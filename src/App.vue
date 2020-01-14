@@ -25,6 +25,9 @@
 <script>
 	import axios from 'axios';
 
+	//needed for CORS
+	const API = axios.create({ withCredentials: true });
+
 	export default {
 		data() {
 			return {
@@ -36,11 +39,11 @@
 		},
 		methods: {
 			getUserSession() {
-				axios.get('http://localhost/Tablaturi-bg-API/API/User/isLoggedIn')
+				API.get('http://localhost/Tablaturi-bg-API/API/User/isLoggedIn')
 					.then((res) => {
 						console.log(res.data);
-						if (res.data && res.data.user) {
-							this.userSession = res.data.user;
+						if (res.data && res.data.data.user) {
+							this.userSession = res.data.data.user;
 						}
 					})
 					.catch((error) => {
@@ -49,7 +52,7 @@
 					});
 			},
 			login() {
-				axios.post('http://localhost/Tablaturi-bg-API/API/User/login', {
+				API.post('http://localhost/Tablaturi-bg-API/API/User/login', {
 					login_username: 'plamen',
 					login_password: 1234,
 					login_remember_me: true
