@@ -1,12 +1,75 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+	<div id="app">
+		<div id="nav">
+			<router-link to="/">Home</router-link> |
+			<router-link to="/about">About</router-link>
+		</div>
+
+		{{ userSession }}
+
+		<button v-if="!userSession" @click="login">
+			Login
+		</button>
+		<button v-else @click="logout">
+			Logout
+		</button>
+
+		<button @click="getUserSession">
+			Get session
+		</button>
+
+		<router-view/>
+	</div>
 </template>
+
+<script>
+	import axios from 'axios';
+
+	export default {
+		data() {
+			return {
+				userSession: null
+			};
+		},
+		created() {
+			this.getUserSession();
+		},
+		methods: {
+			getUserSession() {
+				axios.get('http://localhost/Tablaturi-bg-API/API/User/isLoggedIn')
+					.then((res) => {
+						console.log(res.data);
+						if (res.data && res.data.user) {
+							this.userSession = res.data.user;
+						}
+					})
+					.catch((error) => {
+						console.log('ERROR:');
+						console.log(error);
+					});
+			},
+			login() {
+				axios.post('http://localhost/Tablaturi-bg-API/API/User/login', {
+					login_username: 'plamen',
+					login_password: 1234,
+					login_remember_me: true
+				})
+					.then((res) => {
+						if (res.data) {
+							this.userSession = res.data;
+						}
+					})
+					.catch((error) => {
+						console.log('ERROR:');
+						console.log(error);
+					});
+			},
+			logout() {
+
+			}
+		}
+	};
+</script>
 
 <style lang="scss">
 #app {
