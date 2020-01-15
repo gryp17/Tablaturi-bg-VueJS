@@ -94,7 +94,8 @@
 </script>
 
 <style lang="scss">
-	header {
-		background-color: $gray;
+	.main-wrapper {
+		margin: auto;
+		width: 1000px;
 	}
 </style>
