@@ -6,17 +6,23 @@
 			<header class="header">
 				<div class="main-menu">
 					Main menu
+					<div id="nav">
+						<router-link :to="{name: 'home'}">Home</router-link> |
+						<router-link :to="{name: 'articles'}">Articles</router-link> |
+						<router-link :to="{name: 'tabs'}">Tabs</router-link> |
+						<router-link :to="{name: 'guitar-pro'}">Guitar Pro</router-link> |
+						<router-link :to="{name: 'add-tab'}">Add Tab</router-link> |
+						<router-link :to="{name: 'usefull'}">Usefull</router-link> |
+						<router-link :to="{name: 'contact-us'}">Contact Us</router-link> |
+						<router-link :to="{name: 'copyright'}">Copyright</router-link> |
+						<router-link :to="{name: 'about-us'}">About Us</router-link>
+					</div>
 				</div>
 				Header content
 			</header>
 
 			<div class="search-bar">
 				Search bar
-			</div>
-
-			<div id="nav">
-				<router-link to="/">Home</router-link> |
-				<router-link to="/about">About</router-link>
 			</div>
 
 			{{ userSession }}
