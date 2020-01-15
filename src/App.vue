@@ -3,10 +3,7 @@
 
 		<div class="main-wrapper">
 
-			<header class="header">
-				<MainMenu/>
-				Header content
-			</header>
+			<Header />
 
 			<div class="search-bar">
 				Search bar
@@ -39,12 +36,12 @@
 </template>
 
 <script>
-	import MainMenu from '@/components/MainMenu';
+	import Header from '@/components/Header';
 	import UserHttpService from '@/services/user';
 
 	export default {
 		components: {
-			MainMenu
+			Header
 		},
 		data() {
 			return {
@@ -97,5 +94,7 @@
 	.main-wrapper {
 		margin: auto;
 		width: 1000px;
+		border-left: 1px solid $gray-darker;
+		border-right: 1px solid $gray-darker;
 	}
 </style>
