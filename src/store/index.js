@@ -13,6 +13,8 @@ export default new Vuex.Store({
 		modal: modalModule
 	},
 	state: {
+		totalTabs: null,
+		totalTabsGP: null
 	},
 	mutations: {
 	},

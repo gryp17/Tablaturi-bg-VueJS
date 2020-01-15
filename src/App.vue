@@ -36,8 +36,13 @@
 </template>
 
 <script>
-	import Header from '@/components/Header';
+	import Vue from 'vue';
+	import FormButton from '@/components/forms/FormButton';
+	import Header from '@/components/header/Header';
 	import UserHttpService from '@/services/user';
+
+	//global components
+	Vue.component('FormButton', FormButton);
 
 	export default {
 		components: {
