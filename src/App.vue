@@ -23,10 +23,7 @@
 </template>
 
 <script>
-	import axios from 'axios';
-
-	//needed for CORS
-	const API = axios.create({ withCredentials: true });
+	import UserHttpService from '@/services/user';
 
 	export default {
 		data() {
@@ -39,27 +36,22 @@
 		},
 		methods: {
 			getUserSession() {
-				API.get('http://localhost/Tablaturi-bg-API/API/User/isLoggedIn')
-					.then((res) => {
-						console.log(res.data);
-						if (res.data && res.data.data.user) {
-							this.userSession = res.data.data.user;
-						}
-					})
+				UserHttpService.getSession().then((res) => {
+					console.log(res.data);
+					if (res.data && res.data.data.user) {
+						this.userSession = res.data.data.user;
+					}
+				})
 					.catch((error) => {
 						console.log('ERROR:');
 						console.log(error);
 					});
 			},
 			login() {
-				API.post('http://localhost/Tablaturi-bg-API/API/User/login', {
-					login_username: 'plamen',
-					login_password: 1234,
-					login_remember_me: true
-				})
+				UserHttpService.login('plamen', 1234, true)
 					.then((res) => {
-						if (res.data) {
-							this.userSession = res.data;
+						if (res.data && res.data.data) {
+							this.userSession = res.data.data;
 						}
 					})
 					.catch((error) => {
@@ -68,7 +60,14 @@
 					});
 			},
 			logout() {
-
+				UserHttpService.logout()
+					.then((res) => {
+						this.userSession = null;
+					})
+					.catch((error) => {
+						console.log('ERROR:');
+						console.log(error);
+					});
 			}
 		}
 	};
