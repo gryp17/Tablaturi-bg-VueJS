@@ -2,12 +2,30 @@
 @import '~bootstrap/scss/bootstrap';
 
 body{
+	background: $background;
+	color: $blue;
+	font-family: $font-family;
+	
 	:focus {
 		outline:none;
 	}
 
 	::-moz-focus-inner {
 		border: 0;
+	}
+
+	.main-wrapper {
+		margin: auto;
+		width: 1000px;
+	}
+
+	a:hover, a:focus, button{
+		text-decoration: none;
+		outline: none;
+	}
+
+	label{
+		font-weight: normal;
 	}
 	
 	.toasted {

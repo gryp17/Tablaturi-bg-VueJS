@@ -1,10 +1,18 @@
 //misc
-$background: url('/img/bg.jpg') no-repeat fixed;
-$background-size: cover;
-$layout-width: 1000px;
+$background: url('/img/background.jpg') no-repeat fixed;
 
 //typography
 $font-family: "Open Sans", sans-serif;
+
+//colors
+$red: #F84241;
+$blue: #465A65;
+$gray: #E4E4E4;
+
+/*
+$layout-width: 1000px;
+
+//typography
 
 //colors
 $light-blue: #2196F3;
@@ -17,3 +25,4 @@ $dark-gray: #525252;
 $body-color: #333333;
 $links-color: $light-blue;
 $links-color-active: $dark-blue;
+*/

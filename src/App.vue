@@ -1,24 +1,45 @@
 <template>
 	<div id="app">
-		<div id="nav">
-			<router-link to="/">Home</router-link> |
-			<router-link to="/about">About</router-link>
+
+		<div class="main-wrapper">
+
+			<header class="header">
+				<div class="main-menu">
+					Main menu
+				</div>
+				Header content
+			</header>
+
+			<div class="search-bar">
+				Search bar
+			</div>
+
+			<div id="nav">
+				<router-link to="/">Home</router-link> |
+				<router-link to="/about">About</router-link>
+			</div>
+
+			{{ userSession }}
+
+			<button v-if="!userSession" @click="login" class="btn btn-success">
+				Login
+			</button>
+			<button v-else @click="logout" class="btn btn-danger">
+				Logout
+			</button>
+
+			<button @click="getUserSession" class="btn btn-info">
+				Get session
+			</button>
+
+			<router-view/>
+
+			<footer class="footer">
+				Footer
+			</footer>
+
 		</div>
 
-		{{ userSession }}
-
-		<button v-if="!userSession" @click="login" class="btn btn-success">
-			Login
-		</button>
-		<button v-else @click="logout" class="btn btn-danger">
-			Logout
-		</button>
-
-		<button @click="getUserSession" class="btn btn-info">
-			Get session
-		</button>
-
-		<router-view/>
 	</div>
 </template>
 
@@ -74,14 +95,6 @@
 </script>
 
 <style lang="scss">
-	#app {
-		font-family: 'Avenir', Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		text-align: center;
-		color: #2c3e50;
-	}
-
 	#nav {
 		padding: 30px;
 
