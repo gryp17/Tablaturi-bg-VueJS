@@ -5,9 +5,7 @@
 
 			<Header />
 
-			<div class="search-bar">
-				Search bar
-			</div>
+			<SearchBar />
 
 			{{ userSession }}
 
@@ -24,11 +22,7 @@
 
 			<router-view/>
 
-			<footer class="footer">
-				Footer
-				<router-link :to="{name: 'copyright'}">Copyright</router-link> |
-				<router-link :to="{name: 'about-us'}">About Us</router-link>
-			</footer>
+			<Footer />
 
 		</div>
 
@@ -42,6 +36,8 @@
 	import errorsMap from '@/filters/errorsMap';
 	import FormButton from '@/components/forms/FormButton';
 	import Header from '@/components/header/Header';
+	import SearchBar from '@/components/SearchBar';
+	import Footer from '@/components/Footer';
 
 	//global components/filters
 	Vue.filter('errorsMap', errorsMap);
@@ -49,7 +45,9 @@
 
 	export default {
 		components: {
-			Header
+			Header,
+			SearchBar,
+			Footer
 		},
 		data() {
 			return {
@@ -92,5 +90,6 @@
 		width: 1000px;
 		border-left: 1px solid $gray-darker;
 		border-right: 1px solid $gray-darker;
+		background-color: $white;
 	}
 </style>
