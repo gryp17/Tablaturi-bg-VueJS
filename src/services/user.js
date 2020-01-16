@@ -1,5 +1,5 @@
 
-import API, { API_URL } from './API';
+import API from './API';
 
 export default {
 	/**
@@ -10,7 +10,7 @@ export default {
 	 * @returns {Promise}
 	 */
 	login(username, password, rememberMe) {
-		return API.post(`${API_URL}/User/login`, {
+		return API.post('/User/login', {
 			login_username: username,
 			login_password: password,
 			login_remember_me: rememberMe
@@ -21,13 +21,13 @@ export default {
 	 * @returns {Promise}
 	 */
 	getSession() {
-		return API.get(`${API_URL}/User/isLoggedIn`);
+		return API.get('/User/isLoggedIn');
 	},
 	/**
 	 * Logs out the user
 	 * @returns {Promise}
 	 */
 	logout() {
-		return API.get(`${API_URL}/User/logout`);
+		return API.get('/User/logout');
 	},
 };

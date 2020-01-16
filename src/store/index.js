@@ -1,20 +1,20 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import userModule from '@/store/modules/user';
-import formModule from '@/store/modules/form';
-import modalModule from '@/store/modules/modal';
+import authModule from '@/store/modules/auth';
+import formsModule from '@/store/modules/forms';
+import modalsModule from '@/store/modules/modals';
+import tabsModule from '@/store/modules/tabs';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	modules: {
-		user: userModule,
-		form: formModule,
-		modal: modalModule
+		auth: authModule,
+		forms: formsModule,
+		modals: modalsModule,
+		tabs: tabsModule
 	},
 	state: {
-		totalTabs: null,
-		totalTabsGP: null
 	},
 	mutations: {
 	},

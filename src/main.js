@@ -7,22 +7,16 @@ import store from './store';
 
 Vue.use(Toasted, {
 	position: 'bottom-right',
-	duration: 8000,
-	keepOnHover: true,
-	iconPack: 'fontawesome'
+	duration: 5000,
+	keepOnHover: true
 });
 
 //register custom toast type
-/*
 Vue.toasted.register('apiError', (payload) => {
-	return payload.message || 'Something went wrong...';
+	return payload.message || 'Грешка грешка...';
 }, {
 	type: 'error',
-	icon: {
-		name: 'fa-exclamation-triangle'
-	}
 });
-*/
 
 Vue.config.productionTip = false;
 

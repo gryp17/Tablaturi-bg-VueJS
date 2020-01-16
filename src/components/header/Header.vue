@@ -12,16 +12,7 @@
 			<img alt="Tablaturi-bg Logo" title="Tablaturi-bg" src="/img/logo-tablaturi-bg.png"/>
 
 			<div class="aside right">
-				<!-- TODO: get the total tabs from the backend -->
-				<div class="stats">
-					<div>
-						<strong>82288</strong> Guitar Pro таблатури
-					</div>
-					<div>
-						<strong>196345</strong> Текстови таблатури
-					</div>
-				</div>
-
+				<TabsStats />
 				<UserPanel />
 			</div>
 		</div>
@@ -32,11 +23,13 @@
 <script>
 	import MainMenu from '@/components/header/MainMenu';
 	import UserPanel from '@/components/header/UserPanel';
+	import TabsStats from '@/components/header/TabsStats';
 
 	export default {
 		components: {
 			MainMenu,
-			UserPanel
+			UserPanel,
+			TabsStats
 		}
 	};
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 
-		<div class="main-wrapper">
+		<div v-if="ready" class="main-wrapper">
 
 			<Header />
 
@@ -11,7 +11,7 @@
 
 			{{ userSession }}
 
-			<button v-if="!userSession" @click="login" class="btn btn-success">
+			<button v-if="!userSession" @click="login({username: 'plamen', password: 1234, rememberMe: true})" class="btn btn-success">
 				Login
 			</button>
 			<button v-else @click="logout" class="btn btn-danger">
@@ -37,11 +37,14 @@
 
 <script>
 	import Vue from 'vue';
+	import { mapActions, mapState } from 'vuex';
+
+	import errorsMap from '@/filters/errorsMap';
 	import FormButton from '@/components/forms/FormButton';
 	import Header from '@/components/header/Header';
-	import UserHttpService from '@/services/user';
 
-	//global components
+	//global components/filters
+	Vue.filter('errorsMap', errorsMap);
 	Vue.component('FormButton', FormButton);
 
 	export default {
@@ -50,47 +53,35 @@
 		},
 		data() {
 			return {
-				userSession: null
+				ready: true
 			};
 		},
+		computed: {
+			...mapState('auth', [
+				'userSession'
+			])
+		},
 		created() {
-			this.getUserSession();
+			Promise.all([
+				this.getUserSession(),
+				this.getTabsCount()
+			]).then(() => {
+				this.ready = true;
+			}).catch(() => {
+				this.$toasted.global.apiError({
+					message: 'Failed to initialize the application'
+				});
+			});
 		},
 		methods: {
-			getUserSession() {
-				UserHttpService.getSession().then((res) => {
-					console.log(res.data);
-					if (res.data && res.data.data.user) {
-						this.userSession = res.data.data.user;
-					}
-				})
-					.catch((error) => {
-						console.log('ERROR:');
-						console.log(error);
-					});
-			},
-			login() {
-				UserHttpService.login('plamen', 1234, true)
-					.then((res) => {
-						if (res.data && res.data.data) {
-							this.userSession = res.data.data;
-						}
-					})
-					.catch((error) => {
-						console.log('ERROR:');
-						console.log(error);
-					});
-			},
-			logout() {
-				UserHttpService.logout()
-					.then((res) => {
-						this.userSession = null;
-					})
-					.catch((error) => {
-						console.log('ERROR:');
-						console.log(error);
-					});
-			}
+			...mapActions('auth', [
+				'getUserSession',
+				'login',
+				'logout'
+			]),
+			...mapActions('tabs', [
+				'getTabsCount'
+			])
 		}
 	};
 </script>
