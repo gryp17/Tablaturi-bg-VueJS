@@ -72,3 +72,24 @@
 		}
 	};
 </script>
+
+<style scoped lang="scss">
+	.base-modal {
+		.modal-content {
+			border-radius: 0px;
+
+			.modal-header {
+				border-radius: 0px;
+				border-bottom: solid 2px $blue;
+				background-color: $red;
+				color: $white;
+
+				.close {
+					color: $white;
+					opacity: 1;
+					line-height: 30px;
+				}
+			}
+		}
+	}
+</style>

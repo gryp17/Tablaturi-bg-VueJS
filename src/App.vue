@@ -57,6 +57,8 @@
 
 	import errorsMap from '@/filters/errorsMap';
 	import FormButton from '@/components/forms/FormButton';
+	import FormInput from '@/components/forms/FormInput';
+	import FormFileInput from '@/components/forms/FormFileInput';
 	import Header from '@/components/header/Header';
 	import SearchBar from '@/components/SearchBar';
 	import Footer from '@/components/Footer';
@@ -64,6 +66,8 @@
 	//global components/filters
 	Vue.filter('errorsMap', errorsMap);
 	Vue.component('FormButton', FormButton);
+	Vue.component('FormInput', FormInput);
+	Vue.component('FormFileInput', FormFileInput);
 
 	export default {
 		components: {

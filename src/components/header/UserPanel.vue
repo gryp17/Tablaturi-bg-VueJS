@@ -13,7 +13,7 @@
 <script>
 	import { mapState, mapActions } from 'vuex';
 
-	import UserLoginModal from '@/components/modals/UserLoginModal';
+	import UserLoginModal from '@/components/modals/login/UserLoginModal';
 
 	export default {
 		components: {

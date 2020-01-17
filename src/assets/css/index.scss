@@ -16,12 +16,19 @@ body{
 		border: 0;
 	}
 
-	button {
+	button:focus {
 		outline: none;
 	}
 
 	label{
 		font-weight: normal;
+	}
+
+	input[type="checkbox"], input[type="radio"] {
+		+ label {
+			margin-left: 5px;
+			cursor: pointer;
+		}
 	}
 	
 	.toasted {
