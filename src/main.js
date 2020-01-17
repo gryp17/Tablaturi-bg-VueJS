@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Toasted from 'vue-toasted';
+import 'bootstrap';
 
 import App from './App.vue';
 import router from './router';

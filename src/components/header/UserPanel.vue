@@ -2,11 +2,35 @@
 	<div class="user-panel">
 		<!-- TODO: if user is logged in show the logout button -->
 		<a class="signup-link" href="#">Регистрация</a>
-		<FormButton>
+		<FormButton @click="showLoginModal">
 			Вход
 		</FormButton>
+
+		<UserLoginModal/>
 	</div>
 </template>
+
+<script>
+	import { mapState, mapActions } from 'vuex';
+
+	import UserLoginModal from '@/components/modals/UserLoginModal';
+
+	export default {
+		components: {
+			UserLoginModal
+		},
+		computed: {
+			...mapState('auth', [
+				'userSession'
+			])
+		},
+		methods: {
+			...mapActions('modals', [
+				'showLoginModal'
+			])
+		}
+	};
+</script>
 
 <style scoped lang="scss">
 	.user-panel {
