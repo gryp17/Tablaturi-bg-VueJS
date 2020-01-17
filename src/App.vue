@@ -7,6 +7,29 @@
 
 			<SearchBar />
 
+			<div class="inner-wrapper">
+				<aside>
+					<a href="mailto:reklama@tablaturi-bg.com">
+						<img src="/img/ad-placeholder.png"/>
+					</a>
+				</aside>
+				<div class="view-wrapper">
+					<router-view class="view" />
+
+					<div class="bottom-banner">
+						<a href="mailto:reklama@tablaturi-bg.com">
+							<img src="/img/ad-placeholder-horizontal.png"/>
+						</a>
+					</div>
+				</div>
+				<aside>
+					<a href="mailto:reklama@tablaturi-bg.com">
+						<img src="/img/ad-placeholder.png"/>
+					</a>
+				</aside>
+			</div>
+
+			<!--
 			{{ userSession }}
 
 			<button v-if="!userSession" @click="login({username: 'plamen', password: 1234, rememberMe: true})" class="btn btn-success">
@@ -19,8 +42,7 @@
 			<button @click="getUserSession" class="btn btn-info">
 				Get session
 			</button>
-
-			<router-view/>
+			-->
 
 			<Footer />
 
@@ -91,5 +113,29 @@
 		border-left: 1px solid $gray-darker;
 		border-right: 1px solid $gray-darker;
 		background-color: $white;
+
+		.inner-wrapper {
+			display: flex;
+
+			aside {
+				margin: 5px;
+				width: 120px;
+				min-height: 600px;
+			}
+
+			.view-wrapper {
+				margin: 5px 0px;
+				width: 100%;
+
+				.view {
+					min-height: 615px;
+					padding: 10px;
+				}
+
+				.bottom-banner {
+					text-align: center;
+				}
+			}
+		}
 	}
 </style>
