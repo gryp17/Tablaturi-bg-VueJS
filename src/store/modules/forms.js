@@ -25,13 +25,11 @@ export default {
 				error: null
 			});
 		},
-		setFormErrors(context, { form, errors }) {
-			Object.keys(errors).forEach((field) => {
-				context.commit('setFormError', {
-					form,
-					field,
-					error: errors[field]
-				});
+		setFormError(context, { form, field, error }) {
+			context.commit('setFormError', {
+				form,
+				field,
+				error
 			});
 		},
 		resetFormErrors(context, form) {

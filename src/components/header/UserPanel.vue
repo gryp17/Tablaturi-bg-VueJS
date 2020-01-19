@@ -1,10 +1,20 @@
 <template>
 	<div class="user-panel">
-		<!-- TODO: if user is logged in show the logout button -->
-		<a class="signup-link" href="#">Регистрация</a>
-		<FormButton @click="showLoginModal">
-			Вход
-		</FormButton>
+
+		{{ userSession }}
+
+		<template v-if="userSession">
+			{{ userSession.username }}
+			<FormButton>
+				Изход
+			</FormButton>
+		</template>
+		<template v-else>
+			<a class="signup-link" href="#">Регистрация</a>
+			<FormButton @click="showLoginModal">
+				Вход
+			</FormButton>
+		</template>
 
 		<UserLoginModal/>
 	</div>

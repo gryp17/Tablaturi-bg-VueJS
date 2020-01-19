@@ -16,9 +16,9 @@ export default {
 	},
 	actions: {
 		getTabsCount(context) {
-			TabHttpService.getTabsCount().then((res) => {
+			return TabHttpService.getTabsCount().then((res) => {
 				context.commit('setTotalTabs', res.data);
-				return res.data;
+				return res;
 			}).catch((error) => {
 				Vue.toasted.global.apiError({
 					message: `getTabsCount failed - ${error}`

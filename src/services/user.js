@@ -11,9 +11,9 @@ export default {
 	 */
 	login(username, password, rememberMe) {
 		return API.post('/User/login', {
-			login_username: username,
-			login_password: password,
-			login_remember_me: rememberMe
+			username,
+			password,
+			remember_me: rememberMe
 		});
 	},
 	/**

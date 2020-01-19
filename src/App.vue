@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 
-		<div v-if="ready" class="main-wrapper">
+		<div v-show="appIsReady" class="main-wrapper">
 
 			<Header />
 
@@ -28,21 +28,6 @@
 					</a>
 				</aside>
 			</div>
-
-			<!--
-			{{ userSession }}
-
-			<button v-if="!userSession" @click="login({username: 'plamen', password: 1234, rememberMe: true})" class="btn btn-success">
-				Login
-			</button>
-			<button v-else @click="logout" class="btn btn-danger">
-				Logout
-			</button>
-
-			<button @click="getUserSession" class="btn btn-info">
-				Get session
-			</button>
-			-->
 
 			<Footer />
 
@@ -75,12 +60,10 @@
 			SearchBar,
 			Footer
 		},
-		data() {
-			return {
-				ready: true
-			};
-		},
 		computed: {
+			...mapState([
+				'appIsReady'
+			]),
 			...mapState('auth', [
 				'userSession'
 			])
@@ -90,7 +73,7 @@
 				this.getUserSession(),
 				this.getTabsCount()
 			]).then(() => {
-				this.ready = true;
+				this.setAppAsReady();
 			}).catch(() => {
 				this.$toasted.global.apiError({
 					message: 'Failed to initialize the application'
@@ -98,10 +81,11 @@
 			});
 		},
 		methods: {
+			...mapActions([
+				'setAppAsReady'
+			]),
 			...mapActions('auth', [
-				'getUserSession',
-				'login',
-				'logout'
+				'getUserSession'
 			]),
 			...mapActions('tabs', [
 				'getTabsCount'

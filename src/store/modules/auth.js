@@ -13,11 +13,11 @@ export default {
 	},
 	actions: {
 		getUserSession(context) {
-			UserHttpService.getSession().then((res) => {
+			return UserHttpService.getSession().then((res) => {
 				if (res.data && res.data.user) {
 					context.commit('setUserSession', res.data.user);
 				}
-				return res.data;
+				return res;
 			}).catch((error) => {
 				Vue.toasted.global.apiError({
 					message: `getUserSession failed - ${error}`
@@ -25,9 +25,11 @@ export default {
 			});
 		},
 		login(context, { username, password, rememberMe }) {
-			UserHttpService.login(username, password, rememberMe).then((res) => {
-				context.commit('setUserSession', res.data);
-				return res.data;
+			return UserHttpService.login(username, password, rememberMe).then((res) => {
+				if (res.data && res.data.ID) {
+					context.commit('setUserSession', res.data);
+				}
+				return res;
 			}).catch((error) => {
 				Vue.toasted.global.apiError({
 					message: `login failed - ${error}`
@@ -35,9 +37,9 @@ export default {
 			});
 		},
 		logout(context) {
-			UserHttpService.logout().then((res) => {
+			return UserHttpService.logout().then((res) => {
 				context.commit('setUserSession', null);
-				return res.data;
+				return res;
 			}).catch((error) => {
 				Vue.toasted.global.apiError({
 					message: `logout failed - ${error}`

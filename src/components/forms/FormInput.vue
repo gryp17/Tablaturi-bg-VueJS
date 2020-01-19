@@ -11,7 +11,7 @@
 			<input
 				v-if="tag === 'input'"
 				:value="value"
-				:class="['form-control', className, {'is-invalid': error}]"
+				:class="['form-control', className, {'has-error': error}]"
 				:type="type"
 				:name="name"
 				:placeholder="placeholder"
@@ -23,7 +23,7 @@
 			<textarea
 				v-if="tag === 'textarea'"
 				:value="value"
-				:class="['form-control', className, {'is-invalid': error}]"
+				:class="['form-control', className, {'has-error': error}]"
 				:name="name"
 				:placeholder="placeholder"
 				v-on="{
@@ -85,6 +85,10 @@
 			background-color: $gray;
 			border-color: transparent;
 			font-size: inherit;
+
+			&.has-error {
+				border-color: $red;
+			}
 
 			&:focus {
 				box-shadow: none;

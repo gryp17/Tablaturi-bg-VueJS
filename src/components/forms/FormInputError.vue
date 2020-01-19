@@ -7,7 +7,7 @@
 <style scoped lang="scss">
 	.form-input-error {
 		position: absolute;
-		font-size: 10px;
+		font-size: 11px;
 		color: $red;
 	}
 </style>

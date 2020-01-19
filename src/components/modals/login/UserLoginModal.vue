@@ -12,6 +12,7 @@
 			</template>
 			<template v-slot:body>
 
+				<!-- TODO: implement the forgotten password form -->
 				<ForgottenPasswordForm v-if="forgottenPasswordFormVisible" />
 				<template v-else>
 					<FormInput
@@ -102,13 +103,11 @@
 			...mapActions('modals', [
 				'hideLoginModal'
 			]),
-			/*
-			...mapActions('user', [
+			...mapActions('auth', [
 				'login'
 			]),
-			*/
 			...mapActions('forms', [
-				'setFormErrors',
+				'setFormError',
 				'clearFormError',
 				'resetFormErrors'
 			]),
@@ -122,22 +121,22 @@
 			 * Tries to authenticate the user with the provided credentials
 			 */
 			loginUser() {
-				/*
 				this.login({
 					username: this.username,
 					password: this.password,
 					rememberMe: this.rememberMe
-				}).then((data) => {
-					if (data.user) {
+				}).then((res) => {
+					const data = res.data;
+
+					if (data.ID) {
 						this.hideLoginModal();
-					} else if (data.errors) {
-						this.setFormErrors({
-							form: formName,
-							errors: data.errors
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
 						});
 					}
 				});
-				*/
 			},
 			/**
 			 * Clears the form errors related to this input

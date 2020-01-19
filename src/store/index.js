@@ -15,9 +15,16 @@ export default new Vuex.Store({
 		tabs: tabsModule
 	},
 	state: {
+		appIsReady: false
 	},
 	mutations: {
+		setAppIsReady(state, ready) {
+			state.appIsReady = ready;
+		}
 	},
 	actions: {
+		setAppAsReady(context) {
+			context.commit('setAppIsReady', true);
+		}
 	}
 });
