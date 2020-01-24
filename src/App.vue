@@ -38,7 +38,7 @@
 
 <script>
 	import Vue from 'vue';
-	import { mapActions, mapState } from 'vuex';
+	import { mapState, mapActions } from 'vuex';
 
 	import errorsMap from '@/filters/errorsMap';
 	import FormButton from '@/components/forms/FormButton';

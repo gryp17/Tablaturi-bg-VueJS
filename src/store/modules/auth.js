@@ -6,6 +6,11 @@ export default {
 	state: {
 		userSession: null
 	},
+	getters: {
+		isAdmin(state) {
+			return state.userSession && state.userSession.type === 'admin';
+		}
+	},
 	mutations: {
 		setUserSession(state, userSession) {
 			state.userSession = userSession;
