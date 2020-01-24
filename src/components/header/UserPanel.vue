@@ -1,10 +1,13 @@
 <template>
 	<div class="user-panel">
 
-		{{ userSession }}
-
 		<template v-if="userSession">
-			{{ userSession.username }}
+			{{ welcomeMessage }}
+			<router-link
+				:to="{name: 'profile', params: {id: userSession.ID}}"
+				class="profile-link red"
+			>{{ userSession.username }}</router-link>
+
 			<FormButton @click="logout">
 				Изход
 			</FormButton>
@@ -32,7 +35,14 @@
 		computed: {
 			...mapState('auth', [
 				'userSession'
-			])
+			]),
+			welcomeMessage() {
+				if (!this.userSession) {
+					return;
+				}
+
+				return this.userSession.gender === 'M' ? 'Добре дошъл' : 'Добре дошла';
+			}
 		},
 		methods: {
 			...mapActions('modals', [
@@ -49,6 +59,10 @@
 	.user-panel {
 		padding: 10px;
 		text-align: right;
+
+		.profile-link {
+			margin-right: 10px;
+		}
 
 		.signup-link {
 			margin-right: 10px;

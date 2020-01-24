@@ -31,6 +31,11 @@ const routes = [
 		component: () => import(/* webpackChunkName: "tabs" */ '@/views/Tabs.vue')
 	},
 	{
+		path: '/profile/:id',
+		name: 'profile',
+		component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
+	},
+	{
 		path: '/guitar-pro',
 		name: 'guitar-pro',
 		component: () => import(/* webpackChunkName: "guitar-pro" */ '@/views/GuitarPro.vue')
