@@ -5,7 +5,7 @@
 
 		<template v-if="userSession">
 			{{ userSession.username }}
-			<FormButton>
+			<FormButton @click="logout">
 				Изход
 			</FormButton>
 		</template>
@@ -37,6 +37,9 @@
 		methods: {
 			...mapActions('modals', [
 				'showLoginModal'
+			]),
+			...mapActions('auth', [
+				'logout'
 			])
 		}
 	};
