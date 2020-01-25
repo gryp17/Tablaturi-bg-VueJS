@@ -3,6 +3,9 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import Articles from '@/views/Articles.vue';
 import NotFound from '@/views/NotFound.vue';
+import Forbidden from '@/views/Forbidden.vue';
+
+import store from '@/store';
 
 Vue.use(VueRouter);
 
@@ -31,11 +34,6 @@ const routes = [
 		component: () => import(/* webpackChunkName: "tabs" */ '@/views/Tabs.vue')
 	},
 	{
-		path: '/profile/:id',
-		name: 'profile',
-		component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
-	},
-	{
 		path: '/guitar-pro',
 		name: 'guitar-pro',
 		component: () => import(/* webpackChunkName: "guitar-pro" */ '@/views/GuitarPro.vue')
@@ -43,7 +41,10 @@ const routes = [
 	{
 		path: '/add-tab',
 		name: 'add-tab',
-		component: () => import(/* webpackChunkName: "add-tab" */ '@/views/AddTab.vue')
+		component: () => import(/* webpackChunkName: "add-tab" */ '@/views/AddTab.vue'),
+		meta: {
+			authRequired: true
+		}
 	},
 	{
 		path: '/usefull',
@@ -66,6 +67,19 @@ const routes = [
 		component: () => import(/* webpackChunkName: "copyright" */ '@/views/Copyright.vue')
 	},
 	{
+		path: '/profile/:id',
+		name: 'profile',
+		component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue'),
+		meta: {
+			authRequired: true
+		}
+	},
+	{
+		path: '/forbidden',
+		name: 'forbidden',
+		component: Forbidden
+	},
+	{
 		path: '*',
 		name: 'not-found',
 		component: NotFound
@@ -81,6 +95,34 @@ const router = new VueRouter({
 			x: 0,
 			y: 0
 		};
+	}
+});
+
+/**
+ * Returns the user session
+ * @returns {Promise}
+ */
+function getUserSession() {
+	if (store.state.auth.userSession) {
+		return Promise.resolve(store.state.auth.userSession);
+	}
+
+	return store.dispatch('auth/getUserSession').then((res) => {
+		return res.data.user;
+	});
+}
+
+router.beforeEach((to, from, next) => {
+	const forbiddenRoute = {
+		name: 'forbidden'
+	};
+
+	if (to.meta.authRequired) {
+		getUserSession().then((user) => {
+			next(user ? true : forbiddenRoute);
+		});
+	} else {
+		next();
 	}
 });
 
