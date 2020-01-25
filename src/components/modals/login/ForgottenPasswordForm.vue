@@ -1,18 +1,28 @@
 <template>
 	<div class="forgotten-password-form">
-		<FormInput
-			v-model="email"
-			:error="errors.email"
-			@keyup.enter="submit()"
-			@focus="clearError"
-			type="text"
-			name="email"
-			placeholder="Email"
-		></FormInput>
+		<template v-if="!done">
+			<FormInput
+				v-model="email"
+				:error="errors.email"
+				@keyup.enter="submit()"
+				@focus="clearError"
+				type="text"
+				name="email"
+				placeholder="Email"
+			></FormInput>
 
-		<FormButton @click="submit()">
-			Изпрати
-		</FormButton>
+			<FormButton @click="submit()">
+				Изпрати
+			</FormButton>
+		</template>
+
+		<div v-else class="success-message">
+			<img src="/img/icons/success-icon.png" />
+			<div class="message">
+				<h5>Заявката за смяна на парола беше изпратена успешно.</h5>
+				До няколко минути ще получите имейл с линк, от който да смените паролата си.
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -24,7 +34,8 @@
 	export default {
 		data() {
 			return {
-				email: ''
+				email: '',
+				done: false
 			};
 		},
 		computed: {
@@ -33,13 +44,30 @@
 			})
 		},
 		methods: {
+			...mapActions('auth', [
+				'sendPasswordResetRequest'
+			]),
 			...mapActions('forms', [
-				'setFormErrors',
+				'setFormError',
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			/**
+			 * Sends the password reset request
+			 */
 			submit() {
-				//TODO: implement this!!!!
+				this.sendPasswordResetRequest(this.email).then((res) => {
+					const data = res.data;
+
+					if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					} else {
+						this.done = true;
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input
@@ -61,6 +89,14 @@
 		button {
 			display: block;
 			margin: auto;
+		}
+
+		.success-message {
+			text-align: center;
+
+			.message {
+				margin-top: 15px;
+			}
 		}
 	}
 </style>

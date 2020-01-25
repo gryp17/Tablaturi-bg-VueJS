@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import Articles from '@/views/Articles.vue';
 import NotFound from '@/views/NotFound.vue';
 import Forbidden from '@/views/Forbidden.vue';
+import ChangePassword from '@/views/ChangePassword.vue';
 
 import store from '@/store';
 
@@ -73,6 +74,11 @@ const routes = [
 		meta: {
 			authRequired: true
 		}
+	},
+	{
+		path: '/change-password/:userId/:hash',
+		name: 'change-password',
+		component: ChangePassword
 	},
 	{
 		path: '/forbidden',

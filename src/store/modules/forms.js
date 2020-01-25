@@ -6,7 +6,8 @@ export default {
 		errors: {
 			login: {},
 			signup: {},
-			forgottenPassword: {}
+			forgottenPassword: {},
+			changePassword: {}
 		}
 	},
 	mutations: {

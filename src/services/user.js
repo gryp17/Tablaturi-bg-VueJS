@@ -30,4 +30,17 @@ export default {
 	logout() {
 		return API.get('/User/logout');
 	},
+	/**
+	 * Sends a password reset request for the specified email
+	 * @param {String} email
+	 * @returns {Promise}
+	 */
+	sendPasswordResetRequest(email) {
+		return API.post('/PasswordReset/sendPasswordResetRequest', {
+			email
+		});
+	},
+	checkPasswordResetHash(userId, hash) {
+
+	}
 };

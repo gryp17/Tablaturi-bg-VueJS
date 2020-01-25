@@ -21,6 +21,9 @@ export default {
 		}
 	},
 	actions: {
+		setRedirectAfterLogin(context, value) {
+			context.commit('setRedirectAfterLogin', value);
+		},
 		getUserSession(context) {
 			return UserHttpService.getSession().then((res) => {
 				if (res.data && res.data.user) {
@@ -55,8 +58,14 @@ export default {
 				});
 			});
 		},
-		setRedirectAfterLogin(context, value) {
-			context.commit('setRedirectAfterLogin', value);
+		sendPasswordResetRequest(context, email) {
+			return UserHttpService.sendPasswordResetRequest(email).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `password reset failed - ${error}`
+				});
+			});
 		}
 	}
 };
