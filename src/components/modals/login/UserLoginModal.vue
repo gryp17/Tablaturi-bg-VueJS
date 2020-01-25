@@ -80,6 +80,9 @@
 			};
 		},
 		computed: {
+			...mapState('auth', [
+				'redirectAfterLogin'
+			]),
 			...mapState('modals', {
 				visible: 'loginModalOpened'
 			}),
@@ -104,7 +107,8 @@
 				'hideLoginModal'
 			]),
 			...mapActions('auth', [
-				'login'
+				'login',
+				'setRedirectAfterLogin'
 			]),
 			...mapActions('forms', [
 				'setFormError',
@@ -129,6 +133,11 @@
 					const data = res.data;
 
 					if (data.ID) {
+						if (this.redirectAfterLogin) {
+							this.$router.push(this.redirectAfterLogin);
+							this.setRedirectAfterLogin(null);
+						}
+
 						this.hideLoginModal();
 					} else if (data.error) {
 						this.setFormError({

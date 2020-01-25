@@ -119,7 +119,12 @@ router.beforeEach((to, from, next) => {
 
 	if (to.meta.authRequired) {
 		getUserSession().then((user) => {
-			next(user ? true : forbiddenRoute);
+			if (!user) {
+				store.dispatch('auth/setRedirectAfterLogin', to);
+				return next(forbiddenRoute);
+			}
+
+			next();
 		});
 	} else {
 		next();

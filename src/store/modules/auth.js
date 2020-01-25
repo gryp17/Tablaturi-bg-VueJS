@@ -4,7 +4,8 @@ import UserHttpService from '@/services/user';
 export default {
 	namespaced: true,
 	state: {
-		userSession: null
+		userSession: null,
+		redirectAfterLogin: null
 	},
 	getters: {
 		isAdmin(state) {
@@ -14,6 +15,9 @@ export default {
 	mutations: {
 		setUserSession(state, userSession) {
 			state.userSession = userSession;
+		},
+		setRedirectAfterLogin(state, value) {
+			state.redirectAfterLogin = value;
 		}
 	},
 	actions: {
@@ -50,6 +54,9 @@ export default {
 					message: `logout failed - ${error}`
 				});
 			});
+		},
+		setRedirectAfterLogin(context, value) {
+			context.commit('setRedirectAfterLogin', value);
 		}
 	}
 };
