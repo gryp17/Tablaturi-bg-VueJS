@@ -1,8 +1,6 @@
 <template>
 	<div class="change-password-page">
-		<template v-if="!tokenChecked">
-			Loading.....
-		</template>
+		<LoadingIndicator v-if="!tokenChecked" />
 		<template v-else>
 			<div v-if="done" class="success-message">
 				<img src="/img/icons/success-icon.png" />

@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '@/views/Home.vue';
-import Articles from '@/views/Articles.vue';
-import NotFound from '@/views/NotFound.vue';
-import Forbidden from '@/views/Forbidden.vue';
-import ChangePassword from '@/views/ChangePassword.vue';
+import Home from '@/views/Home';
+import Articles from '@/views/Articles';
+import NotFound from '@/views/NotFound';
+import Forbidden from '@/views/Forbidden';
+import ChangePassword from '@/views/ChangePassword';
 
 import store from '@/store';
 
@@ -32,17 +32,17 @@ const routes = [
 		// route level code-splitting
 		// this generates a separate chunk (about.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "tabs" */ '@/views/Tabs.vue')
+		component: () => import(/* webpackChunkName: "tabs" */ '@/views/Tabs')
 	},
 	{
 		path: '/guitar-pro',
 		name: 'guitar-pro',
-		component: () => import(/* webpackChunkName: "guitar-pro" */ '@/views/GuitarPro.vue')
+		component: () => import(/* webpackChunkName: "guitar-pro" */ '@/views/GuitarPro')
 	},
 	{
 		path: '/add-tab',
 		name: 'add-tab',
-		component: () => import(/* webpackChunkName: "add-tab" */ '@/views/AddTab.vue'),
+		component: () => import(/* webpackChunkName: "add-tab" */ '@/views/AddTab'),
 		meta: {
 			authRequired: true
 		}
@@ -50,27 +50,27 @@ const routes = [
 	{
 		path: '/usefull',
 		name: 'usefull',
-		component: () => import(/* webpackChunkName: "usefull" */ '@/views/Usefull.vue')
+		component: () => import(/* webpackChunkName: "usefull" */ '@/views/Usefull')
 	},
 	{
 		path: '/contact-us',
 		name: 'contact-us',
-		component: () => import(/* webpackChunkName: "contact-us" */ '@/views/ContactUs.vue')
+		component: () => import(/* webpackChunkName: "contact-us" */ '@/views/ContactUs')
 	},
 	{
 		path: '/about-us',
 		name: 'about-us',
-		component: () => import(/* webpackChunkName: "about-us" */ '@/views/AboutUs.vue')
+		component: () => import(/* webpackChunkName: "about-us" */ '@/views/AboutUs')
 	},
 	{
 		path: '/copyright',
 		name: 'copyright',
-		component: () => import(/* webpackChunkName: "copyright" */ '@/views/Copyright.vue')
+		component: () => import(/* webpackChunkName: "copyright" */ '@/views/Copyright')
 	},
 	{
 		path: '/profile/:id',
 		name: 'profile',
-		component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue'),
+		component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile'),
 		meta: {
 			authRequired: true
 		}

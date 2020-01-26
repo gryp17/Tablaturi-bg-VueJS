@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Toasted from 'vue-toasted';
 import 'bootstrap';
 
-import App from './App.vue';
+import App from './App';
 import router from './router';
 import store from './store';
 

@@ -12,7 +12,6 @@
 			</template>
 			<template v-slot:body>
 
-				<!-- TODO: implement the forgotten password form -->
 				<ForgottenPasswordForm v-if="forgottenPasswordFormVisible" />
 				<template v-else>
 					<FormInput
@@ -61,7 +60,7 @@
 
 <script>
 	import { mapState, mapActions } from 'vuex';
-	import BaseModal from '@/components/modals/BaseModal.vue';
+	import BaseModal from '@/components/modals/BaseModal';
 	import ForgottenPasswordForm from '@/components/modals/login/ForgottenPasswordForm';
 
 	const formName = 'login';
