@@ -40,7 +40,32 @@ export default {
 			email
 		});
 	},
+	/**
+	 * Checks if the userId/hash combination is valid (not expired)
+	 * @param {Number} userId
+	 * @param {String} hash
+	 * @returns {Promise}
+	 */
 	checkPasswordResetHash(userId, hash) {
-
+		return API.post('/PasswordReset/checkPasswordResetHash', {
+			user_id: userId,
+			hash
+		});
+	},
+	/**
+	 * Updates the user password
+	 * @param {Number} userId
+	 * @param {String} hash
+	 * @param {String} password
+	 * @param {String} repeatPassword
+	 * @returns {Promise}
+	 */
+	updatePassword(userId, hash, password, repeatPassword) {
+		return API.post('/User/updatePassword', {
+			user_id: userId,
+			hash,
+			password,
+			repeat_password: repeatPassword
+		});
 	}
 };

@@ -66,6 +66,24 @@ export default {
 					message: `password reset failed - ${error}`
 				});
 			});
+		},
+		checkPasswordResetHash(context, { userId, hash }) {
+			return UserHttpService.checkPasswordResetHash(userId, hash).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `password reset hash check failed - ${error}`
+				});
+			});
+		},
+		updatePassword(context, { userId, hash, password, repeatPassword }) {
+			return UserHttpService.updatePassword(userId, hash, password, repeatPassword).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `password update failed - ${error}`
+				});
+			});
 		}
 	}
 };

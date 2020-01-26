@@ -23,11 +23,11 @@
 
 					<FormInput
 						v-model="repeatPassword"
-						:error="errors.repeatPassword"
+						:error="errors.repeat_password"
 						@keyup.enter="changePassword()"
 						@focus="clearError"
 						type="password"
-						name="repeatPassword"
+						name="repeat_password"
 						placeholder="Повтори паролата"
 					></FormInput>
 
@@ -71,13 +71,11 @@
 		},
 		created() {
 			const { userId, hash } = this.$route.params;
-			console.log(userId);
-			console.log(hash);
 
-			setTimeout(() => {
+			this.checkPasswordResetHash({ userId, hash }).then((res) => {
 				this.tokenChecked = true;
-				this.validToken = true;
-			}, 2000);
+				this.validToken = res.data;
+			});
 		},
 		methods: {
 			...mapActions('forms', [
@@ -88,11 +86,38 @@
 			...mapActions('modals', [
 				'showLoginModal'
 			]),
+			...mapActions('auth', [
+				'checkPasswordResetHash',
+				'updatePassword',
+				'setRedirectAfterLogin'
+			]),
+			/**
+			 * Submits the new user password together with the hash and user id
+			 */
 			changePassword() {
+				const { userId, hash } = this.$route.params;
 
-				//TODO:
-				//after the password has been changed set a login redirect to the home page (using 'setRedirectAfterLogin')
+				const params = {
+					userId,
+					hash,
+					password: this.password,
+					repeatPassword: this.repeatPassword
+				};
 
+				this.updatePassword(params).then((res) => {
+					const data = res.data;
+
+					if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					} else {
+						//redirect the user to the home page after logging in successfully
+						this.setRedirectAfterLogin({ name: 'home' });
+						this.done = true;
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input
@@ -123,6 +148,10 @@
 				margin-left: auto;
 				margin-right: auto;
 				width: 40%;
+			}
+
+			button {
+				margin-top: 5px;
 			}
 		}
 	}
