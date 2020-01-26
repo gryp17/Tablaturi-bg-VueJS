@@ -77,7 +77,7 @@
 					form: formName,
 					field
 				});
-			},
+			}
 		}
 	};
 </script>

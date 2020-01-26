@@ -1,15 +1,91 @@
 <template>
 	<div class="search-bar">
-		Search bar
+
+		<FormInput
+			v-model="band"
+			@keyup.enter="search()"
+			type="text"
+			name="band"
+			placeholder="Група"
+		></FormInput>
+
+		<FormInput
+			v-model="song"
+			@keyup.enter="search()"
+			type="text"
+			name="song"
+			placeholder="Песен"
+		></FormInput>
+
+		<FormDropdown
+			v-model="type"
+			:options="tabTypes"
+			name="type"
+		/>
+
+		<FormButton @click="search()">
+			Търси
+		</FormButton>
+
 	</div>
 </template>
+
+<script>
+	export default {
+		//TODO: add autocomplete for the band and song fields
+		data() {
+			return {
+				band: '',
+				song: '',
+				type: 'all'
+			};
+		},
+		computed: {
+			//TODO: this needs to be taken from the backend or from a config
+			tabTypes() {
+				return [
+					{
+						label: 'Тип',
+						value: 'all'
+					},
+					{
+						label: 'Таблатури',
+						value: 'tab'
+					},
+					{
+						label: 'Акорди',
+						value: 'chord'
+					},
+					{
+						label: 'Бас',
+						value: 'bass'
+					},
+					{
+						label: 'Guitar Pro',
+						value: 'gp'
+					},
+					{
+						label: 'Backing Tracks',
+						value: 'bt'
+					}
+				];
+			}
+		},
+		methods: {
+			search() {
+
+			}
+		}
+	};
+</script>
 
 <style scoped lang="scss">
 	.search-bar {
 		position: relative;
+		display: flex;
 		margin-left: -15px;
 		margin-right: -15px;
-		padding: 10px 0px;
+		padding: 10px 25px;
 		background-color: $blue;
 
 		&:before, &:after {
@@ -30,6 +106,15 @@
 
 		&:after {
 			right: 0;
+		}
+
+		.form-input {
+			flex: 1;
+			margin: 0;
+		}
+
+		.form-input, .form-dropdown {
+			margin-right: 12px;
 		}
 	}
 </style>

@@ -44,6 +44,7 @@
 	import FormButton from '@/components/forms/FormButton';
 	import FormInput from '@/components/forms/FormInput';
 	import FormFileInput from '@/components/forms/FormFileInput';
+	import FormDropdown from '@/components/forms/FormDropdown';
 	import Header from '@/components/header/Header';
 	import SearchBar from '@/components/SearchBar';
 	import Footer from '@/components/Footer';
@@ -55,6 +56,7 @@
 	Vue.component('FormButton', FormButton);
 	Vue.component('FormInput', FormInput);
 	Vue.component('FormFileInput', FormFileInput);
+	Vue.component('FormDropdown', FormDropdown);
 	Vue.component('LoadingIndicator', LoadingIndicator);
 	Vue.component('StatusMessage', StatusMessage);
 
