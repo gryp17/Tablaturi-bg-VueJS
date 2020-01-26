@@ -2,13 +2,11 @@
 	<div class="change-password-page">
 		<LoadingIndicator v-if="!tokenChecked" />
 		<template v-else>
-			<div v-if="done" class="success-message">
+			<StatusMessage v-if="done">
 				<img src="/img/icons/success-icon.png" />
-				<div class="message">
-					<h5>Паролата беше сменена успешно.</h5>
-					Вече можете да <a @click.prevent="showLoginModal()" href="#" class="red">влезете</a> в профила си.
-				</div>
-			</div>
+				<h5>Паролата беше сменена успешно.</h5>
+				Вече можете да <a @click.prevent="showLoginModal()" href="#" class="red">влезете</a> в профила си.
+			</StatusMessage>
 			<template v-else>
 				<div v-if="validToken" class="change-password-form">
 					<h5 class="title">Смяна на паролата</h5>
@@ -37,7 +35,7 @@
 						Смени паролата
 					</FormButton>
 				</div>
-				<div v-else class="invalid-token-message">
+				<StatusMessage v-else>
 					<img src="/img/icons/sad.png" />
 					<p>
 						Линкът е невалиден или е изтекъл.
@@ -45,7 +43,7 @@
 						При проблем със смяната на паролата се
 						<router-link :to="{name: 'contact-us'}" class="red">свържете с нас</router-link>.
 					</p>
-				</div>
+				</StatusMessage>
 			</template>
 		</template>
 	</div>
@@ -93,8 +91,6 @@
 			changePassword() {
 
 				//TODO:
-				//add the loading indicator component
-				//maybe refactor this component into smaller components (at least the messages)
 				//after the password has been changed set a login redirect to the home page (using 'setRedirectAfterLogin')
 
 			},
@@ -127,25 +123,6 @@
 				margin-left: auto;
 				margin-right: auto;
 				width: 40%;
-			}
-		}
-
-		.invalid-token-message {
-			text-align: center;
-
-			img {
-				width: 100px;
-				margin-top: 15px;
-				margin-bottom: 15px;
-			}
-		}
-
-		.success-message {
-			text-align: center;
-
-			img {
-				margin-top: 15px;
-				margin-bottom: 15px;
 			}
 		}
 	}

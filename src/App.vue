@@ -48,6 +48,7 @@
 	import SearchBar from '@/components/SearchBar';
 	import Footer from '@/components/Footer';
 	import LoadingIndicator from '@/components/LoadingIndicator';
+	import StatusMessage from '@/components/StatusMessage';
 
 	//global components/filters
 	Vue.filter('errorsMap', errorsMap);
@@ -55,6 +56,7 @@
 	Vue.component('FormInput', FormInput);
 	Vue.component('FormFileInput', FormFileInput);
 	Vue.component('LoadingIndicator', LoadingIndicator);
+	Vue.component('StatusMessage', StatusMessage);
 
 	export default {
 		components: {

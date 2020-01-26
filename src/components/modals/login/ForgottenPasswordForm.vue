@@ -16,13 +16,11 @@
 			</FormButton>
 		</template>
 
-		<div v-else class="success-message">
+		<StatusMessage v-else>
 			<img src="/img/icons/success-icon.png" />
-			<div class="message">
-				<h5>Заявката за смяна на парола беше изпратена успешно.</h5>
-				До няколко минути ще получите имейл с линк, от който да смените паролата си.
-			</div>
-		</div>
+			<h5>Заявката за смяна на парола беше изпратена успешно.</h5>
+			До няколко минути ще получите имейл с линк, от който да смените паролата си.
+		</StatusMessage>
 	</div>
 </template>
 
@@ -89,14 +87,6 @@
 		button {
 			display: block;
 			margin: auto;
-		}
-
-		.success-message {
-			text-align: center;
-
-			.message {
-				margin-top: 15px;
-			}
 		}
 	}
 </style>
