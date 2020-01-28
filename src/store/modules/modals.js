@@ -7,6 +7,9 @@ export default {
 	mutations: {
 		setLoginModalOpened(state, opened) {
 			state.loginModalOpened = opened;
+		},
+		setSignupModalOpened(state, opened) {
+			state.signupModalOpened = opened;
 		}
 	},
 	actions: {
@@ -15,6 +18,12 @@ export default {
 		},
 		hideLoginModal(context) {
 			context.commit('setLoginModalOpened', false);
+		},
+		showSignupModal(context) {
+			context.commit('setSignupModalOpened', true);
+		},
+		hideSignupModal(context) {
+			context.commit('setSignupModalOpened', false);
 		}
 	}
 };

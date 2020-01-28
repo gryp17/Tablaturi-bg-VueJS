@@ -13,13 +13,16 @@
 			</FormButton>
 		</template>
 		<template v-else>
-			<a class="signup-link" href="#">Регистрация</a>
+			<a @click.prevent="showSignupModal" class="signup-link" href="#">
+				Регистрация
+			</a>
 			<FormButton @click="showLoginModal">
 				Вход
 			</FormButton>
 		</template>
 
 		<UserLoginModal/>
+		<UserSignupModal/>
 	</div>
 </template>
 
@@ -27,10 +30,12 @@
 	import { mapState, mapActions } from 'vuex';
 
 	import UserLoginModal from '@/components/modals/login/UserLoginModal';
+	import UserSignupModal from '@/components/modals/UserSignupModal';
 
 	export default {
 		components: {
-			UserLoginModal
+			UserLoginModal,
+			UserSignupModal
 		},
 		computed: {
 			...mapState('auth', [
@@ -46,7 +51,8 @@
 		},
 		methods: {
 			...mapActions('modals', [
-				'showLoginModal'
+				'showLoginModal',
+				'showSignupModal'
 			]),
 			...mapActions('auth', [
 				'logout'
