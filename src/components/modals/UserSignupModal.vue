@@ -12,7 +12,52 @@
 			</template>
 			<template v-slot:body>
 
-				<FormButton class="signup-btn">
+				<FormInput
+					v-model="username"
+					:error="errors.username"
+					@keyup.enter="submit"
+					@focus="clearError"
+					type="text"
+					name="username"
+					placeholder="Потребителско име"
+				></FormInput>
+
+				<FormInput
+					v-model="email"
+					:error="errors.email"
+					@keyup.enter="submit"
+					@focus="clearError"
+					type="text"
+					name="email"
+					placeholder="Email"
+				></FormInput>
+
+				<FormInput
+					v-model="password"
+					:error="errors.password"
+					@keyup.enter="submit"
+					@focus="clearError"
+					type="password"
+					name="password"
+					placeholder="Парола"
+				></FormInput>
+
+				<FormInput
+					v-model="repeatPassword"
+					:error="errors.repeat_password"
+					@keyup.enter="submit"
+					@focus="clearError"
+					type="password"
+					name="repeat_password"
+					placeholder="Повтори паролата"
+				></FormInput>
+
+				<FormDatepicker
+					v-model="birthday"
+					placeholder="Рождена дата"
+				/>
+
+				<FormButton @click="submit" class="signup-btn">
 					Регистрирай се
 				</FormButton>
 
@@ -33,7 +78,12 @@
 		},
 		data() {
 			return {
-				username: ''
+				username: '',
+				email: '',
+				password: '',
+				repeatPassword: '',
+				birthday: null,
+				gender: 'M'
 			};
 		},
 		computed: {
@@ -62,6 +112,9 @@
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			submit() {
+
+			},
 			/**
 			 * Clears the form errors related to this input
 			 * @param {Object} e
