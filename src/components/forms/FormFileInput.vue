@@ -68,12 +68,5 @@
 		input {
 			display: none;
 		}
-
-		.form-error{
-			position: absolute;
-			right: 0px;
-			font-size: 10px;
-			color: $red;
-		}
 	}
 </style>

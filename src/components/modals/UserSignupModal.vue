@@ -54,6 +54,7 @@
 
 				<FormDatepicker
 					v-model="birthday"
+					:error="errors.birthday"
 					placeholder="Рождена дата"
 				/>
 
