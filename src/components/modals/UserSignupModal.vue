@@ -4,7 +4,7 @@
 		<BaseModal :visible="visible" @hidden="hideSignupModal">
 			<template v-slot:header>
 				<h5 class="modal-title">
-					Регистрация
+					{{ modalTitle }}
 				</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -12,55 +12,62 @@
 			</template>
 			<template v-slot:body>
 
-				<FormInput
-					v-model="username"
-					:error="errors.username"
-					@keyup.enter="submit"
-					@focus="clearError"
-					type="text"
-					name="username"
-					placeholder="Потребителско име"
-				></FormInput>
+				<template v-if="!done">
+					<FormInput
+						v-model="username"
+						:error="errors.username"
+						@keyup.enter="submit"
+						@focus="clearError"
+						type="text"
+						name="username"
+						placeholder="Потребителско име"
+					></FormInput>
 
-				<FormInput
-					v-model="email"
-					:error="errors.email"
-					@keyup.enter="submit"
-					@focus="clearError"
-					type="text"
-					name="email"
-					placeholder="Email"
-				></FormInput>
+					<FormInput
+						v-model="email"
+						:error="errors.email"
+						@keyup.enter="submit"
+						@focus="clearError"
+						type="text"
+						name="email"
+						placeholder="Email"
+					></FormInput>
 
-				<FormInput
-					v-model="password"
-					:error="errors.password"
-					@keyup.enter="submit"
-					@focus="clearError"
-					type="password"
-					name="password"
-					placeholder="Парола"
-				></FormInput>
+					<FormInput
+						v-model="password"
+						:error="errors.password"
+						@keyup.enter="submit"
+						@focus="clearError"
+						type="password"
+						name="password"
+						placeholder="Парола"
+					></FormInput>
 
-				<FormInput
-					v-model="repeatPassword"
-					:error="errors.repeat_password"
-					@keyup.enter="submit"
-					@focus="clearError"
-					type="password"
-					name="repeat_password"
-					placeholder="Повтори паролата"
-				></FormInput>
+					<FormInput
+						v-model="repeatPassword"
+						:error="errors.repeat_password"
+						@keyup.enter="submit"
+						@focus="clearError"
+						type="password"
+						name="repeat_password"
+						placeholder="Повтори паролата"
+					></FormInput>
 
-				<FormDatepicker
-					v-model="birthday"
-					:error="errors.birthday"
-					placeholder="Рождена дата"
-				/>
+					<FormDatepicker
+						v-model="birthday"
+						:error="errors.birthday"
+						placeholder="Рождена дата"
+					/>
 
-				<FormButton @click="submit" class="signup-btn">
-					Регистрирай се
-				</FormButton>
+					<FormButton @click="submit" class="signup-btn">
+						Регистрирай се
+					</FormButton>
+				</template>
+				<StatusMessage v-else>
+					<img src="/img/icons/success-icon.png" />
+					<h5>Благодарим Ви, че се регистрирахте.</h5>
+					До няколко минути ще получите имейл с линк за активация на своя акаунт.
+				</StatusMessage>
 
 			</template>
 		</BaseModal>
@@ -84,7 +91,8 @@
 				password: '',
 				repeatPassword: '',
 				birthday: null,
-				gender: 'M'
+				gender: 'M',
+				done: false
 			};
 		},
 		computed: {
@@ -93,7 +101,10 @@
 			}),
 			...mapState('forms', {
 				errors: state => state.errors[formName]
-			})
+			}),
+			modalTitle() {
+				return this.done ? 'Регистрирахте се успешно!' : 'Регистрация';
+			}
 		},
 		watch: {
 			/**
@@ -114,7 +125,7 @@
 				'resetFormErrors'
 			]),
 			submit() {
-
+				this.done = true;
 			},
 			/**
 			 * Clears the form errors related to this input
