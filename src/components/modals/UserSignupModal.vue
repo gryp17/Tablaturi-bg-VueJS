@@ -124,8 +124,33 @@
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			...mapActions('auth', [
+				'signup'
+			]),
 			submit() {
-				this.done = true;
+				const params = {
+					username: this.username,
+					email: this.email,
+					password: this.password,
+					repeatPassword: this.repeatPassword,
+					birthday: this.birthday,
+					gender: this.gender,
+					captcha: this.captcha
+				};
+
+				this.signup(params).then((res) => {
+					const data = res.data;
+					console.log(data);
+
+					if (data.ID) {
+						this.done = true;
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input

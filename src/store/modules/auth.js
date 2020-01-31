@@ -58,6 +58,15 @@ export default {
 				});
 			});
 		},
+		signup(context, { username, email, password, repeatPassword, birthday, gender, captcha }) {
+			return UserHttpService.signup(username, email, password, repeatPassword, birthday, gender, captcha).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `signup failed - ${error}`
+				});
+			});
+		},
 		sendPasswordResetRequest(context, email) {
 			return UserHttpService.sendPasswordResetRequest(email).then((res) => {
 				return res;

@@ -31,6 +31,28 @@ export default {
 		return API.get('/User/logout');
 	},
 	/**
+	 * Signs up the user
+	 * @param {String} username
+	 * @param {String} email
+	 * @param {String} password
+	 * @param {String} repeatPassword
+	 * @param {Object} birthday
+	 * @param {String} gender
+	 * @param {String} captcha
+	 * @returns {Promise}
+	 */
+	signup(username, email, password, repeatPassword, birthday, gender, captcha) {
+		return API.post('/User/signup', {
+			username,
+			email,
+			password,
+			repeatPassword,
+			birthday,
+			gender,
+			captcha
+		});
+	},
+	/**
 	 * Sends a password reset request for the specified email
 	 * @param {String} email
 	 * @returns {Promise}
