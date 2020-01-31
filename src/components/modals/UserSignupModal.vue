@@ -59,6 +59,22 @@
 						placeholder="Рождена дата"
 					/>
 
+					<div class="gender-wrapper">
+						<label>
+							Пол:
+						</label>
+
+						<input type="radio" id="male" value="M" v-model="gender"/>
+						<label for="male">
+							Мъж
+						</label>
+
+						<input type="radio" id="female" value="F" v-model="gender"/>
+						<label for="female">
+							Жена
+						</label>
+					</div>
+
 					<FormButton @click="submit" class="signup-btn">
 						Регистрирай се
 					</FormButton>
@@ -183,6 +199,12 @@
 			text-align: left;
 
 			.modal-body{
+
+				.gender-wrapper {
+					label {
+						margin-right: 10px;
+					}
+				}
 
 				.signup-btn {
 					display: block;
