@@ -46,7 +46,7 @@ export default {
 			username,
 			email,
 			password,
-			repeatPassword,
+			repeat_password: repeatPassword,
 			birthday,
 			gender,
 			captcha

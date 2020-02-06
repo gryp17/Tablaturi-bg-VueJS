@@ -75,6 +75,12 @@
 						</label>
 					</div>
 
+					<img :src="captchaImageUrl" />
+
+					<button @click="resetCaptcha">
+						Reset
+					</button>
+
 					<FormButton @click="submit" class="signup-btn">
 						Регистрирай се
 					</FormButton>
@@ -92,6 +98,7 @@
 
 <script>
 	import { mapState, mapActions } from 'vuex';
+	import config from '@/config';
 	import BaseModal from '@/components/modals/BaseModal';
 
 	const formName = 'signup';
@@ -108,6 +115,8 @@
 				repeatPassword: '',
 				birthday: null,
 				gender: 'M',
+				captchaImage: null,
+				timestamp: new Date().getTime(),
 				done: false
 			};
 		},
@@ -120,15 +129,22 @@
 			}),
 			modalTitle() {
 				return this.done ? 'Регистрирахте се успешно!' : 'Регистрация';
+			},
+			captchaImageUrl() {
+				return `${config.API_URL}/Misc/generateCaptcha?timestamp=${this.timestamp}`;
 			}
 		},
 		watch: {
 			/**
 			 * Watches the visible status and resets the data/state/errors
 			 */
-			visible() {
+			visible(value) {
 				this.resetState();
 				this.resetFormErrors(formName);
+
+				if (value) {
+					this.resetCaptcha();
+				}
 			}
 		},
 		methods: {
@@ -143,6 +159,9 @@
 			...mapActions('auth', [
 				'signup'
 			]),
+			resetCaptcha() {
+				this.timestamp = new Date().getTime();
+			},
 			submit() {
 				const params = {
 					username: this.username,
