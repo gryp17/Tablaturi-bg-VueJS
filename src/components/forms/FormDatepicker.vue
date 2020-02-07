@@ -14,6 +14,7 @@
 				...$listeners,
 				input: onInput
 			}"
+			ref="datepicker"
 		/>
 
 		<FormInputError>
@@ -23,9 +24,12 @@
 </template>
 
 <script>
+	import $ from 'jquery';
 	import Datepicker from 'vuejs-datepicker';
 	import { bg } from 'vuejs-datepicker/dist/locale';
 	import FormInputError from '@/components/forms/FormInputError';
+
+	let input;
 
 	export default {
 		components: {
@@ -55,6 +59,14 @@
 			language() {
 				return bg;
 			}
+		},
+		mounted() {
+			//need to manually bind/unbind focus because vuejs-datepicker doesn't provide a working focus event...
+			input = $(this.$refs.datepicker.$el).find('input');
+			input.on('focus', this.$listeners.focus);
+		},
+		destroyed() {
+			input.off('focus', this.$listeners.focus);
 		},
 		methods: {
 			/**
