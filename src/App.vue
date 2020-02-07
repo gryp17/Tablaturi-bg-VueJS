@@ -46,6 +46,7 @@
 	import FormFileInput from '@/components/forms/FormFileInput';
 	import FormDropdown from '@/components/forms/FormDropdown';
 	import FormDatepicker from '@/components/forms/FormDatepicker';
+	import FormCaptcha from '@/components/forms/FormCaptcha';
 	import Header from '@/components/header/Header';
 	import SearchBar from '@/components/SearchBar';
 	import Footer from '@/components/Footer';
@@ -59,6 +60,7 @@
 	Vue.component('FormFileInput', FormFileInput);
 	Vue.component('FormDropdown', FormDropdown);
 	Vue.component('FormDatepicker', FormDatepicker);
+	Vue.component('FormCaptcha', FormCaptcha);
 	Vue.component('LoadingIndicator', LoadingIndicator);
 	Vue.component('StatusMessage', StatusMessage);
 

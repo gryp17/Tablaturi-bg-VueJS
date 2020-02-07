@@ -59,7 +59,7 @@
 						placeholder="Рождена дата"
 					/>
 
-					<div class="gender-wrapper">
+					<div class="gender-wrapper form-group">
 						<label>
 							Пол:
 						</label>
@@ -75,11 +75,13 @@
 						</label>
 					</div>
 
-					<img :src="captchaImageUrl" />
-
-					<button @click="resetCaptcha">
-						Reset
-					</button>
+					<FormCaptcha
+						v-model="captcha"
+						:error="errors.captcha"
+						@keyup.enter="submit"
+						@focus="clearError"
+						ref="captcha"
+					/>
 
 					<FormButton @click="submit" class="signup-btn">
 						Регистрирай се
@@ -98,7 +100,6 @@
 
 <script>
 	import { mapState, mapActions } from 'vuex';
-	import config from '@/config';
 	import BaseModal from '@/components/modals/BaseModal';
 
 	const formName = 'signup';
@@ -115,8 +116,7 @@
 				repeatPassword: '',
 				birthday: null,
 				gender: 'M',
-				captchaImage: null,
-				timestamp: new Date().getTime(),
+				captcha: '',
 				done: false
 			};
 		},
@@ -129,9 +129,6 @@
 			}),
 			modalTitle() {
 				return this.done ? 'Регистрирахте се успешно!' : 'Регистрация';
-			},
-			captchaImageUrl() {
-				return `${config.API_URL}/Misc/generateCaptcha?timestamp=${this.timestamp}`;
 			}
 		},
 		watch: {
@@ -143,7 +140,7 @@
 				this.resetFormErrors(formName);
 
 				if (value) {
-					this.resetCaptcha();
+					this.$refs.captcha.resetCaptcha();
 				}
 			}
 		},
@@ -159,9 +156,6 @@
 			...mapActions('auth', [
 				'signup'
 			]),
-			resetCaptcha() {
-				this.timestamp = new Date().getTime();
-			},
 			submit() {
 				const params = {
 					username: this.username,
@@ -219,15 +213,18 @@
 
 			.modal-body{
 
+				//TODO: move this to a component
 				.gender-wrapper {
 					label {
 						margin-right: 10px;
+						margin-bottom: 0px;
 					}
 				}
 
 				.signup-btn {
 					display: block;
 					margin: auto;
+					margin-top: 10px;
 				}
 			}
 		}
