@@ -26,6 +26,7 @@
 				:class="['form-control', className, {'has-error': error}]"
 				:name="name"
 				:placeholder="placeholder"
+				:rows="rows"
 				v-on="{
 					...$listeners,
 					input: onInput
@@ -60,6 +61,10 @@
 			className: String,
 			type: String,
 			placeholder: String,
+			rows: {
+				type: Number,
+				default: 3
+			},
 			name: String,
 			error: String
 		},
@@ -93,6 +98,12 @@
 			&:focus {
 				box-shadow: none;
 				border-color: $blue-lighter;
+			}
+		}
+
+		textarea {
+			&.form-control {
+				padding: 10px;
 			}
 		}
 	}

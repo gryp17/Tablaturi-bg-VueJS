@@ -7,7 +7,8 @@ export default {
 			login: {},
 			signup: {},
 			forgottenPassword: {},
-			changePassword: {}
+			changePassword: {},
+			contactUs: {}
 		}
 	},
 	mutations: {
