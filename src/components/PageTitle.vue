@@ -6,7 +6,7 @@
 
 <style scoped lang="scss">
 	.page-title {
-		margin-bottom: 15px;
+		margin-bottom: 20px;
 		text-align: center;
 	}
 </style>
