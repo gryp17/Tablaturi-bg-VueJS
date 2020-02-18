@@ -64,7 +64,7 @@
 <script>
 	import { mapState, mapActions } from 'vuex';
 
-	const formName = 'signup';
+	const formName = 'contactUs';
 
 	export default {
 		data() {
@@ -87,11 +87,32 @@
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			...mapActions('misc', [
+				'sendContactUsForm'
+			]),
 			/**
 			 * Submits the contact us form
 			 */
 			submit() {
-				console.log('SUBMITING DATA');
+				const params = {
+					username: this.username,
+					email: this.email,
+					message: this.message,
+					captcha: this.captcha
+				};
+
+				this.sendContactUsForm(params).then((res) => {
+					const data = res.data;
+
+					if (data.success) {
+						this.done = true;
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input
@@ -121,7 +142,7 @@
 
 			.submit-btn {
 				display: block;
-				margin: auto;
+				margin: 10px auto;
 			}
 		}
 	}
