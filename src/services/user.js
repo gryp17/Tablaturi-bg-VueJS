@@ -89,5 +89,17 @@ export default {
 			password,
 			repeat_password: repeatPassword
 		});
+	},
+	/**
+	 * Activates the user account
+	 * @param {Number} userId
+	 * @param {String} hash
+	 * @returns {Promise}
+	 */
+	activateUser(userId, hash) {
+		return API.post('/UserActivation/activateUser', {
+			user_id: userId,
+			hash
+		});
 	}
 };

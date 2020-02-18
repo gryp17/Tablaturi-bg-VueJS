@@ -5,6 +5,7 @@ import Articles from '@/views/Articles';
 import NotFound from '@/views/NotFound';
 import Forbidden from '@/views/Forbidden';
 import ChangePassword from '@/views/ChangePassword';
+import UserActivation from '@/views/UserActivation';
 
 import store from '@/store';
 
@@ -79,6 +80,11 @@ const routes = [
 		path: '/change-password/:userId/:hash',
 		name: 'change-password',
 		component: ChangePassword
+	},
+	{
+		path: '/activate/:userId/:hash',
+		name: 'user-activation',
+		component: UserActivation
 	},
 	{
 		path: '/forbidden',

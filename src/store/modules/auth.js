@@ -93,6 +93,15 @@ export default {
 					message: `password update failed - ${error}`
 				});
 			});
+		},
+		activateUser(context, { userId, hash }) {
+			return UserHttpService.activateUser(userId, hash).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `user activation failed - ${error}`
+				});
+			});
 		}
 	}
 };
