@@ -6,6 +6,7 @@
 
 <style scoped lang="scss">
 	.status-message {
+		font-size: 18px;
 		text-align: center;
 
 		img {
