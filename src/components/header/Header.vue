@@ -9,7 +9,9 @@
 				</a>
 			</div>
 
-			<img alt="Tablaturi-bg Logo" title="Tablaturi-bg" src="/img/logo-tablaturi-bg.png"/>
+			<router-link :to="{name: 'home'}">
+				<img alt="Tablaturi-bg Logo" title="Tablaturi-bg" src="/img/logo-tablaturi-bg.png"/>
+			</router-link>
 
 			<div class="aside right">
 				<TabsStats />

@@ -52,6 +52,7 @@
 	import Footer from '@/components/Footer';
 	import LoadingIndicator from '@/components/LoadingIndicator';
 	import StatusMessage from '@/components/StatusMessage';
+	import PageTitle from '@/components/PageTitle';
 
 	//global components/filters
 	Vue.filter('errorsMap', errorsMap);
@@ -63,6 +64,7 @@
 	Vue.component('FormCaptcha', FormCaptcha);
 	Vue.component('LoadingIndicator', LoadingIndicator);
 	Vue.component('StatusMessage', StatusMessage);
+	Vue.component('PageTitle', PageTitle);
 
 	export default {
 		components: {
@@ -127,7 +129,7 @@
 
 				.view {
 					min-height: 615px;
-					padding: 10px;
+					padding: 15px;
 				}
 
 				.bottom-banner {

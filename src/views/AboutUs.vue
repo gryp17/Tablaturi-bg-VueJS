@@ -1,5 +1,27 @@
 <template>
-	<div>
-		This is an about page
+	<div class="about-us-page">
+		<PageTitle>
+			За нас
+		</PageTitle>
+		<p>
+			<strong>Tablaturi-bg</strong> е създаден през септември 2014 година от малък екип ентусиасти.<br/>
+			Сайтът цели да събере на едно място български и чуждестранни таблатури,
+			музикални новини и полезни материали, както за начинаещи, така и за напреднали китаристи.<br/><br/>
+			Към днешна дата сайтът разполага с богата колекция от около 82 000 Guitar Pro таблатури и 196 000 текстови таблатури и акорди.<br/><br/>
+			През месец май 2015г. tablaturi-bg се сдоби с мобилна версия, поддържаща нови функционалности като "Любими таблатури",
+			а през септември 2016г. и с обновен дизайн.
+
+			<img class="logo" src="/img/logo-tablaturi-bg.png"/>
+		</p>
 	</div>
 </template>
+
+<style scoped lang="scss">
+	.about-us-page {
+		.logo {
+			display: block;
+			margin: 50px auto;
+			width: 350px;
+		}
+	}
+</style>
