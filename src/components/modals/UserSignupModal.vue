@@ -101,6 +101,7 @@
 </template>
 
 <script>
+	import moment from 'moment';
 	import { mapState, mapActions } from 'vuex';
 	import BaseModal from '@/components/modals/BaseModal';
 
@@ -158,22 +159,24 @@
 			...mapActions('auth', [
 				'signup'
 			]),
+			/**
+			 * Submits the user signup data
+			 */
 			submit() {
 				const params = {
 					username: this.username,
 					email: this.email,
 					password: this.password,
 					repeatPassword: this.repeatPassword,
-					birthday: this.birthday,
+					birthday: moment(this.birthday).format('YYYY-MM-DD'),
 					gender: this.gender,
 					captcha: this.captcha
 				};
 
 				this.signup(params).then((res) => {
 					const data = res.data;
-					console.log(data);
 
-					if (data.ID) {
+					if (data.success) {
 						this.done = true;
 					} else if (data.error) {
 						this.setFormError({
