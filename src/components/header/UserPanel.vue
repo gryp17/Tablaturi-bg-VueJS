@@ -8,7 +8,7 @@
 				class="profile-link red"
 			>{{ userSession.username }}</router-link>
 
-			<FormButton @click="logout">
+			<FormButton @click="onLogout">
 				Изход
 			</FormButton>
 		</template>
@@ -56,7 +56,15 @@
 			]),
 			...mapActions('auth', [
 				'logout'
-			])
+			]),
+			/**
+			 * Logs out the user and redirects to the home page
+			 */
+			onLogout() {
+				this.logout().then(() => {
+					this.$router.push({ name: 'home' });
+				});
+			}
 		}
 	};
 </script>
