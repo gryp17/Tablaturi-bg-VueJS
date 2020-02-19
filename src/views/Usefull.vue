@@ -53,7 +53,7 @@
 					<img src="/img/usefull/tuxguitar.png" />
 					<div class="description">
 						<h5>
-							<a class="red" href="http://tuxguitar.herac.com.ar/download.html" target="_blank">TuxGuitar</a>
+							<a class="red" href="http://www.tuxguitar.com.ar/download.html" target="_blank">TuxGuitar</a>
 						</h5>
 						TuxGuitar e безплатна алтернатива на известната програма за таблатури и партитури - Guitar Pro.
 						Софтуерът служи за създаване, редактиране и преслушване на таблатури.
@@ -65,7 +65,7 @@
 					<img src="/img/usefull/aptuner.jpg" />
 					<div class="description">
 						<h5>
-							<a class="red" href="http://www.aptuner.com/aptuner_index.html" target="_blank">APTuner</a>
+							<a class="red" href="https://ap-tuner.en.softonic.com/" target="_blank">APTuner</a>
 						</h5>
 						APTuner е безплатна програма за бързо и лесно настройване на китара като може да се използва както на компютър, така и на таблет или смартфон.
 					</div>
