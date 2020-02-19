@@ -19,7 +19,7 @@
 </template>
 
 <script>
-	import config from '@/config';
+	import { mapState } from 'vuex';
 
 	export default {
 		props: {
@@ -32,8 +32,11 @@
 			};
 		},
 		computed: {
+			...mapState([
+				'API_URL'
+			]),
 			captchaImageUrl() {
-				return `${config.API_URL}/Misc/generateCaptcha?timestamp=${this.timestamp}`;
+				return `${this.API_URL}/Misc/generateCaptcha?timestamp=${this.timestamp}`;
 			}
 		},
 		methods: {

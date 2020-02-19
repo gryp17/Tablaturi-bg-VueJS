@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import config from '@/config';
 import authModule from '@/store/modules/auth';
 import formsModule from '@/store/modules/forms';
 import modalsModule from '@/store/modules/modals';
@@ -17,6 +18,7 @@ export default new Vuex.Store({
 		misc: miscModule
 	},
 	state: {
+		...config,
 		appIsReady: false
 	},
 	mutations: {

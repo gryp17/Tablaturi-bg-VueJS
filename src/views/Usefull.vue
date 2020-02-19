@@ -47,6 +47,7 @@
 		</ul>
 
 		<div class="tab-content">
+			<!-- software tab -->
 			<div class="tab-pane fade show active" id="software" role="tabpanel" aria-labelledby="software-tab">
 				<div class="usefull-item">
 					<img src="/img/usefull/tuxguitar.png" />
@@ -80,20 +81,72 @@
 					</div>
 				</div>
 			</div>
+			<!-- lessons tab -->
 			<div class="tab-pane fade" id="lessons" role="tabpanel" aria-labelledby="lessons-tab">
 				<div class="usefull-item">
 					<img src="/img/usefull/lessons.jpg" />
 					<div class="description">
-						TODO: figure out how to make the download links work!!!
+						<h5>
+							<a class="red" :href="`${CDN_URL}/downloads/lessons.pdf`">Уроци по китара (Скот Фритцингер)</a>
+						</h5>
+						Уроците включват основна теория по китара, техника за свирене, както и информация за акордите, техните прогресии и вариации.
+					</div>
+				</div>
+				<div class="usefull-item">
+					<img src="/img/usefull/tab.jpg" />
+					<div class="description">
+						<h5>
+							<a class="red" :href="`${CDN_URL}/downloads/tabs.pdf`">Писане и четене на таблатури (Хауърд Райт)</a>
+						</h5>
+						Урокът обяснява какво представляват таблатурите, как се четат и пишат и най-често използваните символи.
 					</div>
 				</div>
 			</div>
+			<!-- video lessons tab -->
 			<div class="tab-pane fade" id="video-lessons" role="tabpanel" aria-labelledby="video-lessons-tab">
-				video lessons
+
+				<h5>
+					<a class="red" href="http://www.guitarjamz.com" target="_blank">Видео уроци от Марти Шварц</a>
+				</h5>
+
+				<div class="videos-wrapper">
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=guitarjamzdotcom" width="340" height="390"></iframe>
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=martyzsongs" width="340" height="390"></iframe>
+				</div>
+
+				<hr/>
+
+				<h5>
+					Още видео уроци
+				</h5>
+
+				<div class="videos-wrapper">
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=JustinSandercoeSongs" width="340" height="390"></iframe>
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=guitarlessonscom" width="340" height="390"></iframe>
+
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=tripfuse04" width="340" height="390"></iframe>
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=educationalmaterials" width="340" height="390"></iframe>
+
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=KristoferDahl" width="340" height="390"></iframe>
+					<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=SteveTerreberry" width="340" height="390"></iframe>
+				</div>
+
 			</div>
 		</div>
 	</div>
 </template>
+
+<script>
+	import { mapState } from 'vuex';
+
+	export default {
+		computed: {
+			...mapState([
+				'CDN_URL'
+			])
+		}
+	};
+</script>
 
 <style scoped lang="scss">
 	.usefull-page {
@@ -129,5 +182,23 @@
 			}
 		}
 
+		#video-lessons {
+			padding-top: 10px;
+
+			h5 {
+				margin: 10px 0px;
+				text-align: center;
+			}
+
+			.videos-wrapper {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-around;
+
+				iframe {
+					margin-top: 10px;
+				}
+			}
+		}
 	}
 </style>
