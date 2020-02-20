@@ -13,8 +13,10 @@
 						<img src="/img/ad-placeholder.png"/>
 					</a>
 				</aside>
-				<div class="view-wrapper">
-					<router-view class="view" />
+				<div class="content-wrapper">
+					<div class="view-wrapper">
+						<router-view class="view" />
+					</div>
 
 					<div class="bottom-banner">
 						<a href="mailto:reklama@tablaturi-bg.com">
@@ -114,7 +116,7 @@
 		border-right: 1px solid $gray-darker;
 		background-color: $white;
 
-		.inner-wrapper {
+		> .inner-wrapper {
 			display: flex;
 
 			aside {
@@ -123,13 +125,16 @@
 				min-height: 600px;
 			}
 
-			.view-wrapper {
+			.content-wrapper {
 				margin: 5px 0px;
 				width: 100%;
 
-				.view {
+				.view-wrapper {
 					min-height: 615px;
-					padding: 15px;
+
+					.view {
+						padding: 15px;
+					}
 				}
 
 				.bottom-banner {
