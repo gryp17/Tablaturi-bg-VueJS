@@ -1,8 +1,8 @@
 <template>
 	<div class="profile-page">
 
-		<LoadingIndicator v-show="!doneLoading" />
-		<div v-show="doneLoading">
+		<LoadingIndicator v-if="loading" />
+		<div v-else>
 			<TabsNav>
 				<template v-slot:items>
 					<li class="nav-item">
@@ -73,13 +73,13 @@
 				</template>
 				<template v-slot:content>
 					<div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-						<UserProfile @ready="componentIsReady"/>
+						<UserProfile :user="user" />
 					</div>
 					<div class="tab-pane fade" id="user-tabs" role="tabpanel" aria-labelledby="user-tabs-tab">
-						<UserTabs @ready="componentIsReady"/>
+						<UserTabs />
 					</div>
 					<div class="tab-pane fade" id="favourite-tabs" role="tabpanel" aria-labelledby="favourite-tabs-tab">
-						<UserFavourites @ready="componentIsReady"/>
+						<UserFavourites />
 					</div>
 					<div class="tab-pane fade" id="user-search" role="tabpanel" aria-labelledby="user-search-tab">
 						user search
@@ -94,6 +94,8 @@
 </template>
 
 <script>
+	import { mapState, mapActions } from 'vuex';
+
 	import TabsNav from '@/components/TabsNav';
 	import UserProfile from '@/components/UserProfile';
 	import UserTabs from '@/components/UserTabs';
@@ -108,18 +110,41 @@
 		},
 		data() {
 			return {
-				asyncComponents: 3,
-				readyComponents: 0
+				loading: true
 			};
 		},
 		computed: {
-			doneLoading() {
-				return this.readyComponents === this.asyncComponents;
+			...mapState('user', [
+				'user'
+			])
+		},
+		watch: {
+			$route(route, prevRoute) {
+				if (route.params.id !== prevRoute.params.id) {
+					this.getUserData();
+				}
 			}
 		},
+		created() {
+			this.getUserData();
+		},
 		methods: {
-			componentIsReady() {
-				this.readyComponents++;
+			...mapActions('user', [
+				'getUser'
+			]),
+			/**
+			 * Fetches the user data for the specified id
+			 */
+			getUserData() {
+				this.loading = true;
+
+				this.getUser(this.$route.params.id).then((res) => {
+					if (!res.data || !res.data.ID) {
+						this.$router.push({ name: 'not-found' });
+					} else {
+						this.loading = false;
+					}
+				});
 			}
 		}
 	};
