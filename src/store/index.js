@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import config from '@/config';
 import authModule from '@/store/modules/auth';
+import userModule from '@/store/modules/user';
 import formsModule from '@/store/modules/forms';
 import modalsModule from '@/store/modules/modals';
 import tabsModule from '@/store/modules/tabs';
@@ -12,6 +13,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	modules: {
 		auth: authModule,
+		user: userModule,
 		forms: formsModule,
 		modals: modalsModule,
 		tabs: tabsModule,

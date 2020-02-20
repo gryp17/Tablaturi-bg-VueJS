@@ -101,5 +101,13 @@ export default {
 			user_id: userId,
 			hash
 		});
+	},
+	/**
+	 * Returns the user data for the specified id
+	 * @param {Number} userId
+	 * @returns {Promise}
+	 */
+	getUser(userId) {
+		return API.get(`/User/getUser?id=${userId}`);
 	}
 };
