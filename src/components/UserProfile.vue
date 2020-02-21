@@ -28,6 +28,26 @@
 					<tbody>
 						<tr>
 							<td>
+								<span class="info-label">Репутация:</span>
+								{{ user.reputation }}
+
+								<PopoverButton>
+									<template v-slot:button>
+										<i class="fas fa-info-circle"></i>
+									</template>
+									<template v-slot:content>
+										<div>
+											<strong>Репутация се натрупва чрез:</strong>
+										</div>
+										- писане на коментар 1 точка <br/>
+										- оценка на таблатура 1 точка <br/>
+										- качване на таблатура 10 точки
+									</template>
+								</PopoverButton>
+							</td>
+						</tr>
+						<tr>
+							<td>
 								<span class="info-label">{{ registeredText }}</span>
 								{{ registeredDate }}
 							</td>
@@ -77,11 +97,14 @@
 <script>
 	import moment from 'moment';
 	import { mapState } from 'vuex';
+
 	import GenderIcon from '@/components/GenderIcon';
+	import PopoverButton from '@/components/PopoverButton';
 
 	export default {
 		components: {
-			GenderIcon
+			GenderIcon,
+			PopoverButton
 		},
 		props: {
 			user: Object
@@ -130,6 +153,17 @@
 			}
 		}
 
+		.info-label {
+			margin-right: 5px;
+			color: $red;
+		}
+
+		.fa-info-circle {
+			font-size: 16px;
+			color: $blue-light;
+			cursor: pointer;
+		}
+
 		.table-wrapper {
 			display: flex;
 			margin-top: 20px;
@@ -152,11 +186,6 @@
 
 					td {
 						padding: 10px;
-
-						.info-label {
-							margin-right: 5px;
-							color: $red;
-						}
 					}
 				}
 			}
