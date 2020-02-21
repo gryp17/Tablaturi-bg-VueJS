@@ -8,9 +8,12 @@ $font-size: 14px;
 //colors
 $red: #F84241;
 $blue: #465A65;
+$blue-light: #2980b9;
 $blue-lighter: #829ba8;
 $gray: #E4E4E4;
 $gray-darker: #ADADAD;
 $white: #ffffff;
 
 $text-color: $blue;
+$gender-male: $blue-light;
+$gender-female: $red;

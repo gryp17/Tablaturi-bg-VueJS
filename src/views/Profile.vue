@@ -149,3 +149,11 @@
 		}
 	};
 </script>
+
+<style scoped lang="scss">
+	.profile-page {
+		.tab-pane {
+			padding-top: 15px;
+		}
+	}
+</style>

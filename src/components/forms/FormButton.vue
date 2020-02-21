@@ -1,6 +1,6 @@
 <template>
 	<button
-		:class="['form-button', className]"
+		:class="['form-button', {'outline': outline}, className]"
 		:type="type"
 		v-on="{
 			...$listeners
@@ -17,6 +17,10 @@
 			type: {
 				type: String,
 				default: 'button'
+			},
+			outline: {
+				type: Boolean,
+				default: false
 			}
 		}
 	};
@@ -33,6 +37,17 @@
 
 		&:hover, &:active, &:focus {
 			background-color: darken($red, 15%);
+		}
+
+		&.outline {
+			background-color: $white;
+			color: $red;
+			border: solid 1px $red;
+
+			&:hover, &:active, &:focus {
+				background-color: $red;
+				color: $white;
+			}
 		}
 	}
 </style>
