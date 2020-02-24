@@ -1,29 +1,29 @@
 <template>
 	<div class="form-file-input form-group">
-			<label v-if="label">
-				{{ label }}
-			</label>
+		<label v-if="label">
+			{{ label }}
+		</label>
 
-			<button
-				@click="openFileBrowser()"
-				type="button"
-				class="btn btn-secondary browse-btn"
-			>
-				<i class="fas fa-file-upload"></i>
-				Choose a file
-			</button>
+		<div @click="openFileBrowser()">
+			<slot>
+				<FormButton class="browse-btn">
+					<i class="fas fa-file-upload"></i>
+					Избери файл
+				</FormButton>
+			</slot>
+		</div>
 
-			<input
-				:class="className"
-				:name="name"
-				v-on="$listeners"
-				ref="file"
-				type="file"
-			/>
+		<input
+			:class="className"
+			:name="name"
+			v-on="$listeners"
+			ref="file"
+			type="file"
+		/>
 
-			<FormInputError>
-				{{ error }}
-			</FormInputError>
+		<FormInputError>
+			{{ error }}
+		</FormInputError>
 	</div>
 </template>
 
@@ -61,7 +61,8 @@
 			width: 100%;
 
 			.fa-file-upload {
-				margin-right: 6px;
+				margin-right: 5px;
+				margin-top: -3px;
 			}
 		}
 

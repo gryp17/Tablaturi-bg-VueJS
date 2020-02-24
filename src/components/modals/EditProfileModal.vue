@@ -12,17 +12,25 @@
 			</template>
 			<template v-slot:body>
 
-				<template v-if="!done">
+				<div class="columns-wrapper">
+					<div class="avatar-wrapper">
+						<FormFileInput>
+							<UploadImagePreview :image="`${CDN_URL}/avatars/${user.photo}`"/>
+						</FormFileInput>
 
-					inputs
+						<div class="avatar-hint">
+							Позволени формати: JPG и PNG под 1MB
+						</div>
+					</div>
 
-					<FormButton @click="submit" class="submit-btn">
-						ОК
-					</FormButton>
-				</template>
-				<StatusMessage v-else>
-					success
-				</StatusMessage>
+					<div class="right-wrapper">
+						inputs
+					</div>
+				</div>
+
+				<FormButton @click="submit" class="submit-btn">
+					Запази промените
+				</FormButton>
 
 			</template>
 		</BaseModal>
@@ -32,12 +40,17 @@
 <script>
 	import { mapState, mapActions } from 'vuex';
 	import BaseModal from '@/components/modals/BaseModal';
+	import UploadImagePreview from '@/components/UploadImagePreview';
 
 	const formName = 'editProfile';
 
 	export default {
 		components: {
-			BaseModal
+			BaseModal,
+			UploadImagePreview
+		},
+		props: {
+			user: Object
 		},
 		data() {
 			return {
@@ -54,7 +67,10 @@
 			}),
 			...mapState('forms', {
 				errors: state => state.errors[formName]
-			})
+			}),
+			...mapState([
+				'CDN_URL'
+			])
 		},
 		watch: {
 			/**
@@ -111,6 +127,23 @@
 			text-align: left;
 
 			.modal-body{
+
+				.columns-wrapper {
+					display: flex;
+
+					.avatar-wrapper {
+						.avatar-hint {
+							margin-top: 5px;
+							margin-bottom: 10px;
+							font-size: 10px;
+							font-style: italic;
+						}
+					}
+
+					.right-wrapper {
+						flex: 1;
+					}
+				}
 
 				.submit-btn {
 					display: block;

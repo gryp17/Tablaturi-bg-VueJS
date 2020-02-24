@@ -114,7 +114,7 @@
 			</div>
 		</div>
 
-		<EditProfileModal />
+		<EditProfileModal :user="userSession"/>
 	</div>
 </template>
 
