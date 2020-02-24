@@ -14,8 +14,14 @@
 
 				<div class="columns-wrapper">
 					<div class="avatar-wrapper">
-						<FormFileInput>
-							<UploadImagePreview :image="`${CDN_URL}/avatars/${user.photo}`"/>
+						<FormFileInput
+							:error="errors.photo"
+							@click="clearError"
+							@change="avatarChanged"
+							ref="avatar"
+							name="photo"
+							>
+							<UploadImagePreview :image="avatarPreview"/>
 						</FormFileInput>
 
 						<div class="avatar-hint">
@@ -76,6 +82,36 @@
 					</div>
 				</div>
 
+				<FormInput
+					v-model="aboutMe"
+					:error="errors.about_me"
+					@keyup.enter="submit"
+					@focus="clearError"
+					tag="textarea"
+					name="about_me"
+					placeholder="За мен"
+				></FormInput>
+
+				<FormInput
+					v-model="instrument"
+					:error="errors.instrument"
+					@keyup.enter="submit"
+					@focus="clearError"
+					tag="textarea"
+					name="instrument"
+					placeholder="Инструменти/Екипировка"
+				></FormInput>
+
+				<FormInput
+					v-model="favouriteBands"
+					:error="errors.favourite_bands"
+					@keyup.enter="submit"
+					@focus="clearError"
+					tag="textarea"
+					name="favourite_bands"
+					placeholder="Любими групи/музиканти"
+				></FormInput>
+
 				<FormButton @click="submit" class="submit-btn">
 					Запази промените
 				</FormButton>
@@ -102,11 +138,16 @@
 		},
 		data() {
 			return {
-				username: '',
-				email: '',
 				password: '',
 				repeatPassword: '',
-				done: false
+				location: '',
+				occupation: '',
+				web: '',
+				aboutMe: '',
+				instrument: '',
+				favouriteBands: '',
+				photo: null,
+				avatarPreview: null
 			};
 		},
 		computed: {
@@ -139,6 +180,14 @@
 				'resetFormErrors'
 			]),
 			/**
+			 * Updates the avatar and avatar preview values whenever the selected file changes
+			 * @param {Object} e
+			 */
+			avatarChanged(e) {
+				this.photo = e.target.files[0];
+				this.avatarPreview = URL.createObjectURL(e.target.files[0]);
+			},
+			/**
 			 * Submits the updated user data
 			 */
 			submit() {
@@ -160,6 +209,14 @@
 			 */
 			resetState() {
 				Object.assign(this.$data, this.$options.data.call(this));
+
+				this.location = this.user.location;
+				this.occupation = this.user.occupation;
+				this.web = this.user.web;
+				this.aboutMe = this.user.about_me;
+				this.instrument = this.user.instrument;
+				this.favouriteBands = this.user.favourite_bands;
+				this.avatarPreview = `${this.CDN_URL}/avatars/${this.user.photo}`;
 			}
 		}
 	};
@@ -170,7 +227,7 @@
 		$max-width: 600px;
 
 		.modal-dialog {
-			margin-top: 20vh;
+			margin-top: 10vh;
 			max-width: $max-width;
 			text-align: left;
 

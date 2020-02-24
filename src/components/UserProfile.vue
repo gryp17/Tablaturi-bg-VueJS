@@ -161,7 +161,7 @@
 				return this.user.type === 'admin';
 			},
 			canEdit() {
-				return this.user && this.user.ID === this.userSession.ID;
+				return this.user && this.userSession && this.user.ID === this.userSession.ID;
 			}
 		},
 		methods: {
