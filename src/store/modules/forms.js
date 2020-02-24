@@ -8,7 +8,8 @@ export default {
 			signup: {},
 			forgottenPassword: {},
 			changePassword: {},
-			contactUs: {}
+			contactUs: {},
+			editProfile: {}
 		}
 	},
 	mutations: {

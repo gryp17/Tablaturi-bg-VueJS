@@ -9,7 +9,7 @@
 				(Админ)
 			</span>
 
-			<FormButton v-if="canEdit" class="edit-btn">
+			<FormButton v-if="canEdit" @click="showEditProfileModal" class="edit-btn">
 				<i class="fas fa-pencil-alt"></i>
 				Редактирай
 			</FormButton>
@@ -113,20 +113,24 @@
 				{{ user.favourite_bands || 'Няма информация' }}
 			</div>
 		</div>
+
+		<EditProfileModal />
 	</div>
 </template>
 
 <script>
 	import moment from 'moment';
-	import { mapState } from 'vuex';
+	import { mapState, mapActions } from 'vuex';
 
 	import GenderIcon from '@/components/GenderIcon';
 	import PopoverButton from '@/components/PopoverButton';
+	import EditProfileModal from '@/components/modals/EditProfileModal';
 
 	export default {
 		components: {
 			GenderIcon,
-			PopoverButton
+			PopoverButton,
+			EditProfileModal
 		},
 		props: {
 			user: Object
@@ -159,6 +163,11 @@
 			canEdit() {
 				return this.user && this.user.ID === this.userSession.ID;
 			}
+		},
+		methods: {
+			...mapActions('modals', [
+				'showEditProfileModal'
+			]),
 		}
 	};
 </script>
