@@ -90,7 +90,29 @@
 			</div>
 		</div>
 
-		{{ user }}
+		<div class="info-box">
+			<div class="red-line"></div>
+			<div class="info">
+				<span class="info-label">За мен:</span>
+				{{ user.about_me || 'Няма информация' }}
+			</div>
+		</div>
+
+		<div class="info-box">
+			<div class="red-line"></div>
+			<div class="info">
+				<span class="info-label">Инструменти/Екипировка:</span>
+				{{ user.instrument || 'Няма информация' }}
+			</div>
+		</div>
+
+		<div class="info-box">
+			<div class="red-line"></div>
+			<div class="info">
+				<span class="info-label">Любими групи/музиканти:</span>
+				{{ user.favourite_bands || 'Няма информация' }}
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -188,6 +210,22 @@
 						padding: 10px;
 					}
 				}
+			}
+		}
+
+		.info-box {
+			margin-top: 30px;
+			background-color: #f9f9f9;
+
+			.red-line {
+				background: linear-gradient(to right, $red 0%, $red 49%, $white 100%);
+				height: 3px;
+				margin: 0px;
+			}
+
+			.info {
+				padding: 10px 20px;
+				min-height: 100px;
 			}
 		}
 	}
