@@ -21,6 +21,15 @@ export default {
 					message: `get user failed - ${error}`
 				});
 			});
+		},
+		updateUser(context, data) {
+			return UserHttpService.updateUser(data).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `update user failed - ${error}`
+				});
+			});
 		}
 	}
 };

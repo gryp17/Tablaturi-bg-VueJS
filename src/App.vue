@@ -43,6 +43,7 @@
 	import { mapState, mapActions } from 'vuex';
 
 	import errorsMap from '@/filters/errorsMap';
+	import camelToSnake from '@/filters/camelToSnake';
 	import FormButton from '@/components/forms/FormButton';
 	import FormInput from '@/components/forms/FormInput';
 	import FormFileInput from '@/components/forms/FormFileInput';
@@ -58,6 +59,7 @@
 
 	//global components/filters
 	Vue.filter('errorsMap', errorsMap);
+	Vue.filter('camelToSnake', camelToSnake);
 	Vue.component('FormButton', FormButton);
 	Vue.component('FormInput', FormInput);
 	Vue.component('FormFileInput', FormFileInput);

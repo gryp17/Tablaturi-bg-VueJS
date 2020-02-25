@@ -15,11 +15,11 @@
 				<div class="columns-wrapper">
 					<div class="avatar-wrapper">
 						<FormFileInput
-							:error="errors.photo"
+							:error="errors.avatar"
 							@click="clearError"
 							@change="avatarChanged"
 							ref="avatar"
-							name="photo"
+							name="avatar"
 							>
 							<UploadImagePreview :image="avatarPreview"/>
 						</FormFileInput>
@@ -146,7 +146,7 @@
 				aboutMe: '',
 				instrument: '',
 				favouriteBands: '',
-				photo: null,
+				avatar: null,
 				avatarPreview: null
 			};
 		},
@@ -179,19 +179,49 @@
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			...mapActions('user', [
+				'getUser',
+				'updateUser'
+			]),
+			...mapActions('auth', [
+				'getUserSession'
+			]),
 			/**
 			 * Updates the avatar and avatar preview values whenever the selected file changes
 			 * @param {Object} e
 			 */
 			avatarChanged(e) {
-				this.photo = e.target.files[0];
+				this.avatar = e.target.files[0];
 				this.avatarPreview = URL.createObjectURL(e.target.files[0]);
 			},
 			/**
 			 * Submits the updated user data
 			 */
 			submit() {
+				const formData = new FormData();
 
+				['password', 'repeatPassword', 'location', 'occupation', 'web', 'aboutMe', 'instrument', 'favouriteBands', 'avatar'].forEach((field) => {
+					if (this[field]) {
+						const snakeCaseField = this.$options.filters.camelToSnake(field);
+						formData.append(snakeCaseField, this[field]);
+					}
+				});
+
+				this.updateUser(formData).then((res) => {
+					const data = res.data;
+
+					//reload the user and userSession data and close the modal
+					if (data.success) {
+						this.getUser(this.user.ID);
+						this.getUserSession();
+						this.hideEditProfileModal();
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input
@@ -227,7 +257,7 @@
 		$max-width: 600px;
 
 		.modal-dialog {
-			margin-top: 10vh;
+			margin-top: 5vh;
 			max-width: $max-width;
 			text-align: left;
 

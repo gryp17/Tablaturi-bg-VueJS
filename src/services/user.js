@@ -109,5 +109,13 @@ export default {
 	 */
 	getUser(userId) {
 		return API.get(`/User/getUser?id=${userId}`);
+	},
+	/**
+	 * Updates the user data
+	 * @param {Object} formData
+	 * @returns {Promise}
+	 */
+	updateUser(formData) {
+		return API.post('/User/updateUser', formData);
 	}
 };
