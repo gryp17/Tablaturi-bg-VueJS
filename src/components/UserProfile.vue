@@ -114,6 +114,16 @@
 			</div>
 		</div>
 
+		<p>
+			comments list placeholder
+		</p>
+
+		<AddCommentBox
+			@focus="clearError"
+			@submit="submitComment"
+			ref="commentBox"
+		/>
+
 		<EditProfileModal :user="userSession"/>
 	</div>
 </template>
@@ -124,12 +134,14 @@
 
 	import GenderIcon from '@/components/GenderIcon';
 	import PopoverButton from '@/components/PopoverButton';
+	import AddCommentBox from '@/components/AddCommentBox';
 	import EditProfileModal from '@/components/modals/EditProfileModal';
 
 	export default {
 		components: {
 			GenderIcon,
 			PopoverButton,
+			AddCommentBox,
 			EditProfileModal
 		},
 		props: {
@@ -168,6 +180,23 @@
 			...mapActions('modals', [
 				'showEditProfileModal'
 			]),
+			submitComment(content) {
+				console.log('SUBMIT COMMENT ', content);
+				this.$refs.commentBox.reset();
+			},
+			/**
+			 * Clears the form errors related to this input
+			 * @param {Object} e
+			 */
+			clearError(e) {
+				/*
+				const field = e.target.name;
+				this.clearFormError({
+					form: formName,
+					field
+				});
+				*/
+			},
 		}
 	};
 </script>
