@@ -8,6 +8,7 @@
 				@focus="clearError"
 				type="text"
 				name="email"
+				floating-label
 				placeholder="Email"
 			></FormInput>
 

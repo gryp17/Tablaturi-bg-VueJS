@@ -1,5 +1,8 @@
 <template>
 	<div class="form-input form-group">
+		<FormFloatingLabel :visible="showLabel">
+			{{ placeholder }}
+		</FormFloatingLabel>
 		<div class="input-group">
 			<slot name="input-group-prepend"></slot>
 
@@ -17,7 +20,9 @@
 				:placeholder="placeholder"
 				v-on="{
 					...$listeners,
-					input: onInput
+					input: onInput,
+					focus: onFocus,
+					blur: onBlur
 				}"
 			/>
 			<textarea
@@ -29,7 +34,9 @@
 				:rows="rows"
 				v-on="{
 					...$listeners,
-					input: onInput
+					input: onInput,
+					focus: onFocus,
+					blur: onBlur
 				}"
 			/>
 
@@ -43,13 +50,16 @@
 </template>
 
 <script>
+	import FormFloatingLabel from '@/components/forms/FormFloatingLabel';
 	import FormInputError from '@/components/forms/FormInputError';
 
 	export default {
 		components: {
+			FormFloatingLabel,
 			FormInputError
 		},
 		props: {
+			floatingLabel: Boolean,
 			tag: {
 				type: String,
 				default: 'input',
@@ -68,6 +78,16 @@
 			name: String,
 			error: String
 		},
+		data() {
+			return {
+				focused: false,
+			};
+		},
+		computed: {
+			showLabel() {
+				return this.floatingLabel && this.focused && this.value;
+			}
+		},
 		methods: {
 			/**
 			 * Propagates the "input" event back to the parent (needed because of v-model)
@@ -75,6 +95,30 @@
 			*/
 			onInput(e) {
 				this.$emit('input', e.target.value);
+			},
+			/**
+			 * Intercepts the focus event and updates the focused parameter
+			 * @param {Object} e
+			 */
+			onFocus(e) {
+				this.focused = true;
+
+				//call the passed focus event (if provided)
+				if (this.$listeners.focus) {
+					this.$listeners.focus(e);
+				}
+			},
+			/**
+			 * Intercepts the blur event and updates the focused parameter
+			 * @param {Object} e
+			 */
+			onBlur(e) {
+				this.focused = false;
+
+				//call the passed blur event (if provided)
+				if (this.$listeners.blur) {
+					this.$listeners.blur(e);
+				}
 			}
 		}
 	};

@@ -22,6 +22,7 @@
 					@focus="clearError"
 					type="text"
 					name="username"
+					floating-label
 					placeholder="Име"
 				></FormInput>
 
@@ -32,6 +33,7 @@
 					@focus="clearError"
 					type="text"
 					name="email"
+					floating-label
 					placeholder="Email"
 				></FormInput>
 
@@ -43,6 +45,7 @@
 					@focus="clearError"
 					tag="textarea"
 					name="message"
+					floating-label
 					placeholder="Съобщение"
 				></FormInput>
 

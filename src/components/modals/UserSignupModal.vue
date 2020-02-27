@@ -20,6 +20,7 @@
 						@focus="clearError"
 						type="text"
 						name="username"
+						floating-label
 						placeholder="Потребителско име"
 					></FormInput>
 
@@ -30,6 +31,7 @@
 						@focus="clearError"
 						type="text"
 						name="email"
+						floating-label
 						placeholder="Email"
 					></FormInput>
 
@@ -40,6 +42,7 @@
 						@focus="clearError"
 						type="password"
 						name="password"
+						floating-label
 						placeholder="Парола"
 					></FormInput>
 
@@ -50,6 +53,7 @@
 						@focus="clearError"
 						type="password"
 						name="repeat_password"
+						floating-label
 						placeholder="Повтори паролата"
 					></FormInput>
 
@@ -58,6 +62,7 @@
 						:error="errors.birthday"
 						@focus="clearError"
 						name="birthday"
+						floating-label
 						placeholder="Рождена дата"
 					/>
 

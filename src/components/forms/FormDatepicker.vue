@@ -1,5 +1,8 @@
 <template>
 	<div class="form-datepicker">
+		<FormFloatingLabel :visible="showLabel">
+			{{ placeholder }}
+		</FormFloatingLabel>
 		<Datepicker
 			:value="value"
 			:name="name"
@@ -27,6 +30,7 @@
 	import $ from 'jquery';
 	import Datepicker from 'vuejs-datepicker';
 	import { bg } from 'vuejs-datepicker/dist/locale';
+	import FormFloatingLabel from '@/components/forms/FormFloatingLabel';
 	import FormInputError from '@/components/forms/FormInputError';
 
 	let input;
@@ -34,11 +38,13 @@
 	export default {
 		components: {
 			Datepicker,
+			FormFloatingLabel,
 			FormInputError
 		},
 		props: {
 			value: Date,
 			name: String,
+			floatingLabel: Boolean,
 			placeholder: String,
 			error: String,
 			format: {
@@ -55,18 +61,28 @@
 				}
 			}
 		},
+		data() {
+			return {
+				focused: false
+			};
+		},
 		computed: {
 			language() {
 				return bg;
+			},
+			showLabel() {
+				return this.floatingLabel && this.focused && this.value;
 			}
 		},
 		mounted() {
-			//need to manually bind/unbind focus because vuejs-datepicker doesn't provide a working focus event...
+			//need to manually bind/unbind focus and blur because vuejs-datepicker doesn't provide a working focus event...
 			input = $(this.$refs.datepicker.$el).find('input');
-			input.on('focus', this.$listeners.focus);
+			input.on('focus', this.onFocus);
+			input.on('blur', this.onBlur);
 		},
 		destroyed() {
-			input.off('focus', this.$listeners.focus);
+			input.off('focus', this.onFocus);
+			input.off('blur', this.onBlur);
 		},
 		methods: {
 			/**
@@ -75,6 +91,30 @@
 			*/
 			onInput(selectedDate) {
 				this.$emit('input', selectedDate);
+			},
+			/**
+			 * Intercepts the focus event and updates the focused parameter
+			 * @param {Object} e
+			 */
+			onFocus(e) {
+				this.focused = true;
+
+				//call the passed focus event (if provided)
+				if (this.$listeners.focus) {
+					this.$listeners.focus(e);
+				}
+			},
+			/**
+			 * Intercepts the blur event and updates the focused parameter
+			 * @param {Object} e
+			 */
+			onBlur(e) {
+				this.focused = false;
+
+				//call the passed blur event (if provided)
+				if (this.$listeners.blur) {
+					this.$listeners.blur(e);
+				}
 			}
 		}
 	};

@@ -13,6 +13,7 @@
 			}"
 			type="text"
 			name="captcha"
+			floating-label
 			placeholder="Captcha"
 		></FormInput>
 	</div>

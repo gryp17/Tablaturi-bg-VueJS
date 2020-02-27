@@ -21,6 +21,7 @@
 						@focus="clearError"
 						type="text"
 						name="username"
+						floating-label
 						placeholder="Потребителско име"
 					></FormInput>
 
@@ -31,6 +32,7 @@
 						@focus="clearError"
 						type="password"
 						name="password"
+						floating-label
 						placeholder="Парола"
 					></FormInput>
 

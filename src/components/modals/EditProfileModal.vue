@@ -37,6 +37,7 @@
 							@focus="clearError"
 							type="password"
 							name="password"
+							floating-label
 							placeholder="Нова парола"
 						></FormInput>
 
@@ -47,6 +48,7 @@
 							@focus="clearError"
 							type="password"
 							name="repeat_password"
+							floating-label
 							placeholder="Повтори паролата"
 						></FormInput>
 
@@ -57,6 +59,7 @@
 							@focus="clearError"
 							type="text"
 							name="location"
+							floating-label
 							placeholder="Местоживеене"
 						></FormInput>
 
@@ -67,6 +70,7 @@
 							@focus="clearError"
 							type="text"
 							name="occupation"
+							floating-label
 							placeholder="Професия"
 						></FormInput>
 
@@ -77,6 +81,7 @@
 							@focus="clearError"
 							type="text"
 							name="web"
+							floating-label
 							placeholder="Web"
 						></FormInput>
 					</div>
@@ -89,6 +94,7 @@
 					@focus="clearError"
 					tag="textarea"
 					name="about_me"
+					floating-label
 					placeholder="За мен"
 				></FormInput>
 
@@ -99,6 +105,7 @@
 					@focus="clearError"
 					tag="textarea"
 					name="instrument"
+					floating-label
 					placeholder="Инструменти/Екипировка"
 				></FormInput>
 
@@ -109,6 +116,7 @@
 					@focus="clearError"
 					tag="textarea"
 					name="favourite_bands"
+					floating-label
 					placeholder="Любими групи/музиканти"
 				></FormInput>
 
@@ -267,6 +275,10 @@
 					display: flex;
 
 					.avatar-wrapper {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+
 						.avatar-hint {
 							margin-top: 5px;
 							margin-bottom: 10px;

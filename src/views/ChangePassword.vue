@@ -18,6 +18,7 @@
 						@focus="clearError"
 						type="password"
 						name="password"
+						floating-label
 						placeholder="Нова парола"
 					></FormInput>
 
@@ -28,6 +29,7 @@
 						@focus="clearError"
 						type="password"
 						name="repeat_password"
+						floating-label
 						placeholder="Повтори паролата"
 					></FormInput>
 
