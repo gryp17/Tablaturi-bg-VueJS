@@ -4,6 +4,12 @@
 
 		{{ comments }}
 
+		<Comment
+			v-for="comment in comments"
+			:key="comment.ID"
+			:data="comment"
+		/>
+
 		<hr />
 
 		<button @click="getCommentsByPage(0)">
@@ -17,7 +23,12 @@
 </template>
 
 <script>
+	import Comment from '@/components/Comment';
+
 	export default {
+		components: {
+			Comment
+		},
 		props: {
 			comments: Array,
 			total: Number,
