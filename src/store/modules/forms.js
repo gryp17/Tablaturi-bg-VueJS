@@ -9,7 +9,8 @@ export default {
 			forgottenPassword: {},
 			changePassword: {},
 			contactUs: {},
-			editProfile: {}
+			editProfile: {},
+			addComment: {}
 		}
 	},
 	mutations: {

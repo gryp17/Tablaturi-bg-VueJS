@@ -71,6 +71,7 @@
 	.add-comment-box {
 		.box-wrapper {
 			display: flex;
+			padding-bottom: 15px;
 
 			.form-input {
 				margin: 0 10px 0 0;

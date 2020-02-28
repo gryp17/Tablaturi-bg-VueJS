@@ -119,6 +119,7 @@
 		</p>
 
 		<AddCommentBox
+			:error="errors.content"
 			@focus="clearError"
 			@submit="submitComment"
 			ref="commentBox"
@@ -137,6 +138,8 @@
 	import AddCommentBox from '@/components/AddCommentBox';
 	import EditProfileModal from '@/components/modals/EditProfileModal';
 
+	const formName = 'addComment';
+
 	export default {
 		components: {
 			GenderIcon,
@@ -154,6 +157,9 @@
 			...mapState([
 				'CDN_URL'
 			]),
+			...mapState('forms', {
+				errors: state => state.errors[formName]
+			}),
 			registeredText() {
 				return this.user.gender === 'M' ? 'Регистриран на:' : 'Регистриранa на:';
 			},
@@ -176,26 +182,54 @@
 				return this.user && this.userSession && this.user.ID === this.userSession.ID;
 			}
 		},
+		created() {
+			this.resetFormErrors(formName);
+		},
 		methods: {
 			...mapActions('modals', [
 				'showEditProfileModal'
 			]),
+			...mapActions('forms', [
+				'setFormError',
+				'clearFormError',
+				'resetFormErrors'
+			]),
+			...mapActions('userComments', [
+				'addUserComment'
+			]),
+			/**
+			 * Submits the user comment
+			 * @param {String} content
+			 */
 			submitComment(content) {
-				console.log('SUBMIT COMMENT ', content);
-				this.$refs.commentBox.reset();
+				const params = {
+					userId: this.user.ID,
+					content
+				};
+
+				this.addUserComment(params).then((res) => {
+					const data = res.data;
+
+					if (data.success) {
+						this.$refs.commentBox.reset();
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input
 			 * @param {Object} e
 			 */
 			clearError(e) {
-				/*
 				const field = e.target.name;
 				this.clearFormError({
 					form: formName,
 					field
 				});
-				*/
 			},
 		}
 	};
