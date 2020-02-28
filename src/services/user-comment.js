@@ -13,5 +13,15 @@ export default {
 			user_id: userId,
 			content
 		});
+	},
+	/**
+	 * Fetches the user comments
+	 * @param {Number} userId
+	 * @param {Number} limit
+	 * @param {Number} offset
+	 * @returns {Promise}
+	 */
+	getUserComments(userId, limit, offset) {
+		return API.get(`/UserComment/getUserComments?user_id=${userId}&limit=${limit}&offset=${offset}`);
 	}
 };

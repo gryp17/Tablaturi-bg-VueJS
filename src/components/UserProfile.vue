@@ -118,6 +118,8 @@
 			comments list placeholder
 		</p>
 
+		{{ comments }}
+
 		<AddCommentBox
 			:error="errors.content"
 			@focus="clearError"
@@ -151,11 +153,14 @@
 			user: Object
 		},
 		computed: {
+			...mapState([
+				'CDN_URL'
+			]),
 			...mapState('auth', [
 				'userSession'
 			]),
-			...mapState([
-				'CDN_URL'
+			...mapState('userComments', [
+				'comments'
 			]),
 			...mapState('forms', {
 				errors: state => state.errors[formName]
@@ -183,6 +188,12 @@
 			}
 		},
 		created() {
+			this.getUserComments({
+				userId: this.user.ID,
+				limit: 6,
+				offset: 0
+			});
+
 			this.resetFormErrors(formName);
 		},
 		methods: {
@@ -195,7 +206,8 @@
 				'resetFormErrors'
 			]),
 			...mapActions('userComments', [
-				'addUserComment'
+				'addUserComment',
+				'getUserComments'
 			]),
 			/**
 			 * Submits the user comment
