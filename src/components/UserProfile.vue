@@ -114,11 +114,13 @@
 			</div>
 		</div>
 
-		<p>
-			comments list placeholder
-		</p>
-
-		{{ comments }}
+		<CommentsList
+			:comments="comments"
+			:total="total"
+			:current-page="page"
+			:per-page="perPage"
+			@get-comments-by-page="getCommentsByPage"
+		/>
 
 		<AddCommentBox
 			:error="errors.content"
@@ -138,6 +140,7 @@
 	import GenderIcon from '@/components/GenderIcon';
 	import PopoverButton from '@/components/PopoverButton';
 	import AddCommentBox from '@/components/AddCommentBox';
+	import CommentsList from '@/components/CommentsList';
 	import EditProfileModal from '@/components/modals/EditProfileModal';
 
 	const formName = 'addComment';
@@ -147,6 +150,7 @@
 			GenderIcon,
 			PopoverButton,
 			AddCommentBox,
+			CommentsList,
 			EditProfileModal
 		},
 		props: {
@@ -160,7 +164,10 @@
 				'userSession'
 			]),
 			...mapState('userComments', [
-				'comments'
+				'comments',
+				'total',
+				'page',
+				'perPage'
 			]),
 			...mapState('forms', {
 				errors: state => state.errors[formName]
@@ -188,12 +195,7 @@
 			}
 		},
 		created() {
-			this.getUserComments({
-				userId: this.user.ID,
-				limit: 6,
-				offset: 0
-			});
-
+			this.getCommentsByPage(0);
 			this.resetFormErrors(formName);
 		},
 		methods: {
@@ -224,12 +226,23 @@
 
 					if (data.success) {
 						this.$refs.commentBox.reset();
+						this.getCommentsByPage(0);
 					} else if (data.error) {
 						this.setFormError({
 							...data.error,
 							form: formName
 						});
 					}
+				});
+			},
+			/**
+			 * Fetches the comments for the specified page
+			 * @param {Number} page
+			 */
+			getCommentsByPage(page) {
+				this.getUserComments({
+					userId: this.user.ID,
+					page
 				});
 			},
 			/**
