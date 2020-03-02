@@ -1,13 +1,18 @@
 <template>
 	<div class="comment">
-		<img :src="`${CDN_URL}/avatars/${data.photo}`" class="user-avatar" />
+		<img :src="userAvatar" class="user-avatar" />
 
 		<div class="box-wrapper">
 			<div class="box">
 				<div class="author">
-					{{ data.username }} каза:
+					<router-link
+						:to="{name: 'profile', params: {id: data.author_ID}}"
+						:title="`Виж профила на ${data.username}`"
+						class="red"
+					>{{ data.username }}</router-link>
+					каза:
 				</div>
-				<div class="date">{{ data.date }}</div>
+				<div class="date">{{ date }}</div>
 				<div class="content" v-html="content"></div>
 			</div>
 		</div>
@@ -15,6 +20,7 @@
 </template>
 
 <script>
+	import moment from 'moment';
 	import { mapState } from 'vuex';
 
 	export default {
@@ -29,6 +35,9 @@
 			...mapState([
 				'CDN_URL'
 			]),
+			userAvatar() {
+				return `${this.CDN_URL}/avatars/${this.data.photo}`;
+			},
 			content() {
 				let content = this.data.content;
 
@@ -39,6 +48,9 @@
 				});
 
 				return content;
+			},
+			date() {
+				return moment(this.data.date).format('YYYY-MM-DD в HH:mm:ss');
 			}
 		}
 	};
