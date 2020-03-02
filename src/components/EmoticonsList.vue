@@ -5,7 +5,7 @@
 			@click="onEmoticonSelected(emoticon.title)"
 			:key="emoticon.title"
 			:title="emoticon.title"
-			:src="`/img/emoticons/${emoticon.img}`"
+			:src="emoticonsPath + emoticon.img"
 			class="clickable-emoticon"
 		/>
 	</div>
@@ -17,6 +17,7 @@
 	export default {
 		computed: {
 			...mapState({
+				emoticonsPath: 'EMOTICONS_PATH',
 				emoticons: 'EMOTICONS_LIST'
 			})
 		},
