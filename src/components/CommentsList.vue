@@ -10,30 +10,33 @@
 			:data="comment"
 		/>
 
-		<hr />
-
-		<button @click="getCommentsByPage(0)">
-			0
-		</button>
-
-		<button @click="getCommentsByPage(1)">
-			1
-		</button>
+		<Pagination
+			:total-pages="totalPages"
+			:current-page="currentPage"
+			@change-page="getCommentsByPage"
+		/>
 	</div>
 </template>
 
 <script>
 	import Comment from '@/components/Comment';
+	import Pagination from '@/components/Pagination';
 
 	export default {
 		components: {
-			Comment
+			Comment,
+			Pagination
 		},
 		props: {
 			comments: Array,
 			total: Number,
 			perPage: Number,
 			currentPage: Number
+		},
+		computed: {
+			totalPages() {
+				return Math.ceil(this.total / this.perPage);
+			}
 		},
 		methods: {
 			getCommentsByPage(page) {
