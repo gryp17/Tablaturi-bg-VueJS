@@ -5,10 +5,24 @@ export default {
 	namespaced: true,
 	state: {
 		user: null,
+		users: [],
+		total: 0,
+		page: 0,
+		perPage: 10
+
 	},
 	mutations: {
 		setUser(state, user) {
 			state.user = user;
+		},
+		setUsers(state, users) {
+			state.users = users;
+		},
+		setTotal(state, total) {
+			state.total = total;
+		},
+		setPage(state, page) {
+			state.page = page;
 		}
 	},
 	actions: {
@@ -28,6 +42,23 @@ export default {
 			}).catch((error) => {
 				Vue.toasted.global.apiError({
 					message: `update user failed - ${error}`
+				});
+			});
+		},
+		search(context, { keyword, page }) {
+			const limit = context.state.perPage;
+			const offset = page * limit;
+
+			return UserHttpService.search(keyword, limit, offset).then((res) => {
+				if (!res.data.error) {
+					context.commit('setUsers', res.data.results);
+					context.commit('setTotal', res.data.total);
+					context.commit('setPage', page);
+				}
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `user search failed - ${error}`
 				});
 			});
 		}

@@ -82,7 +82,7 @@
 						<UserFavourites />
 					</div>
 					<div class="tab-pane fade" id="user-search" role="tabpanel" aria-labelledby="user-search-tab">
-						user search
+						<UserSearch />
 					</div>
 					<div class="tab-pane fade" id="add-article" role="tabpanel" aria-labelledby="add-article-tab">
 						add article
@@ -100,13 +100,15 @@
 	import UserProfile from '@/components/UserProfile';
 	import UserTabs from '@/components/UserTabs';
 	import UserFavourites from '@/components/UserFavourites';
+	import UserSearch from '@/components/UserSearch';
 
 	export default {
 		components: {
 			TabsNav,
 			UserProfile,
 			UserTabs,
-			UserFavourites
+			UserFavourites,
+			UserSearch
 		},
 		data() {
 			return {

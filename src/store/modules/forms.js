@@ -10,7 +10,8 @@ export default {
 			changePassword: {},
 			contactUs: {},
 			editProfile: {},
-			addComment: {}
+			addComment: {},
+			userSearch: {}
 		}
 	},
 	mutations: {

@@ -117,5 +117,15 @@ export default {
 	 */
 	updateUser(formData) {
 		return API.post('/User/updateUser', formData);
+	},
+	/**
+	 * Fetches users that match the passed keyword
+	 * @param {String} keyword
+	 * @param {Number} limit
+	 * @param {Number} offset
+	 * @returns {Promise}
+	 */
+	search(keyword, limit, offset) {
+		return API.get(`/User/search?keyword=${keyword}&limit=${limit}&offset=${offset}`);
 	}
 };

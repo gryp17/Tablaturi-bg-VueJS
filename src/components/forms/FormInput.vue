@@ -135,13 +135,13 @@
 			border-color: transparent;
 			font-size: inherit;
 
-			&.has-error {
-				border-color: $red;
-			}
-
 			&:focus {
 				box-shadow: none;
 				border-color: $blue-lighter;
+			}
+
+			&.has-error {
+				border-color: $red;
 			}
 		}
 

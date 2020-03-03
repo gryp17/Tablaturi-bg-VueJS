@@ -1,0 +1,16 @@
+<template>
+	<table class="results-table table table-striped">
+		<slot></slot>
+	</table>
+</template>
+
+<style scoped lang="scss">
+	.results-table {
+		thead {
+			td {
+				border-top: none;
+				font-weight: 600;
+			}
+		}
+	}
+</style>

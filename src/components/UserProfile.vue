@@ -61,7 +61,7 @@
 						<tr>
 							<td>
 								<span class="info-label">Възраст:</span>
-								{{ age }} години
+								{{ user.birthday | age }} години
 							</td>
 						</tr>
 						<tr>
@@ -183,9 +183,6 @@
 			},
 			lastActiveDate() {
 				return moment(this.user.last_active_date).format('YYYY-MM-DD в HH:mm');
-			},
-			age() {
-				return moment().diff(moment(this.user.birthday), 'years');
 			},
 			isAdmin() {
 				return this.user.type === 'admin';
