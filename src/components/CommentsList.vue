@@ -1,20 +1,24 @@
 <template>
 	<div class="comments-list">
-		comments list
+		<template v-if="total > 0">
+			<h5>Коментари:</h5>
 
-		{{ comments }}
+			<Comment
+				v-for="comment in comments"
+				:key="comment.ID"
+				:data="comment"
+			/>
 
-		<Comment
-			v-for="comment in comments"
-			:key="comment.ID"
-			:data="comment"
-		/>
-
-		<Pagination
-			:total-pages="totalPages"
-			:current-page="currentPage"
-			@change-page="getCommentsByPage"
-		/>
+			<Pagination
+				v-show="totalPages > 1"
+				:total-pages="totalPages"
+				:current-page="currentPage"
+				@change-page="getCommentsByPage"
+			/>
+		</template>
+		<h5 v-else class="no-comments">
+			Няма коментари
+		</h5>
 	</div>
 </template>
 
@@ -47,5 +51,12 @@
 </script>
 
 <style scoped lang="scss">
+	.comments-list {
+		margin-top: 30px;
+		margin-bottom: 15px;
 
+		.no-comments {
+			text-align: center;
+		}
+	}
 </style>

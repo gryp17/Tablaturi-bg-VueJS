@@ -7,7 +7,7 @@ export default {
 		comments: [],
 		total: 0,
 		page: 0,
-		perPage: 6
+		perPage: 5
 	},
 	mutations: {
 		setComments(state, comments) {

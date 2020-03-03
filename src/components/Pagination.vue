@@ -1,7 +1,5 @@
 <template>
 	<div class="pagination">
-
-		<!-- TODO: fix the button current/active/hover/disabled colors and add the "disabled" style to the FormButton component -->
 		<FormButton
 			:disabled="currentPage === 0"
 			@click="$emit('change-page', 0)"
@@ -111,10 +109,13 @@
 
 		button {
 			margin: 0px 1px;
+			padding: 6px 12px;
 			font-size: 15px;
+			font-weight: bold;
 			border-radius: 5px;
 
 			&.btn-arrow {
+				margin-top: -1px;
 				font-size: 18px;
 				padding: 0px 12px;
 			}

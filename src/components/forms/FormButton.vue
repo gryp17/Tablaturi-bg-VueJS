@@ -35,8 +35,17 @@
 		transition: all 0.4s ease-in-out;
 		font-size: 16px;
 
-		&:hover, &:active, &:focus {
+		&:hover, &:active, &:focus, &.active {
 			background-color: darken($red, 15%);
+		}
+
+		&:disabled {
+			background-color: lighten($red, 15%);
+			cursor: not-allowed;
+
+			&:hover {
+				background-color: lighten($red, 15%);
+			}
 		}
 
 		&.outline {
@@ -44,7 +53,7 @@
 			color: $red;
 			border: solid 1px $red;
 
-			&:hover, &:active, &:focus {
+			&:hover, &:active, &:focus, &.active {
 				background-color: $red;
 				color: $white;
 			}
