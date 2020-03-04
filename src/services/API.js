@@ -1,10 +1,9 @@
 import axios from 'axios';
+import config from '@/config';
 import errorsMap from '@/filters/errorsMap';
 
-export const API_URL = 'http://localhost/Tablaturi-bg-API/API';
-
 const API = axios.create({
-	baseURL: API_URL,
+	baseURL: config.API_URL,
 	timeout: 8000,
 	withCredentials: true
 });
