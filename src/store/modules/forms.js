@@ -11,7 +11,8 @@ export default {
 			contactUs: {},
 			editProfile: {},
 			addComment: {},
-			userSearch: {}
+			userSearch: {},
+			addArticle: {}
 		}
 	},
 	mutations: {

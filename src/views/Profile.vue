@@ -57,7 +57,7 @@
 							Търси потребители
 						</a>
 					</li>
-					<li class="nav-item">
+					<li v-show="isAdmin" class="nav-item">
 						<a
 							class="nav-link"
 							id="add-article-tab"
@@ -85,7 +85,7 @@
 						<UserSearch />
 					</div>
 					<div class="tab-pane fade" id="add-article" role="tabpanel" aria-labelledby="add-article-tab">
-						add article
+						<AddArticle />
 					</div>
 				</template>
 			</TabsNav>
@@ -94,13 +94,14 @@
 </template>
 
 <script>
-	import { mapState, mapActions } from 'vuex';
+	import { mapState, mapGetters, mapActions } from 'vuex';
 
 	import TabsNav from '@/components/TabsNav';
 	import UserProfile from '@/components/UserProfile';
 	import UserTabs from '@/components/UserTabs';
 	import UserFavourites from '@/components/UserFavourites';
 	import UserSearch from '@/components/UserSearch';
+	import AddArticle from '@/components/AddArticle';
 
 	export default {
 		components: {
@@ -108,7 +109,8 @@
 			UserProfile,
 			UserTabs,
 			UserFavourites,
-			UserSearch
+			UserSearch,
+			AddArticle
 		},
 		data() {
 			return {
@@ -118,6 +120,9 @@
 		computed: {
 			...mapState('user', [
 				'user'
+			]),
+			...mapGetters('auth', [
+				'isAdmin'
 			])
 		},
 		watch: {
