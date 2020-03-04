@@ -54,6 +54,13 @@
 					</tr>
 				</tbody>
 			</ResultsTable>
+
+			<Pagination
+				v-show="totalPages > 1"
+				:total-pages="totalPages"
+				:current-page="page"
+				@change-page="getUsers"
+			/>
 		</template>
 	</div>
 </template>
@@ -62,13 +69,15 @@
 	import { mapState, mapActions } from 'vuex';
 	import ResultsTable from '@/components/ResultsTable';
 	import GenderIcon from '@/components/GenderIcon';
+	import Pagination from '@/components/Pagination';
 
 	const formName = 'userSearch';
 
 	export default {
 		components: {
 			GenderIcon,
-			ResultsTable
+			ResultsTable,
+			Pagination
 		},
 		data() {
 			return {
@@ -85,7 +94,10 @@
 				'total',
 				'page',
 				'perPage'
-			])
+			]),
+			totalPages() {
+				return Math.ceil(this.total / this.perPage);
+			}
 		},
 		methods: {
 			...mapActions('forms', [
