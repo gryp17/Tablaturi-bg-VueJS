@@ -3,7 +3,8 @@ export default {
 	state: {
 		loginModalOpened: false,
 		signupModalOpened: false,
-		editProfileModalOpened: false
+		editProfileModalOpened: false,
+		reportUserModalOpened: false
 	},
 	mutations: {
 		setLoginModalOpened(state, opened) {
@@ -14,6 +15,9 @@ export default {
 		},
 		setEditProfileModalOpened(state, opened) {
 			state.editProfileModalOpened = opened;
+		},
+		setReportUserModalOpened(state, opened) {
+			state.reportUserModalOpened = opened;
 		}
 	},
 	actions: {
@@ -34,6 +38,12 @@ export default {
 		},
 		hideEditProfileModal(context) {
 			context.commit('setEditProfileModalOpened', false);
+		},
+		showReportUserModal(context) {
+			context.commit('setReportUserModalOpened', true);
+		},
+		hideReportUserModal(context) {
+			context.commit('setReportUserModalOpened', false);
 		}
 	}
 };

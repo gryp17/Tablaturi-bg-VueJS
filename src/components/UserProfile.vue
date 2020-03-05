@@ -14,7 +14,7 @@
 				Редактирай
 			</FormButton>
 
-			<FormButton v-else outline class="report-btn">
+			<FormButton v-else outline @click="showReportUserModal" class="report-btn">
 				<i class="far fa-thumbs-down"></i>
 				Докладвай
 			</FormButton>
@@ -130,6 +130,7 @@
 		/>
 
 		<EditProfileModal :user="userSession"/>
+		<ReportUserModal :user="user"/>
 	</div>
 </template>
 
@@ -142,6 +143,7 @@
 	import AddCommentBox from '@/components/AddCommentBox';
 	import CommentsList from '@/components/CommentsList';
 	import EditProfileModal from '@/components/modals/EditProfileModal';
+	import ReportUserModal from '@/components/modals/ReportUserModal';
 
 	const formName = 'addComment';
 
@@ -151,7 +153,8 @@
 			PopoverButton,
 			AddCommentBox,
 			CommentsList,
-			EditProfileModal
+			EditProfileModal,
+			ReportUserModal
 		},
 		props: {
 			user: Object
@@ -197,7 +200,8 @@
 		},
 		methods: {
 			...mapActions('modals', [
-				'showEditProfileModal'
+				'showEditProfileModal',
+				'showReportUserModal'
 			]),
 			...mapActions('forms', [
 				'setFormError',
