@@ -4,18 +4,17 @@
 			Добави новина
 		</PageTitle>
 
-		<div class="picture-wrapper">
+		<div class="image-wrapper">
 			<FormFileInput
-				:error="errors.picture"
+				:error="errors.image"
 				@click="clearError"
-				@change="pictureChanged"
-				ref="picture"
-				name="picture"
+				@change="imageChanged"
+				name="image"
 			>
-				<UploadImagePreview :image="picturePreview" />
+				<UploadImagePreview :image="imagePreview" />
 			</FormFileInput>
 
-			<div class="picture-hint">
+			<div class="image-hint">
 				Позволени формати: JPG и PNG под 1MB
 			</div>
 		</div>
@@ -44,7 +43,6 @@
 			v-model="content"
 			:error="errors.content"
 			:rows="10"
-			@keyup.enter="submit"
 			@focus="clearError"
 			tag="textarea"
 			name="content"
@@ -55,11 +53,11 @@
 		<FormButton @click="submit">
 			Публикувай новината
 		</FormButton>
-
 	</div>
 </template>
 
 <script>
+	import moment from 'moment';
 	import { mapState, mapActions } from 'vuex';
 	import UploadImagePreview from '@/components/UploadImagePreview';
 
@@ -74,8 +72,8 @@
 				title: '',
 				date: null,
 				content: '',
-				picture: null,
-				picturePreview: '/img/no-image.jpg'
+				image: null,
+				imagePreview: '/img/no-image.jpg'
 			};
 		},
 		computed: {
@@ -89,19 +87,52 @@
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			...mapActions('articles', [
+				'addArticle'
+			]),
 			/**
-			 * Updates the picture and picture preview values whenever the selected file changes
+			 * Updates the image and image preview values whenever the selected file changes
 			 * @param {Object} e
 			 */
-			pictureChanged(e) {
-				this.picture = e.target.files[0];
-				this.picturePreview = URL.createObjectURL(e.target.files[0]);
+			imageChanged(e) {
+				this.image = e.target.files[0];
+				this.imagePreview = URL.createObjectURL(e.target.files[0]);
 			},
 			/**
 			 * Submits the article form
 			 */
 			submit() {
+				const formData = new FormData();
 
+				['title', 'date', 'content', 'image'].forEach((field) => {
+					if (this[field]) {
+						let value = this[field];
+
+						if (field === 'date') {
+							value = moment(value).format('YYYY-MM-DD HH:mm:ss');
+						}
+
+						formData.append(field, value);
+					}
+				});
+
+				this.addArticle(formData).then((res) => {
+					const data = res.data;
+
+					if (data.success) {
+						this.$router.push({
+							name: 'article',
+							params: {
+								id: data.article_id
+							}
+						});
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input
@@ -120,11 +151,11 @@
 
 <style scoped lang="scss">
 	.add-article {
-		.picture-wrapper {
+		.image-wrapper {
 			margin: auto;
 			width: 200px;
 
-			.picture-hint {
+			.image-hint {
 				margin-top: 5px;
 				margin-bottom: 10px;
 				font-size: 10px;
