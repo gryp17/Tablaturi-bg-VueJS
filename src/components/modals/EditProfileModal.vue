@@ -20,7 +20,7 @@
 							@change="avatarChanged"
 							ref="avatar"
 							name="avatar"
-							>
+						>
 							<UploadImagePreview :image="avatarPreview"/>
 						</FormFileInput>
 
