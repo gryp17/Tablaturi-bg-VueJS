@@ -12,9 +12,33 @@
 			</template>
 			<template v-slot:body>
 
-				<FormButton @click="submit" class="submit-btn">
-					Докладвай
-				</FormButton>
+				<template v-if="!done">
+					<FormRadioGroup
+						v-model="reason"
+						:items="reportReasons"
+						title="Причина:"
+					/>
+
+					<FormInput
+						v-model="other"
+						:disabled="reason !== 'other'"
+						:error="errors.report"
+						@focus="clearError"
+						tag="textarea"
+						name="report"
+						floating-label
+						placeholder="Друга причина"
+					></FormInput>
+
+					<FormButton @click="submit" class="submit-btn">
+						Докладвай
+					</FormButton>
+				</template>
+				<StatusMessage v-else>
+					<img src="/img/icons/success-icon.png" />
+					<h5>Успешно докладвахте {{ user.username }}!.</h5>
+					Екипът ни ще разгледа докладвания профил в най-скоро време.
+				</StatusMessage>
 
 			</template>
 		</BaseModal>
@@ -25,6 +49,8 @@
 	import { mapState, mapActions } from 'vuex';
 	import BaseModal from '@/components/modals/BaseModal';
 
+	const formName = 'reportUser';
+
 	export default {
 		components: {
 			BaseModal
@@ -34,13 +60,27 @@
 		},
 		data() {
 			return {
-				reason: 'rude language'
+				reportReasons: {
+					rude_language: 'Грубо отношение или език',
+					spam: 'Спам',
+					inappropriate_avatar: 'Неподходящ аватар',
+					other: 'Друго'
+				},
+				reason: 'rude_language',
+				other: '',
+				done: false
 			};
 		},
 		computed: {
 			...mapState('modals', {
 				visible: 'reportUserModalOpened'
-			})
+			}),
+			...mapState('forms', {
+				errors: state => state.errors[formName]
+			}),
+			reportReason() {
+				return this.reason !== 'other' ? this.reason : this.other;
+			}
 		},
 		watch: {
 			/**
@@ -54,15 +94,46 @@
 			...mapActions('modals', [
 				'hideReportUserModal'
 			]),
+			...mapActions('forms', [
+				'setFormError',
+				'clearFormError',
+				'resetFormErrors'
+			]),
 			...mapActions('user', [
-				'getUser',
-				'updateUser'
+				'reportUser'
 			]),
 			/**
 			 * Submits the report user form
 			 */
 			submit() {
+				const params = {
+					userId: this.user.ID,
+					report: this.reportReason
+				};
 
+				this.reportUser(params).then((res) => {
+					const data = res.data;
+
+					if (data.success) {
+						this.done = true;
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
+			},
+			/**
+			 * Clears the form errors related to this input
+			 * @param {Object} e
+			 */
+			clearError(e) {
+				const field = e.target.name;
+				this.clearFormError({
+					form: formName,
+					field
+				});
 			},
 			/**
 			 * Resets the data/state back to it's default/initial value
@@ -75,37 +146,15 @@
 </script>
 
 <style lang="scss">
-	.edit-profile-modal {
-		$max-width: 600px;
+	.report-user-modal {
+		$max-width: 500px;
 
 		.modal-dialog {
-			margin-top: 5vh;
+			margin-top: 10vh;
 			max-width: $max-width;
 			text-align: left;
 
 			.modal-body{
-
-				.columns-wrapper {
-					display: flex;
-
-					.avatar-wrapper {
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-
-						.avatar-hint {
-							margin-top: 5px;
-							margin-bottom: 10px;
-							font-size: 10px;
-							font-style: italic;
-						}
-					}
-
-					.right-wrapper {
-						flex: 1;
-						padding-left: 20px;
-					}
-				}
 
 				.submit-btn {
 					display: block;

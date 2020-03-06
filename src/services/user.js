@@ -127,5 +127,17 @@ export default {
 	 */
 	search(keyword, limit, offset) {
 		return API.get(`/User/search?keyword=${keyword}&limit=${limit}&offset=${offset}`);
+	},
+	/**
+	 * Submits an user report
+	 * @param {Number} userId
+	 * @param {String} report
+	 * @returns {Promise}
+	 */
+	reportUser(userId, report) {
+		return API.post('/UserReport/reportUser', {
+			user_id: userId,
+			report
+		});
 	}
 };

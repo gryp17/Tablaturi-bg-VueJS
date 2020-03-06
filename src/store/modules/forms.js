@@ -12,7 +12,8 @@ export default {
 			editProfile: {},
 			addComment: {},
 			userSearch: {},
-			addArticle: {}
+			addArticle: {},
+			reportUser: {}
 		}
 	},
 	mutations: {

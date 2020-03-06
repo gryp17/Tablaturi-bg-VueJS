@@ -18,6 +18,7 @@
 				:type="type"
 				:name="name"
 				:placeholder="placeholder"
+				:disabled="disabled"
 				v-on="{
 					...$listeners,
 					input: onInput,
@@ -32,6 +33,7 @@
 				:name="name"
 				:placeholder="placeholder"
 				:rows="rows"
+				:disabled="disabled"
 				v-on="{
 					...$listeners,
 					input: onInput,
@@ -74,6 +76,10 @@
 			rows: {
 				type: Number,
 				default: 3
+			},
+			disabled: {
+				type: Boolean,
+				default: false
 			},
 			name: String,
 			error: String
@@ -142,6 +148,11 @@
 
 			&.has-error {
 				border-color: $red;
+			}
+
+			&:disabled {
+				cursor: not-allowed;
+				opacity: 0.7;
 			}
 		}
 

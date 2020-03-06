@@ -61,6 +61,15 @@ export default {
 					message: `user search failed - ${error}`
 				});
 			});
+		},
+		reportUser(context, { userId, report }) {
+			return UserHttpService.reportUser(userId, report).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `report user failed - ${error}`
+				});
+			});
 		}
 	}
 };

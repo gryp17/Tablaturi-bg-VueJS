@@ -66,21 +66,12 @@
 						placeholder="Рождена дата"
 					/>
 
-					<div class="gender-wrapper form-group">
-						<label>
-							Пол:
-						</label>
-
-						<input type="radio" id="male" value="M" v-model="gender"/>
-						<label for="male">
-							Мъж
-						</label>
-
-						<input type="radio" id="female" value="F" v-model="gender"/>
-						<label for="female">
-							Жена
-						</label>
-					</div>
+					<FormRadioGroup
+						horizontal
+						v-model="gender"
+						:items="genders"
+						title="Пол:"
+					/>
 
 					<FormCaptcha
 						v-model="captcha"
@@ -118,6 +109,10 @@
 		},
 		data() {
 			return {
+				genders: {
+					M: 'Мъж',
+					F: 'Жена'
+				},
 				username: '',
 				email: '',
 				password: '',
@@ -222,15 +217,6 @@
 			text-align: left;
 
 			.modal-body{
-
-				//TODO: move this to a component
-				.gender-wrapper {
-					label {
-						margin-right: 10px;
-						margin-bottom: 0px;
-					}
-				}
-
 				.signup-btn {
 					display: block;
 					margin: auto;
