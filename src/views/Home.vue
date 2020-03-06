@@ -2,7 +2,17 @@
 	<div class="home-page">
 		<LoadingIndicator v-if="loading" />
 		<template v-else>
-			{{ articles }}
+			<PageTitle>
+				Новини
+			</PageTitle>
+
+			<ArticlesList>
+				<ArticleBox
+					v-for="article in articles"
+					:key="article.ID"
+					:data="article"
+				/>
+			</ArticlesList>
 
 			<div class="articles-link-wrapper">
 				<router-link :to="{name: 'articles'}" class="red">
@@ -16,7 +26,14 @@
 <script>
 	import { mapState, mapActions } from 'vuex';
 
+	import ArticlesList from '@/components/ArticlesList';
+	import ArticleBox from '@/components/ArticleBox';
+
 	export default {
+		components: {
+			ArticleBox,
+			ArticlesList
+		},
 		data() {
 			return {
 				loading: true

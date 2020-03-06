@@ -45,6 +45,7 @@
 	import errorsMap from '@/filters/errorsMap';
 	import camelToSnake from '@/filters/camelToSnake';
 	import age from '@/filters/age';
+	import limitTo from '@/filters/limitTo';
 	import FormButton from '@/components/forms/FormButton';
 	import FormInput from '@/components/forms/FormInput';
 	import FormFileInput from '@/components/forms/FormFileInput';
@@ -63,6 +64,7 @@
 	Vue.filter('errorsMap', errorsMap);
 	Vue.filter('camelToSnake', camelToSnake);
 	Vue.filter('age', age);
+	Vue.filter('limitTo', limitTo);
 	Vue.component('FormButton', FormButton);
 	Vue.component('FormInput', FormInput);
 	Vue.component('FormFileInput', FormFileInput);
