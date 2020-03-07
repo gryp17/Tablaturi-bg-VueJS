@@ -24,10 +24,12 @@
 
 				<div class="clearfix"></div>
 
-				<FormButton v-if="isAdmin" class="edit-btn">
-					<i class="fas fa-pencil-alt"></i>
-					Редактирай
-				</FormButton>
+				<router-link v-if="isAdmin" :to="editArticleLink">
+					<FormButton class="edit-btn">
+						<i class="fas fa-pencil-alt"></i>
+						Редактирай
+					</FormButton>
+				</router-link>
 			</div>
 
 			<div class="clearfix"></div>
@@ -71,6 +73,14 @@
 					name: 'profile',
 					params: {
 						id: this.article.author_ID
+					}
+				};
+			},
+			editArticleLink() {
+				return {
+					name: 'edit-article',
+					params: {
+						id: this.article.ID
 					}
 				};
 			},

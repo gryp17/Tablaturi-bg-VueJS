@@ -1,7 +1,7 @@
 <template>
-	<div class="add-article">
+	<div class="article-form">
 		<PageTitle>
-			Добави новина
+			{{ formTitle }}
 		</PageTitle>
 
 		<div class="image-wrapper">
@@ -51,7 +51,7 @@
 		></FormInput>
 
 		<FormButton @click="submit">
-			Публикувай новината
+			{{ buttonText }}
 		</FormButton>
 	</div>
 </template>
@@ -61,11 +61,14 @@
 	import { mapState, mapActions } from 'vuex';
 	import UploadImagePreview from '@/components/UploadImagePreview';
 
-	const formName = 'addArticle';
+	const formName = 'article';
 
 	export default {
 		components: {
 			UploadImagePreview
+		},
+		props: {
+			article: Object
 		},
 		data() {
 			return {
@@ -79,7 +82,16 @@
 		computed: {
 			...mapState('forms', {
 				errors: state => state.errors[formName]
-			})
+			}),
+			isEditing() {
+				return this.article && this.article.ID;
+			},
+			formTitle() {
+				return this.isEditing ? 'Редактирай новина' : 'Добави новина';
+			},
+			buttonText() {
+				return this.isEditing ? 'Запази промените' : 'Публикувай новината';
+			}
 		},
 		methods: {
 			...mapActions('forms', [
@@ -150,7 +162,7 @@
 </script>
 
 <style scoped lang="scss">
-	.add-article {
+	.article-form {
 		.image-wrapper {
 			margin: auto;
 			width: 200px;

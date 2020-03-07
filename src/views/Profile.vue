@@ -85,7 +85,7 @@
 						<UserSearch />
 					</div>
 					<div class="tab-pane fade" id="add-article" role="tabpanel" aria-labelledby="add-article-tab">
-						<AddArticle />
+						<ArticleForm />
 					</div>
 				</template>
 			</TabsNav>
@@ -101,7 +101,7 @@
 	import UserTabs from '@/components/UserTabs';
 	import UserFavourites from '@/components/UserFavourites';
 	import UserSearch from '@/components/UserSearch';
-	import AddArticle from '@/components/AddArticle';
+	import ArticleForm from '@/components/ArticleForm';
 
 	export default {
 		components: {
@@ -110,7 +110,7 @@
 			UserTabs,
 			UserFavourites,
 			UserSearch,
-			AddArticle
+			ArticleForm
 		},
 		data() {
 			return {

@@ -12,7 +12,7 @@ export default {
 			editProfile: {},
 			addComment: {},
 			userSearch: {},
-			addArticle: {},
+			article: {},
 			reportUser: {}
 		}
 	},
