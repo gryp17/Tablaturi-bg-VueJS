@@ -18,5 +18,13 @@ export default {
 	 */
 	getArticles(limit, offset) {
 		return API.get(`/Article/getArticles?limit=${limit}&offset=${offset}`);
+	},
+	/**
+	 * Fetches the article that matches the provided id
+	 * @param {Number} id
+	 * @returns {Promise}
+	 */
+	getArticle(id) {
+		return API.get(`/Article/getArticle?id=${id}`);
 	}
 };

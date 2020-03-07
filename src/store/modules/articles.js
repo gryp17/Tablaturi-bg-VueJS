@@ -4,12 +4,16 @@ import ArticleHttpService from '@/services/article';
 export default {
 	namespaced: true,
 	state: {
+		article: null,
 		articles: [],
 		total: 0,
 		page: 0,
 		perPage: 6
 	},
 	mutations: {
+		setArticle(state, article) {
+			state.article = article;
+		},
 		setArticles(state, articles) {
 			state.articles = articles;
 		},
@@ -52,6 +56,21 @@ export default {
 			}).catch((error) => {
 				Vue.toasted.global.apiError({
 					message: `get articles failed - ${error}`
+				});
+			});
+		},
+		getArticle(context, id) {
+			context.commit('setArticle', null);
+
+			return ArticleHttpService.getArticle(id).then((res) => {
+				if (res.data.ID) {
+					context.commit('setArticle', res.data);
+				}
+
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `get article failed - ${error}`
 				});
 			});
 		}
