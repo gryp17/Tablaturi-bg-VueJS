@@ -28,10 +28,6 @@
 			data: Object
 		},
 		computed: {
-			...mapState({
-				emoticonsPath: 'EMOTICONS_PATH',
-				emoticons: 'EMOTICONS_LIST'
-			}),
 			...mapState([
 				'CDN_URL'
 			]),
@@ -39,15 +35,7 @@
 				return `${this.CDN_URL}/avatars/${this.data.photo}`;
 			},
 			content() {
-				let content = this.data.content;
-
-				this.emoticons.forEach((emoticon) => {
-					const regexp = new RegExp(emoticon.regexp, 'ig');
-					const src = this.emoticonsPath + emoticon.img;
-					content = content.replace(regexp, `<img title="${emoticon.title}" class="emoticon" src="${src}">`);
-				});
-
-				return content;
+				return this.$options.filters.emoticons(this.data.content);
 			},
 			date() {
 				return moment(this.data.date).format('YYYY-MM-DD в HH:mm:ss');

@@ -97,8 +97,12 @@ const routes = [
 		component: Forbidden
 	},
 	{
-		path: '*',
+		path: '/not-found',
 		name: 'not-found',
+		component: NotFound
+	},
+	{
+		path: '*',
 		component: NotFound
 	}
 ];

@@ -63,7 +63,7 @@ export default {
 			context.commit('setArticle', null);
 
 			return ArticleHttpService.getArticle(id).then((res) => {
-				if (res.data.ID) {
+				if (res.data && res.data.ID) {
 					context.commit('setArticle', res.data);
 				}
 
