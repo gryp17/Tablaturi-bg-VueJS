@@ -34,8 +34,18 @@ export default {
 			const limit = context.state.perPage;
 			const offset = page * limit;
 
+			if (page === 0) {
+				context.commit('setArticles', []);
+			}
+
 			return ArticleHttpService.getArticles(limit, offset).then((res) => {
-				context.commit('setArticles', res.data.results);
+				let articles = res.data.results;
+
+				if (page > 0) {
+					articles = [...context.state.articles, ...articles];
+				}
+
+				context.commit('setArticles', articles);
 				context.commit('setTotal', res.data.total);
 				context.commit('setPage', page);
 				return res;

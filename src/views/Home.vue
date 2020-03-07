@@ -7,7 +7,7 @@
 			</PageTitle>
 
 			<ArticlesList>
-				<ArticleBox
+				<ArticleCard
 					v-for="article in articles"
 					:key="article.ID"
 					:data="article"
@@ -27,11 +27,11 @@
 	import { mapState, mapActions } from 'vuex';
 
 	import ArticlesList from '@/components/ArticlesList';
-	import ArticleBox from '@/components/ArticleBox';
+	import ArticleCard from '@/components/ArticleCard';
 
 	export default {
 		components: {
-			ArticleBox,
+			ArticleCard,
 			ArticlesList
 		},
 		data() {
