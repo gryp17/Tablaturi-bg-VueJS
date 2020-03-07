@@ -1,33 +1,43 @@
 <template>
 	<div class="add-comment-box">
-		<h6>Напиши коментар:</h6>
 
-		<div class="box-wrapper">
-			<FormInput
-				v-model="content"
-				:error="error"
-				@keyup.enter="onSubmit"
-				@focus="$listeners.focus"
-				tag="textarea"
-				name="content"
-				floating-label
-				placeholder="Коментар"
-			/>
+		<template v-if="loggedIn">
+			<h6>Напиши коментар:</h6>
 
-			<div class="right-wrapper">
-				<EmoticonsList
-					@emoticon-selected="onEmoticonSelected"
+			<div class="box-wrapper">
+				<FormInput
+					v-model="content"
+					:error="error"
+					@keyup.enter="onSubmit"
+					@focus="$listeners.focus"
+					tag="textarea"
+					name="content"
+					floating-label
+					placeholder="Коментар"
 				/>
 
-				<FormButton @click="onSubmit">
-					Коментирай
-				</FormButton>
+				<div class="right-wrapper">
+					<EmoticonsList
+						@emoticon-selected="onEmoticonSelected"
+					/>
+
+					<FormButton @click="onSubmit">
+						Коментирай
+					</FormButton>
+				</div>
 			</div>
+		</template>
+
+		<div v-else class="not-logged-in">
+			<a @click.prevent="showSignupModal()" href="#" class="red">Регистрирай се</a>
+			или
+			<a @click.prevent="showLoginModal()" href="#" class="red">влез</a>, за да коментираш.
 		</div>
 	</div>
 </template>
 
 <script>
+	import { mapActions } from 'vuex';
 	import EmoticonsList from '@/components/EmoticonsList';
 
 	export default {
@@ -35,6 +45,7 @@
 			EmoticonsList
 		},
 		props: {
+			loggedIn: Boolean,
 			error: String
 		},
 		data() {
@@ -43,6 +54,10 @@
 			};
 		},
 		methods: {
+			...mapActions('modals', [
+				'showLoginModal',
+				'showSignupModal'
+			]),
 			/**
 			 * Triggered when an emoticon is clicked
 			 * @param {String} emoticon
@@ -92,6 +107,11 @@
 					float: right;
 				}
 			}
+		}
+
+		.not-logged-in {
+			padding: 10px;
+			text-align: center;
 		}
 	}
 </style>

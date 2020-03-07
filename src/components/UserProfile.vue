@@ -123,6 +123,7 @@
 		/>
 
 		<AddCommentBox
+			:logged-in="isLoggedIn"
 			:error="errors.content"
 			@focus="clearError"
 			@submit="submitComment"
@@ -136,7 +137,7 @@
 
 <script>
 	import moment from 'moment';
-	import { mapState, mapActions } from 'vuex';
+	import { mapState, mapGetters, mapActions } from 'vuex';
 
 	import GenderIcon from '@/components/GenderIcon';
 	import PopoverButton from '@/components/PopoverButton';
@@ -160,11 +161,14 @@
 			user: Object
 		},
 		computed: {
-			...mapState([
-				'CDN_URL'
+			...mapGetters('auth', [
+				'isLoggedIn'
 			]),
 			...mapState('auth', [
 				'userSession'
+			]),
+			...mapState([
+				'CDN_URL'
 			]),
 			...mapState('userComments', [
 				'comments',

@@ -10,6 +10,9 @@ export default {
 	getters: {
 		isAdmin(state) {
 			return state.userSession && state.userSession.type === 'admin';
+		},
+		isLoggedIn(state) {
+			return !!state.userSession;
 		}
 	},
 	mutations: {

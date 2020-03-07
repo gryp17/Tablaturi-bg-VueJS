@@ -7,6 +7,7 @@ import formsModule from '@/store/modules/forms';
 import modalsModule from '@/store/modules/modals';
 import tabsModule from '@/store/modules/tabs';
 import userCommentsModule from '@/store/modules/user-comments';
+import articleCommentsModule from '@/store/modules/article-comments';
 import articlesModule from '@/store/modules/articles';
 import miscModule from '@/store/modules/misc';
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
 		modals: modalsModule,
 		tabs: tabsModule,
 		userComments: userCommentsModule,
+		articleComments: articleCommentsModule,
 		articles: articlesModule,
 		misc: miscModule
 	},
