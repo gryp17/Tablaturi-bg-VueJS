@@ -1,15 +1,15 @@
 <template>
 	<div class="add-comment-box">
 
-		<template v-if="loggedIn">
+		<template v-if="isLoggedIn">
 			<h6>Напиши коментар:</h6>
 
 			<div class="box-wrapper">
 				<FormInput
 					v-model="content"
-					:error="error"
+					:error="errors.content"
 					@keyup.enter="onSubmit"
-					@focus="$listeners.focus"
+					@focus="clearError"
 					tag="textarea"
 					name="content"
 					floating-label
@@ -37,23 +37,40 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex';
+	import { mapState, mapGetters, mapActions } from 'vuex';
 	import EmoticonsList from '@/components/EmoticonsList';
+
+	const formName = 'addComment';
 
 	export default {
 		components: {
 			EmoticonsList
 		},
 		props: {
-			loggedIn: Boolean,
-			error: String
+			addComment: Function
 		},
 		data() {
 			return {
 				content: ''
 			};
 		},
+		computed: {
+			...mapGetters('auth', [
+				'isLoggedIn'
+			]),
+			...mapState('forms', {
+				errors: state => state.errors[formName]
+			})
+		},
+		created() {
+			this.resetFormErrors(formName);
+		},
 		methods: {
+			...mapActions('forms', [
+				'setFormError',
+				'clearFormError',
+				'resetFormErrors'
+			]),
 			...mapActions('modals', [
 				'showLoginModal',
 				'showSignupModal'
@@ -67,10 +84,32 @@
 				this.content = this.content + space + emoticon;
 			},
 			/**
-			 * Sends the submit event
+			 * Submits the comment data
 			 */
 			onSubmit() {
-				this.$emit('submit', this.content);
+				this.addComment(this.content).then((res) => {
+					const data = res.data;
+
+					if (data.success) {
+						this.reset();
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
+			},
+			/**
+			 * Clears the form errors related to this input
+			 * @param {Object} e
+			 */
+			clearError(e) {
+				const field = e.target.name;
+				this.clearFormError({
+					form: formName,
+					field
+				});
 			},
 			/**
 			 * Resets the comment content

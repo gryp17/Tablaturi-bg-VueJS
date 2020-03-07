@@ -114,20 +114,9 @@
 			</div>
 		</div>
 
-		<CommentsList
-			:comments="comments"
-			:total="total"
-			:current-page="page"
-			:per-page="perPage"
-			@get-comments-by-page="getCommentsByPage"
-		/>
-
-		<AddCommentBox
-			:logged-in="isLoggedIn"
-			:error="errors.content"
-			@focus="clearError"
-			@submit="submitComment"
-			ref="commentBox"
+		<CommentsWidget
+			:object-id="user.ID"
+			type="user"
 		/>
 
 		<EditProfileModal :user="userSession"/>
@@ -137,23 +126,19 @@
 
 <script>
 	import moment from 'moment';
-	import { mapState, mapGetters, mapActions } from 'vuex';
+	import { mapState, mapActions } from 'vuex';
 
 	import GenderIcon from '@/components/GenderIcon';
 	import PopoverButton from '@/components/PopoverButton';
-	import AddCommentBox from '@/components/AddCommentBox';
-	import CommentsList from '@/components/CommentsList';
+	import CommentsWidget from '@/components/comments/CommentsWidget';
 	import EditProfileModal from '@/components/modals/EditProfileModal';
 	import ReportUserModal from '@/components/modals/ReportUserModal';
-
-	const formName = 'addComment';
 
 	export default {
 		components: {
 			GenderIcon,
 			PopoverButton,
-			AddCommentBox,
-			CommentsList,
+			CommentsWidget,
 			EditProfileModal,
 			ReportUserModal
 		},
@@ -161,24 +146,12 @@
 			user: Object
 		},
 		computed: {
-			...mapGetters('auth', [
-				'isLoggedIn'
-			]),
 			...mapState('auth', [
 				'userSession'
 			]),
 			...mapState([
 				'CDN_URL'
 			]),
-			...mapState('userComments', [
-				'comments',
-				'total',
-				'page',
-				'perPage'
-			]),
-			...mapState('forms', {
-				errors: state => state.errors[formName]
-			}),
 			registeredText() {
 				return this.user.gender === 'M' ? 'Регистриран на:' : 'Регистриранa на:';
 			},
@@ -198,69 +171,11 @@
 				return this.user && this.userSession && this.user.ID === this.userSession.ID;
 			}
 		},
-		created() {
-			this.getCommentsByPage(0);
-			this.resetFormErrors(formName);
-		},
 		methods: {
 			...mapActions('modals', [
 				'showEditProfileModal',
 				'showReportUserModal'
-			]),
-			...mapActions('forms', [
-				'setFormError',
-				'clearFormError',
-				'resetFormErrors'
-			]),
-			...mapActions('userComments', [
-				'addUserComment',
-				'getUserComments'
-			]),
-			/**
-			 * Submits the user comment
-			 * @param {String} content
-			 */
-			submitComment(content) {
-				const params = {
-					userId: this.user.ID,
-					content
-				};
-
-				this.addUserComment(params).then((res) => {
-					const data = res.data;
-
-					if (data.success) {
-						this.$refs.commentBox.reset();
-						this.getCommentsByPage(0);
-					} else if (data.error) {
-						this.setFormError({
-							...data.error,
-							form: formName
-						});
-					}
-				});
-			},
-			/**
-			 * Fetches the comments for the specified page
-			 * @param {Number} page
-			 */
-			getCommentsByPage(page) {
-				this.getUserComments({
-					userId: this.user.ID,
-					page
-				});
-			},
-			/**
-			 * Clears the form errors related to this input
-			 * @param {Object} e
-			 */
-			clearError(e) {
-				const field = e.target.name;
-				this.clearFormError({
-					form: formName,
-					field
-				});
-			},
+			])
 		}
 	};
 </script>

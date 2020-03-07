@@ -48,20 +48,9 @@
 				<hr/>
 			</div>
 
-			<CommentsList
-				:comments="comments"
-				:total="total"
-				:current-page="page"
-				:per-page="perPage"
-				@get-comments-by-page="getCommentsByPage"
-			/>
-
-			<AddCommentBox
-				:logged-in="isLoggedIn"
-				:error="errors.content"
-				@focus="clearError"
-				@submit="submitComment"
-				ref="commentBox"
+			<CommentsWidget
+				:object-id="article.ID"
+				type="article"
 			/>
 
 		</div>
@@ -72,15 +61,11 @@
 	import moment from 'moment';
 	import { mapState, mapGetters, mapActions } from 'vuex';
 
-	import AddCommentBox from '@/components/AddCommentBox';
-	import CommentsList from '@/components/CommentsList';
-
-	const formName = 'addComment';
+	import CommentsWidget from '@/components/comments/CommentsWidget';
 
 	export default {
 		components: {
-			AddCommentBox,
-			CommentsList
+			CommentsWidget
 		},
 		data() {
 			return {
@@ -98,15 +83,6 @@
 			...mapState([
 				'CDN_URL'
 			]),
-			...mapState('articleComments', [
-				'comments',
-				'total',
-				'page',
-				'perPage'
-			]),
-			...mapState('forms', {
-				errors: state => state.errors[formName]
-			}),
 			date() {
 				return moment(this.article.date).format('YYYY-MM-DD в HH:mm:ss');
 			},
@@ -137,23 +113,11 @@
 			}
 		},
 		created() {
-			this.getArticleData().then(() => {
-				this.getCommentsByPage(0);
-			});
-			this.resetFormErrors(formName);
+			this.getArticleData();
 		},
 		methods: {
 			...mapActions('articles', [
 				'getArticle'
-			]),
-			...mapActions('articleComments', [
-				'getArticleComments',
-				'addArticleComment'
-			]),
-			...mapActions('forms', [
-				'setFormError',
-				'clearFormError',
-				'resetFormErrors'
 			]),
 			/**
 			 * Fetches the article data
@@ -167,51 +131,6 @@
 					} else {
 						this.$router.push({ name: 'not-found' });
 					}
-				});
-			},
-			/**
-			 * Fetches the comments for the specified page
-			 * @param {Number} page
-			 */
-			getCommentsByPage(page) {
-				this.getArticleComments({
-					articleId: this.article.ID,
-					page
-				});
-			},
-			/**
-			 * Submits the article comment
-			 * @param {String} content
-			 */
-			submitComment(content) {
-				const params = {
-					articleId: this.article.ID,
-					content
-				};
-
-				this.addArticleComment(params).then((res) => {
-					const data = res.data;
-
-					if (data.success) {
-						this.$refs.commentBox.reset();
-						this.getCommentsByPage(0);
-					} else if (data.error) {
-						this.setFormError({
-							...data.error,
-							form: formName
-						});
-					}
-				});
-			},
-			/**
-			 * Clears the form errors related to this input
-			 * @param {Object} e
-			 */
-			clearError(e) {
-				const field = e.target.name;
-				this.clearFormError({
-					form: formName,
-					field
 				});
 			}
 		}

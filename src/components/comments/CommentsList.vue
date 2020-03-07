@@ -12,7 +12,7 @@
 			<Pagination
 				v-show="totalPages > 1"
 				:total-pages="totalPages"
-				:current-page="currentPage"
+				:current-page="page"
 				@change-page="getCommentsByPage"
 			/>
 		</template>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex';
 	import Comment from '@/components/Comment';
 	import Pagination from '@/components/Pagination';
 
@@ -31,20 +32,27 @@
 			Comment,
 			Pagination
 		},
-		props: {
-			comments: Array,
-			total: Number,
-			perPage: Number,
-			currentPage: Number
-		},
 		computed: {
+			...mapState('comments', [
+				'comments',
+				'total',
+				'page',
+				'perPage'
+			]),
 			totalPages() {
 				return Math.ceil(this.total / this.perPage);
 			}
 		},
+		created() {
+			this.getCommentsByPage(0);
+		},
 		methods: {
+			/**
+			 * Fetches the comments for the passed page
+			 * @param {Number} page
+			 */
 			getCommentsByPage(page) {
-				this.$emit('get-comments-by-page', page);
+				this.$emit('get-comments', page);
 			}
 		}
 	};
