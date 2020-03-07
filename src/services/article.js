@@ -11,6 +11,14 @@ export default {
 		return API.post('/Article/addArticle', formData);
 	},
 	/**
+	 * Updates an existing article
+	 * @param {Object} formData
+	 * @returns {Promise}
+	 */
+	updateArticle(formData) {
+		return API.post('Article/updateArticle', formData);
+	},
+	/**
 	 * Fetches all articles that match the limit/offset params
 	 * @param {Number} limit
 	 * @param {Number} offset

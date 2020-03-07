@@ -34,6 +34,15 @@ export default {
 				});
 			});
 		},
+		updateArticle(context, data) {
+			return ArticleHttpService.updateArticle(data).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `update article failed - ${error}`
+				});
+			});
+		},
 		getArticles(context, page) {
 			const limit = context.state.perPage;
 			const offset = page * limit;

@@ -35,7 +35,7 @@
 			<div class="clearfix"></div>
 
 			<div class="article-content">
-				<img class="article-image" :src="imageLink" />
+				<img class="article-image" :src="imageUrl" />
 				<h4 class="title">
 					{{ article.title }}
 				</h4>
@@ -84,7 +84,7 @@
 					}
 				};
 			},
-			imageLink() {
+			imageUrl() {
 				return `${this.CDN_URL}/articles/${this.article.picture}`;
 			},
 			content() {

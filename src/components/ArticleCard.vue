@@ -44,12 +44,12 @@
 					}
 				};
 			},
-			imageLink() {
+			imageUrl() {
 				return `${this.CDN_URL}/articles/${this.data.picture}`;
 			},
 			imageStyle() {
 				return {
-					'background-image': `url(${this.imageLink})`
+					'background-image': `url(${this.imageUrl})`
 				};
 			},
 			date() {

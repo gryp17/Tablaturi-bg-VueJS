@@ -72,6 +72,7 @@
 		},
 		data() {
 			return {
+				id: null,
 				title: '',
 				date: null,
 				content: '',
@@ -83,14 +84,29 @@
 			...mapState('forms', {
 				errors: state => state.errors[formName]
 			}),
+			...mapState([
+				'CDN_URL'
+			]),
 			isEditing() {
 				return this.article && this.article.ID;
+			},
+			imageUrl() {
+				return `${this.CDN_URL}/articles/${this.article.picture}`;
 			},
 			formTitle() {
 				return this.isEditing ? 'Редактирай новина' : 'Добави новина';
 			},
 			buttonText() {
 				return this.isEditing ? 'Запази промените' : 'Публикувай новината';
+			}
+		},
+		created() {
+			if (this.isEditing) {
+				this.id = this.article.ID;
+				this.title = this.article.title;
+				this.date = new Date(this.article.date);
+				this.content = this.article.content;
+				this.imagePreview = this.imageUrl;
 			}
 		},
 		methods: {
@@ -100,7 +116,8 @@
 				'resetFormErrors'
 			]),
 			...mapActions('articles', [
-				'addArticle'
+				'addArticle',
+				'updateArticle'
 			]),
 			/**
 			 * Updates the image and image preview values whenever the selected file changes
@@ -114,9 +131,10 @@
 			 * Submits the article form
 			 */
 			submit() {
+				const action = this.isEditing ? this.updateArticle : this.addArticle;
 				const formData = new FormData();
 
-				['title', 'date', 'content', 'image'].forEach((field) => {
+				['id', 'title', 'date', 'content', 'image'].forEach((field) => {
 					if (this[field]) {
 						let value = this[field];
 
@@ -128,7 +146,7 @@
 					}
 				});
 
-				this.addArticle(formData).then((res) => {
+				action(formData).then((res) => {
 					const data = res.data;
 
 					if (data.success) {
