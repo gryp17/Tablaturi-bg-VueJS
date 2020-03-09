@@ -13,7 +13,8 @@ export default {
 			addComment: {},
 			userSearch: {},
 			article: {},
-			reportUser: {}
+			reportUser: {},
+			tab: {}
 		}
 	},
 	mutations: {
