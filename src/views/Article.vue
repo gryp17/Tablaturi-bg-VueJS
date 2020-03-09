@@ -42,11 +42,9 @@
 				<div class="content" v-html="content"></div>
 			</div>
 
-			<div>
-				<hr/>
-				##### TODO: share stuff goes here
-				<hr/>
-			</div>
+			<div class="clearfix"></div>
+
+			<ShareWidget />
 
 			<CommentsWidget
 				:object-id="article.ID"
@@ -61,10 +59,12 @@
 	import moment from 'moment';
 	import { mapState, mapGetters, mapActions } from 'vuex';
 
+	import ShareWidget from '@/components/ShareWidget';
 	import CommentsWidget from '@/components/comments/CommentsWidget';
 
 	export default {
 		components: {
+			ShareWidget,
 			CommentsWidget
 		},
 		data() {

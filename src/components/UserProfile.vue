@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="info-box">
-			<div class="red-line"></div>
+			<RedLine big />
 			<div class="info">
 				<span class="info-label">За мен:</span>
 				{{ user.about_me || 'Няма информация' }}
@@ -99,7 +99,7 @@
 		</div>
 
 		<div class="info-box">
-			<div class="red-line"></div>
+			<RedLine big />
 			<div class="info">
 				<span class="info-label">Инструменти/Екипировка:</span>
 				{{ user.instrument || 'Няма информация' }}
@@ -107,7 +107,7 @@
 		</div>
 
 		<div class="info-box">
-			<div class="red-line"></div>
+			<RedLine big />
 			<div class="info">
 				<span class="info-label">Любими групи/музиканти:</span>
 				{{ user.favourite_bands || 'Няма информация' }}
@@ -129,6 +129,7 @@
 	import { mapState, mapActions } from 'vuex';
 
 	import GenderIcon from '@/components/GenderIcon';
+	import RedLine from '@/components/RedLine';
 	import PopoverButton from '@/components/PopoverButton';
 	import CommentsWidget from '@/components/comments/CommentsWidget';
 	import EditProfileModal from '@/components/modals/EditProfileModal';
@@ -137,6 +138,7 @@
 	export default {
 		components: {
 			GenderIcon,
+			RedLine,
 			PopoverButton,
 			CommentsWidget,
 			EditProfileModal,
@@ -233,12 +235,6 @@
 		.info-box {
 			margin-top: 30px;
 			background-color: #f9f9f9;
-
-			.red-line {
-				background: linear-gradient(to right, $red 0%, $red 49%, $white 100%);
-				height: 3px;
-				margin: 0px;
-			}
 
 			.info {
 				padding: 10px 20px;
