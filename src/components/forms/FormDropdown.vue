@@ -1,27 +1,34 @@
 <template>
-	<label class="form-dropdown">
-		<select
-			:value="value"
-			:name="name"
-			v-on="{
-				...$listeners,
-				input: onInput
-			}"
-		>
-			<option
-				v-for="option in options"
-				:key="option.value"
-				:value="option.value"
+	<div class="form-dropdown">
+		<label v-if="label">
+			{{ label }}
+		</label>
+
+		<div class="form-dropdown-wrapper">
+			<select
+				:value="value"
+				:name="name"
+				v-on="{
+					...$listeners,
+					input: onInput
+				}"
 			>
-				{{ option.label }}
-			</option>
-		</select>
-	</label>
+				<option
+					v-for="option in options"
+					:key="option.value"
+					:value="option.value"
+				>
+					{{ option.label }}
+				</option>
+			</select>
+		</div>
+	</div>
 </template>
 
 <script>
 	export default {
 		props: {
+			label: String,
 			options: Array,
 			value: String,
 			name: String
@@ -40,32 +47,38 @@
 
 <style scoped lang="scss">
 	.form-dropdown {
-		position: relative;
+		display: block;
 		margin-bottom: 0px;
 
-		&:after {
-			position: absolute;
-			content: '';
-			width: 14px;
-			height: 14px;
-			padding: 0 0 2px;
-			background: url('/img/icons/arrow.png');
-			background-size: 100%;
-			transform: rotate(90deg);
-			filter: brightness(30%);
-			right: 10px;
-			top: 14px;
-			pointer-events: none;
-		}
+		.form-dropdown-wrapper {
+			position: relative;
 
-		select {
-			padding: 10px 30px 9px 5px;
-			border-radius: 2px;
-			border: 1px solid $blue;
-			color: $blue;
-			background-color: $gray;
-			appearance: none;
-			outline: none;
+			&:after {
+				position: absolute;
+				content: '';
+				width: 14px;
+				height: 14px;
+				padding: 0 0 2px;
+				background: url('/img/icons/arrow.png');
+				background-size: 100%;
+				transform: rotate(90deg);
+				filter: brightness(30%);
+				right: 10px;
+				top: 14px;
+				pointer-events: none;
+			}
+
+			select {
+				display: block;
+				width: 100%;
+				padding: 10px 30px 9px 5px;
+				border-radius: 2px;
+				border: 1px solid $blue;
+				color: $blue;
+				background-color: $gray;
+				appearance: none;
+				outline: none;
+			}
 		}
 	}
 </style>

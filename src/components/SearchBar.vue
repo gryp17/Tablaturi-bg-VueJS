@@ -31,6 +31,8 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex';
+
 	export default {
 		//TODO: add autocomplete for the band and song fields
 		data() {
@@ -41,34 +43,30 @@
 			};
 		},
 		computed: {
-			//TODO: this needs to be taken from the backend or from a config
+			...mapState([
+				'TAB_TYPES'
+			]),
 			tabTypes() {
-				return [
-					{
-						label: 'Тип',
-						value: 'all'
-					},
-					{
-						label: 'Таблатури',
-						value: 'tab'
-					},
-					{
-						label: 'Акорди',
-						value: 'chord'
-					},
-					{
-						label: 'Бас',
-						value: 'bass'
-					},
-					{
-						label: 'Guitar Pro',
-						value: 'gp'
-					},
-					{
-						label: 'Backing Tracks',
-						value: 'bt'
-					}
-				];
+				const labelsMap = {
+					tab: 'Таблатури',
+					chord: 'Акорди',
+					bass: 'Бас',
+					gp: 'Guitar Pro'
+				};
+
+				const types = this.TAB_TYPES.map((value) => {
+					return {
+						label: labelsMap[value],
+						value
+					};
+				});
+
+				types.unshift({
+					label: 'Тип',
+					value: 'all'
+				});
+
+				return types;
 			}
 		},
 		methods: {

@@ -6,7 +6,12 @@
 
 		<div class="row">
 			<div class="col-6">
-				left col
+				<FormDropdown
+					v-model="type"
+					:options="tabTypes"
+					label="Вид таблатура:"
+					name="type"
+				/>
 			</div>
 			<div class="col-6">
 				right col
@@ -29,9 +34,14 @@
 			tab: Object
 		},
 		data() {
-			return {};
+			return {
+				type: 'tab'
+			};
 		},
 		computed: {
+			...mapState([
+				'TAB_TYPES'
+			]),
 			...mapState('forms', {
 				errors: state => state.errors[formName]
 			}),
@@ -43,6 +53,23 @@
 			},
 			buttonText() {
 				return this.isEditing ? 'Запази промените' : 'Публикувай таблатурата';
+			},
+			tabTypes() {
+				const labelsMap = {
+					tab: 'Текстова таблатура',
+					chord: 'Акорди',
+					bass: 'Бас',
+					gp: 'Guitar Pro'
+				};
+
+				const types = this.TAB_TYPES.map((value) => {
+					return {
+						label: labelsMap[value],
+						value
+					};
+				});
+
+				return types;
 			}
 		},
 		created() {

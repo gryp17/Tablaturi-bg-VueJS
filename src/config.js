@@ -4,6 +4,12 @@ export default {
 	SERVER_URL,
 	API_URL: `${SERVER_URL}/API`,
 	CDN_URL: `${SERVER_URL}/API/CDN`,
+	TAB_TYPES: [
+		'tab',
+		'chord',
+		'bass',
+		'gp'
+	],
 	EMOTICONS_PATH: '/img/emoticons/',
 	EMOTICONS_LIST: [
 		{
