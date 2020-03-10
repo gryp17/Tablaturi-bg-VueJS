@@ -10,7 +10,6 @@
 					v-model="type"
 					:options="tabTypes"
 					label="Вид таблатура:"
-					name="type"
 				/>
 
 				<FormInput
@@ -34,6 +33,24 @@
 					floating-label
 					placeholder="Песен"
 				></FormInput>
+
+				<FormDropdown
+					v-model="tunning"
+					:options="tunningOptions"
+					label="Тунинг:"
+				/>
+
+				<FormInput
+					v-show="showCustomTunning"
+					v-model="customTunning"
+					:error="errors.tunning"
+					@keyup.enter="submit"
+					@focus="clearError"
+					type="text"
+					name="tunning"
+					floating-label
+					placeholder="Друг тунинг"
+				></FormInput>
 			</div>
 			<div class="col-6">
 				<FormRadioGroup
@@ -45,13 +62,43 @@
 				<FormDropdown
 					v-model="difficulty"
 					:options="difficultyOptions"
+					class="difficulty-dropdown"
 					label="Трудност:"
-					name="difficulty"
 				/>
 			</div>
 		</div>
 
-		<FormButton @click="submit">
+		<div v-if="showFileUpload" class="file-upload-wrapper">
+			<FormFileInput
+				:error="errors.gp_file"
+				@click="clearError"
+				@change="fileChanged"
+				label="Guitar Pro файл:"
+				name="gp_file"
+			/>
+
+			<div v-show="uploadedFile" class="uploaded-file-preview">
+				<img src="/img/gp-file.png" />
+				{{ uploadedFile }}
+			</div>
+
+			<div class="file-hint">
+				Позволени формати: gp, gp3, gp4, gp5, gp6 и gpx под 1MB
+			</div>
+		</div>
+		<FormInput
+			v-else
+			v-model="content"
+			:error="errors.content"
+			:rows="10"
+			@focus="clearError"
+			tag="textarea"
+			name="content"
+			floating-label
+			placeholder="Текстова таблатура"
+		></FormInput>
+
+		<FormButton @click="submit" class="submit-btn">
 			{{ buttonText }}
 		</FormButton>
 	</div>
@@ -72,7 +119,22 @@
 				tabType: 'full song',
 				band: '',
 				song: '',
-				difficulty: 'Средна'
+				difficulty: 'Средна',
+				tunning: 'Стандартен (EBGDAE)',
+				customTunning: '',
+				content: '',
+				gpFile: null,
+				difficultyOptions: {
+					Ниска: 'Ниска',
+					Средна: 'Средна',
+					Висока: 'Висока'
+				},
+				tunningOptions: {
+					'Стандартен (EBGDAE)': 'Стандартен (EBGDAE)',
+					'Drop D': 'Drop D',
+					'Drop C': 'Drop C',
+					other: 'Друг'
+				}
 			};
 		},
 		computed: {
@@ -92,6 +154,15 @@
 			buttonText() {
 				return this.isEditing ? 'Запази промените' : 'Публикувай таблатурата';
 			},
+			showCustomTunning() {
+				return this.tunning === 'other';
+			},
+			showFileUpload() {
+				return this.type === 'gp';
+			},
+			uploadedFile() {
+				return this.gpFile && this.gpFile.name ? this.gpFile.name : null;
+			},
 			tabTypes() {
 				const options = {};
 				this.TAB_TYPES.forEach((value) => {
@@ -107,13 +178,6 @@
 				});
 
 				return options;
-			},
-			difficultyOptions() {
-				return {
-					Ниска: 'Ниска',
-					Средна: 'Средна',
-					Висока: 'Висока'
-				};
 			}
 		},
 		created() {
@@ -133,6 +197,13 @@
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			/**
+			 * Updates the file whenever the selected file changes
+			 * @param {Object} e
+			 */
+			fileChanged(e) {
+				this.gpFile = e.target.files[0];
+			},
 			/**
 			 * Submits the tab form
 			 */
@@ -157,7 +228,33 @@
 
 <style scoped lang="scss">
 	.tab-form {
-		.form-button {
+		.difficulty-dropdown {
+			margin-top: 26px;
+		}
+
+		.file-upload-wrapper {
+			.form-file-input {
+				display: inline-block;
+			}
+
+			.uploaded-file-preview {
+				font-weight: 600;
+
+				img {
+					width: 40px;
+					margin-right: 5px;
+				}
+			}
+
+			.file-hint {
+				margin-top: 5px;
+				margin-bottom: 10px;
+				font-size: 10px;
+				font-style: italic;
+			}
+		}
+
+		.submit-btn {
 			display: block;
 			margin: 20px auto 10px auto;
 		}

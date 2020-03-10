@@ -48,7 +48,6 @@
 <style scoped lang="scss">
 	.form-dropdown {
 		display: block;
-		margin-bottom: 0px;
 
 		.form-dropdown-wrapper {
 			position: relative;
