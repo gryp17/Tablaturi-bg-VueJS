@@ -41,6 +41,13 @@
 					:items="secondaryTabTypes"
 					title="Тип таблатура:"
 				/>
+
+				<FormDropdown
+					v-model="difficulty"
+					:options="difficultyOptions"
+					label="Трудност:"
+					name="difficulty"
+				/>
 			</div>
 		</div>
 
@@ -65,6 +72,7 @@
 				tabType: 'full song',
 				band: '',
 				song: '',
+				difficulty: 'Средна'
 			};
 		},
 		computed: {
@@ -99,6 +107,13 @@
 				});
 
 				return options;
+			},
+			difficultyOptions() {
+				return {
+					Ниска: 'Ниска',
+					Средна: 'Средна',
+					Висока: 'Висока'
+				};
 			}
 		},
 		created() {
