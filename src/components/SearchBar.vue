@@ -47,26 +47,15 @@
 				'TAB_TYPES'
 			]),
 			tabTypes() {
-				const labelsMap = {
-					tab: 'Таблатури',
-					chord: 'Акорди',
-					bass: 'Бас',
-					gp: 'Guitar Pro'
+				const options = {
+					all: 'Тип'
 				};
 
-				const types = this.TAB_TYPES.map((value) => {
-					return {
-						label: labelsMap[value],
-						value
-					};
+				this.TAB_TYPES.forEach((value) => {
+					options[value] = this.$options.filters.labelsMap(value);
 				});
 
-				types.unshift({
-					label: 'Тип',
-					value: 'all'
-				});
-
-				return types;
+				return options;
 			}
 		},
 		methods: {
@@ -113,6 +102,7 @@
 
 		.form-input, .form-dropdown {
 			margin-right: 12px;
+			margin-bottom: 0;
 		}
 	}
 </style>

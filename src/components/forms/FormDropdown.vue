@@ -1,5 +1,5 @@
 <template>
-	<div class="form-dropdown">
+	<div class="form-dropdown form-group">
 		<label v-if="label">
 			{{ label }}
 		</label>
@@ -14,11 +14,11 @@
 				}"
 			>
 				<option
-					v-for="option in options"
-					:key="option.value"
-					:value="option.value"
+					v-for="(optionLabel, key) in options"
+					:key="key"
+					:value="key"
 				>
-					{{ option.label }}
+					{{ optionLabel }}
 				</option>
 			</select>
 		</div>
@@ -29,7 +29,7 @@
 	export default {
 		props: {
 			label: String,
-			options: Array,
+			options: Object,
 			value: String,
 			name: String
 		},

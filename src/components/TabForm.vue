@@ -12,9 +12,35 @@
 					label="Вид таблатура:"
 					name="type"
 				/>
+
+				<FormInput
+					v-model="band"
+					:error="errors.band"
+					@keyup.enter="submit"
+					@focus="clearError"
+					type="text"
+					name="band"
+					floating-label
+					placeholder="Група"
+				></FormInput>
+
+				<FormInput
+					v-model="song"
+					:error="errors.song"
+					@keyup.enter="submit"
+					@focus="clearError"
+					type="text"
+					name="song"
+					floating-label
+					placeholder="Песен"
+				></FormInput>
 			</div>
 			<div class="col-6">
-				right col
+				<FormRadioGroup
+					v-model="tabType"
+					:items="secondaryTabTypes"
+					title="Тип таблатура:"
+				/>
 			</div>
 		</div>
 
@@ -35,12 +61,16 @@
 		},
 		data() {
 			return {
-				type: 'tab'
+				type: 'tab',
+				tabType: 'full song',
+				band: '',
+				song: '',
 			};
 		},
 		computed: {
 			...mapState([
-				'TAB_TYPES'
+				'TAB_TYPES',
+				'SECONDARY_TAB_TYPES'
 			]),
 			...mapState('forms', {
 				errors: state => state.errors[formName]
@@ -55,21 +85,20 @@
 				return this.isEditing ? 'Запази промените' : 'Публикувай таблатурата';
 			},
 			tabTypes() {
-				const labelsMap = {
-					tab: 'Текстова таблатура',
-					chord: 'Акорди',
-					bass: 'Бас',
-					gp: 'Guitar Pro'
-				};
-
-				const types = this.TAB_TYPES.map((value) => {
-					return {
-						label: labelsMap[value],
-						value
-					};
+				const options = {};
+				this.TAB_TYPES.forEach((value) => {
+					options[value] = this.$options.filters.labelsMap(value);
 				});
 
-				return types;
+				return options;
+			},
+			secondaryTabTypes() {
+				const options = {};
+				this.SECONDARY_TAB_TYPES.forEach((value) => {
+					options[value] = this.$options.filters.labelsMap(value);
+				});
+
+				return options;
 			}
 		},
 		created() {

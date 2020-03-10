@@ -7,8 +7,13 @@ export default {
 	TAB_TYPES: [
 		'tab',
 		'chord',
-		'bass',
-		'gp'
+		'gp',
+		'bass'
+	],
+	SECONDARY_TAB_TYPES: [
+		'full song',
+		'intro',
+		'solo'
 	],
 	EMOTICONS_PATH: '/img/emoticons/',
 	EMOTICONS_LIST: [

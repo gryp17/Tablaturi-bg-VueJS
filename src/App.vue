@@ -43,6 +43,7 @@
 	import { mapState, mapActions } from 'vuex';
 
 	import errorsMap from '@/filters/errorsMap';
+	import labelsMap from '@/filters/labelsMap';
 	import camelToSnake from '@/filters/camelToSnake';
 	import age from '@/filters/age';
 	import limitTo from '@/filters/limitTo';
@@ -63,6 +64,7 @@
 
 	//global components/filters
 	Vue.filter('errorsMap', errorsMap);
+	Vue.filter('labelsMap', labelsMap);
 	Vue.filter('camelToSnake', camelToSnake);
 	Vue.filter('age', age);
 	Vue.filter('limitTo', limitTo);
