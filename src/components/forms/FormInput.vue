@@ -29,7 +29,7 @@
 			<textarea
 				v-if="tag === 'textarea'"
 				:value="value"
-				:class="['form-control', className, {'has-error': error}]"
+				:class="['form-control', className, {monospaced}, {'has-error': error}]"
 				:name="name"
 				:placeholder="placeholder"
 				:rows="rows"
@@ -80,6 +80,10 @@
 			disabled: {
 				type: Boolean,
 				default: false
+			},
+			monospaced: {
+				type: Boolean,
+				defalt: false
 			},
 			name: String,
 			error: String
@@ -144,6 +148,11 @@
 			&:focus {
 				box-shadow: none;
 				border-color: $blue-lighter;
+			}
+
+			&.monospaced {
+				font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+				font-size: 13px;
 			}
 
 			&.has-error {

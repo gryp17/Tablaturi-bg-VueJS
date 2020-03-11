@@ -89,6 +89,7 @@
 		<FormInput
 			v-else
 			v-model="content"
+			monospaced
 			:error="errors.content"
 			:rows="10"
 			@focus="clearError"
