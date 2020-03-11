@@ -115,6 +115,7 @@
 		},
 		data() {
 			return {
+				tabId: null,
 				type: 'tab',
 				tabType: 'full song',
 				band: '',
@@ -182,13 +183,24 @@
 		},
 		created() {
 			if (this.isEditing) {
-				/*
-				this.id = this.article.ID;
-				this.title = this.article.title;
-				this.date = new Date(this.article.date);
-				this.content = this.article.content;
-				this.imagePreview = this.imageUrl;
-				*/
+				this.tabId = this.tab.ID;
+				this.type = this.tab.type;
+				this.tabType = this.tab.tab_type;
+				this.band = this.tab.band;
+				this.song = this.tab.song;
+				this.difficulty = this.tab.difficulty;
+				this.content = this.tab.content;
+
+				//tunning specific checks
+				const defaultTunnings = { ...this.tunningOptions };
+				delete defaultTunnings.other;
+
+				if (defaultTunnings[this.tab.tunning]) {
+					this.tunning = this.tab.tunning;
+				} else {
+					this.tunning = 'other';
+					this.customTunning = this.tab.tunning;
+				}
 			}
 		},
 		methods: {
@@ -215,7 +227,7 @@
 				const action = this.isEditing ? this.updateTab : this.addTab;
 				const formData = new FormData();
 
-				['type', 'tabType', 'band', 'song', 'difficulty', 'content', 'gpFile'].forEach((field) => {
+				['tabId', 'type', 'tabType', 'band', 'song', 'difficulty', 'content', 'gpFile'].forEach((field) => {
 					if (this[field]) {
 						const snakeCaseField = this.$options.filters.camelToSnake(field);
 						const value = this[field];
