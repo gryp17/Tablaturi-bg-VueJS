@@ -197,6 +197,10 @@
 				'clearFormError',
 				'resetFormErrors'
 			]),
+			...mapActions('tabs', [
+				'addTab',
+				'updateTab'
+			]),
 			/**
 			 * Updates the file whenever the selected file changes
 			 * @param {Object} e
@@ -208,8 +212,38 @@
 			 * Submits the tab form
 			 */
 			submit() {
-				//const action = this.isEditing ? this.updateArticle : this.addArticle;
-				//const formData = new FormData();
+				const action = this.isEditing ? this.updateTab : this.addTab;
+				const formData = new FormData();
+
+				['type', 'tabType', 'band', 'song', 'difficulty', 'content', 'gpFile'].forEach((field) => {
+					if (this[field]) {
+						const snakeCaseField = this.$options.filters.camelToSnake(field);
+						const value = this[field];
+						formData.append(snakeCaseField, value);
+					}
+				});
+
+				//tunning
+				const tunning = this.showCustomTunning ? this.customTunning : this.tunning;
+				formData.append('tunning', tunning);
+
+				action(formData).then((res) => {
+					const data = res.data;
+
+					if (data.success) {
+						this.$router.push({
+							name: 'tab',
+							params: {
+								id: data.tab_id
+							}
+						});
+					} else if (data.error) {
+						this.setFormError({
+							...data.error,
+							form: formName
+						});
+					}
+				});
 			},
 			/**
 			 * Clears the form errors related to this input

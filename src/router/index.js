@@ -4,6 +4,7 @@ import Home from '@/views/Home';
 import Articles from '@/views/Articles';
 import NotFound from '@/views/NotFound';
 import Forbidden from '@/views/Forbidden';
+import Unauthorized from '@/views/Unauthorized';
 import ChangePassword from '@/views/ChangePassword';
 import UserActivation from '@/views/UserActivation';
 
@@ -35,7 +36,10 @@ const routes = [
 	{
 		path: '/edit-article/:id',
 		name: 'edit-article',
-		component: () => import(/* webpackChunkName: "edit-article" */ '@/views/EditArticle')
+		component: () => import(/* webpackChunkName: "article-form" */ '@/views/EditArticle'),
+		meta: {
+			adminRequired: true
+		}
 	},
 	{
 		path: '/tabs',
@@ -46,17 +50,30 @@ const routes = [
 		component: () => import(/* webpackChunkName: "tabs" */ '@/views/Tabs')
 	},
 	{
-		path: '/guitar-pro',
-		name: 'guitar-pro',
-		component: () => import(/* webpackChunkName: "guitar-pro" */ '@/views/GuitarPro')
+		path: '/tab/:id',
+		name: 'tab',
+		component: () => import(/* webpackChunkName: "tab" */ '@/views/Tab')
 	},
 	{
 		path: '/add-tab',
 		name: 'add-tab',
-		component: () => import(/* webpackChunkName: "add-tab" */ '@/views/AddTab'),
+		component: () => import(/* webpackChunkName: "tab-form" */ '@/views/AddTab'),
 		meta: {
 			authRequired: true
 		}
+	},
+	{
+		path: '/edit-tab/:id',
+		name: 'edit-tab',
+		component: () => import(/* webpackChunkName: "tab-form" */ '@/views/EditTab'),
+		meta: {
+			authRequired: true
+		}
+	},
+	{
+		path: '/guitar-pro',
+		name: 'guitar-pro',
+		component: () => import(/* webpackChunkName: "guitar-pro" */ '@/views/GuitarPro')
 	},
 	{
 		path: '/usefull',
@@ -102,6 +119,11 @@ const routes = [
 		component: Forbidden
 	},
 	{
+		path: '/unauthorized',
+		name: 'unauthorized',
+		component: Unauthorized
+	},
+	{
 		path: '/not-found',
 		name: 'not-found',
 		component: NotFound
@@ -138,12 +160,34 @@ function getUserSession() {
 	});
 }
 
+/**
+ * Checks if the user is an admin
+ * @returns {Promise}
+ */
+function userIsAdmin() {
+	if (store.state.auth.userSession) {
+		return Promise.resolve(store.state.auth.userSession.type === 'admin');
+	}
+
+	return getUserSession().then((user) => {
+		return user && user.type === 'admin';
+	});
+}
+
 router.beforeEach((to, from, next) => {
 	const forbiddenRoute = {
 		name: 'forbidden'
 	};
 
-	if (to.meta.authRequired) {
+	const unauthorizedRoute = {
+		name: 'unauthorized'
+	};
+
+	if (to.meta.adminRequired) {
+		userIsAdmin().then((isAdmin) => {
+			next(isAdmin ? true : unauthorizedRoute);
+		});
+	} else if (to.meta.authRequired) {
 		getUserSession().then((user) => {
 			if (!user) {
 				store.dispatch('auth/setRedirectAfterLogin', to);
