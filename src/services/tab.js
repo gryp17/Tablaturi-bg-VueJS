@@ -31,7 +31,7 @@ export default {
 	 * @returns {Promise}
 	 */
 	updateTab(formData) {
-		return API.post('Tab/updateTab', formData);
+		return API.post('/Tab/updateTab', formData);
 	},
 	/**
 	 * Fetches the tabs by user

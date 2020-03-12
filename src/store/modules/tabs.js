@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import TabHttpService from '@/services/tab';
+import UserFavouriteHttpService from '@/services/user-favourite';
 
 export default {
 	namespaced: true,
@@ -37,6 +38,15 @@ export default {
 		},
 		setUserTabsPage(state, page) {
 			state.userTabs.page = page;
+		},
+		setUserFavourites(state, tabs) {
+			state.userFavourites.tabs = tabs;
+		},
+		setUserFavouritesTotal(state, total) {
+			state.userFavourites.total = total;
+		},
+		setUserFavouritesPage(state, page) {
+			state.userFavourites.page = page;
 		}
 	},
 	actions: {
@@ -98,5 +108,29 @@ export default {
 				});
 			});
 		},
+		getUserFavouriteTabs(context, { id, page }) {
+			const limit = context.state.userFavourites.perPage;
+			const offset = page * limit;
+
+			return UserFavouriteHttpService.getUserFavourites(id, limit, offset).then((res) => {
+				context.commit('setUserFavourites', res.data.results);
+				context.commit('setUserFavouritesTotal', res.data.total);
+				context.commit('setUserFavouritesPage', page);
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `get user favourites failed - ${error}`
+				});
+			});
+		},
+		deleteFavouriteTab(context, tabId) {
+			return UserFavouriteHttpService.deleteFavouriteTab(tabId).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `remove user favourite failed - ${error}`
+				});
+			});
+		}
 	}
 };
