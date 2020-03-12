@@ -48,6 +48,7 @@
 	import age from '@/filters/age';
 	import limitTo from '@/filters/limitTo';
 	import emoticons from '@/filters/emoticons';
+	import lowercase from '@/filters/lowercase';
 	import FormButton from '@/components/forms/FormButton';
 	import FormInput from '@/components/forms/FormInput';
 	import FormFileInput from '@/components/forms/FormFileInput';
@@ -69,6 +70,7 @@
 	Vue.filter('age', age);
 	Vue.filter('limitTo', limitTo);
 	Vue.filter('emoticons', emoticons);
+	Vue.filter('lowercase', lowercase);
 	Vue.component('FormButton', FormButton);
 	Vue.component('FormInput', FormInput);
 	Vue.component('FormFileInput', FormFileInput);

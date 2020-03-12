@@ -15,33 +15,41 @@
 						<td>Песен</td>
 						<td>Тип</td>
 						<td>Рейтинг</td>
-						<td v-if="canEdit">Редактирай</td>
+						<td v-if="canEdit" class="text-center">
+							Редактирай
+						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="tab in userTabs" :key="tab.ID">
 						<td>
-							<!-- TODO: this needs to be a link -->
+							<!-- TODO: this needs to be a link with title="Всичко от band name" -->
 							{{ tab.band }}
 						</td>
 						<td>
-							<router-link :to="{name: 'tab', params: {id: tab.ID}}" class="red">
+							<router-link
+								:to="{name: 'tab', params: {id: tab.ID}}"
+								:title="`${tab.band} - ${tab.song}`"
+								class="red"
+							>
 								{{ tab.song }}
-								<!--
-									TODO: add the tab type here
-									<span ng-show="tab.tab_type !== 'full song'">({{tab.tab_type | tabContentType}})</span>
-								-->
+								<span v-show="tab.tab_type !== 'full song'">({{ tab.tab_type | labelsMap | lowercase }})</span>
 							</router-link>
 						</td>
 						<td>
-							{{ tab.type }}
-							<!-- TODO: this tab needs to be converted as well -->
+							{{ tab.type | labelsMap }}
 						</td>
 						<td>
-							{{ tab.rating }}
+							<TabRating :rating="tab.rating" />
 						</td>
-						<td v-if="canEdit">
-							edit
+						<td v-if="canEdit" class="text-center">
+							<router-link
+								:to="{name: 'edit-tab', params: {id: tab.ID}}"
+							>
+								<FormButton transparent title="Редактирай">
+									<i class="fas fa-pencil-alt"></i>
+								</FormButton>
+							</router-link>
 						</td>
 					</tr>
 				</tbody>
@@ -62,11 +70,13 @@
 
 	import ResultsTable from '@/components/ResultsTable';
 	import Pagination from '@/components/Pagination';
+	import TabRating from '@/components/TabRating';
 
 	export default {
 		components: {
 			ResultsTable,
-			Pagination
+			Pagination,
+			TabRating
 		},
 		props: {
 			userId: Number
@@ -117,7 +127,3 @@
 		}
 	};
 </script>
-
-<style scoped lang="scss">
-
-</style>
