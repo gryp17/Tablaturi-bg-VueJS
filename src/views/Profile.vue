@@ -76,10 +76,10 @@
 						<UserProfile :user="user" />
 					</div>
 					<div class="tab-pane fade" id="user-tabs" role="tabpanel" aria-labelledby="user-tabs-tab">
-						<UserTabs />
+						<UserTabs :user-id="user.ID"/>
 					</div>
 					<div class="tab-pane fade" id="favourite-tabs" role="tabpanel" aria-labelledby="favourite-tabs-tab">
-						<UserFavourites />
+						<UserFavourites :user-id="user.ID" />
 					</div>
 					<div class="tab-pane fade" id="user-search" role="tabpanel" aria-labelledby="user-search-tab">
 						<UserSearch />

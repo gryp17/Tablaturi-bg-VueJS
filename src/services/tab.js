@@ -32,5 +32,15 @@ export default {
 	 */
 	updateTab(formData) {
 		return API.post('Tab/updateTab', formData);
+	},
+	/**
+	 * Fetches the tabs by user
+	 * @param {Number} uploaderId
+	 * @param {Number} limit
+	 * @param {Number} offset
+	 * @returns {Promise}
+	 */
+	getTabsByUploader(uploaderId, limit, offset) {
+		return API.get(`/Tab/getTabsByUploader?uploader_id=${uploaderId}&limit=${limit}&offset=${offset}`);
 	}
 };
