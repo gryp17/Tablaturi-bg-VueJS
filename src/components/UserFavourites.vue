@@ -22,8 +22,20 @@
 				<tbody>
 					<tr v-for="tab in userFavourites" :key="tab.ID">
 						<td>
-							<!-- TODO: this needs to be a link with title="Всичко от band name" -->
-							{{ tab.band }}
+							<router-link
+								:to="{
+									name: 'search',
+									params: {
+										type: 'all',
+										band: tab.band,
+										song: '*'
+									}
+								}"
+								:title="`Всичко от ${tab.band}`"
+								class="red"
+							>
+								{{ tab.band }}
+							</router-link>
 						</td>
 						<td>
 							<router-link
