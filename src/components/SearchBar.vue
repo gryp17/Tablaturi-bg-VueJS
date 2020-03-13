@@ -60,6 +60,11 @@
 				return options;
 			}
 		},
+		watch: {
+			$route() {
+				this.parseUrlParams();
+			}
+		},
 		created() {
 			this.parseUrlParams();
 		},
@@ -85,9 +90,19 @@
 			 * Parses the URL for the search params
 			 */
 			parseUrlParams() {
-				this.type = this.$route.params.type;
-				this.band = this.$route.params.band !== '*' ? this.$route.params.band : '';
-				this.song = this.$route.params.song !== '*' ? this.$route.params.song : '';
+				if (this.$route.name === 'search') {
+					this.type = this.$route.params.type;
+					this.band = this.$route.params.band !== '*' ? this.$route.params.band : '';
+					this.song = this.$route.params.song !== '*' ? this.$route.params.song : '';
+				} else {
+					this.resetState();
+				}
+			},
+			/**
+			 * Resets the data/state back to it's default/initial value
+			 */
+			resetState() {
+				Object.assign(this.$data, this.$options.data.call(this));
 			}
 		}
 	};

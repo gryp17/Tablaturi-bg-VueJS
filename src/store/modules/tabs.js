@@ -21,6 +21,12 @@ export default {
 			total: 0,
 			page: 0,
 			perPage: 10
+		},
+		search: {
+			tabs: [],
+			total: 0,
+			page: 0,
+			perPage: 20
 		}
 	},
 	mutations: {
@@ -47,6 +53,15 @@ export default {
 		},
 		setUserFavouritesPage(state, page) {
 			state.userFavourites.page = page;
+		},
+		setSearchTabs(state, tabs) {
+			state.search.tabs = tabs;
+		},
+		setSearchTotal(state, total) {
+			state.search.total = total;
+		},
+		setSearchPage(state, page) {
+			state.search.page = page;
 		}
 	},
 	actions: {
@@ -140,6 +155,21 @@ export default {
 					message: `autocomplete failed - ${error}`
 				});
 			});
-		}
+		},
+		search(context, { type, band, song, page }) {
+			const limit = context.state.search.perPage;
+			const offset = page * limit;
+
+			return TabHttpService.search(type, band, song, limit, offset).then((res) => {
+				context.commit('setSearchTabs', res.data.results);
+				context.commit('setSearchTotal', res.data.total);
+				context.commit('setSearchPage', page);
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `search failed - ${error}`
+				});
+			});
+		},
 	}
 };

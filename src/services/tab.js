@@ -52,5 +52,16 @@ export default {
 	 */
 	autocomplete(type, term, band) {
 		return API.get(`/Tab/autocomplete?type=${type}&term=${term}&band=${band}`);
+	},
+	/**
+	 * Returns all tabs that match the passed search params
+	 * @param {String} type
+	 * @param {String} band
+	 * @param {String} song
+	 * @param {Number} limit
+	 * @param {Number} offset
+	 */
+	search(type, band, song, limit, offset) {
+		return API.get(`/Tab/search?type=${type}&band=${band}&song=${song}&limit=${limit}&offset=${offset}`);
 	}
 };
