@@ -56,6 +56,7 @@
 	import FormDatepicker from '@/components/forms/FormDatepicker';
 	import FormCaptcha from '@/components/forms/FormCaptcha';
 	import FormRadioGroup from '@/components/forms/FormRadioGroup';
+	import FormAutocompleteInput from '@/components/forms/FormAutocompleteInput';
 	import Header from '@/components/header/Header';
 	import SearchBar from '@/components/SearchBar';
 	import Footer from '@/components/Footer';
@@ -78,6 +79,7 @@
 	Vue.component('FormDatepicker', FormDatepicker);
 	Vue.component('FormCaptcha', FormCaptcha);
 	Vue.component('FormRadioGroup', FormRadioGroup);
+	Vue.component('FormAutocompleteInput', FormAutocompleteInput);
 	Vue.component('LoadingIndicator', LoadingIndicator);
 	Vue.component('StatusMessage', StatusMessage);
 	Vue.component('PageTitle', PageTitle);

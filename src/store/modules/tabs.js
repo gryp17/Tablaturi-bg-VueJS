@@ -131,6 +131,15 @@ export default {
 					message: `remove user favourite failed - ${error}`
 				});
 			});
+		},
+		autocomplete(context, { type, term, band }) {
+			return TabHttpService.autocomplete(type, term, band).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `autocomplete failed - ${error}`
+				});
+			});
 		}
 	}
 };

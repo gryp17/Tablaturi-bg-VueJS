@@ -42,5 +42,15 @@ export default {
 	 */
 	getTabsByUploader(uploaderId, limit, offset) {
 		return API.get(`/Tab/getTabsByUploader?uploader_id=${uploaderId}&limit=${limit}&offset=${offset}`);
+	},
+	/**
+	 * Fetches the song/band autocomplete suggestions
+	 * @param {String} type
+	 * @param {String} term
+	 * @param {String} band
+	 * @returns {Promise}
+	 */
+	autocomplete(type, term, band) {
+		return API.get(`/Tab/autocomplete?type=${type}&term=${term}&band=${band}`);
 	}
 };

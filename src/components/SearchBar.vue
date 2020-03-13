@@ -1,21 +1,24 @@
 <template>
 	<div class="search-bar">
 
-		<FormInput
+		<FormAutocompleteInput
 			v-model="band"
 			@keyup.enter="submit"
 			type="text"
 			name="band"
 			placeholder="Група"
-		></FormInput>
+			field="band"
+		/>
 
-		<FormInput
+		<FormAutocompleteInput
 			v-model="song"
+			:band="band"
 			@keyup.enter="submit"
 			type="text"
 			name="song"
 			placeholder="Песен"
-		></FormInput>
+			field="song"
+		/>
 
 		<FormDropdown
 			v-model="type"
