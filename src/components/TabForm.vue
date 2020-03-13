@@ -12,7 +12,7 @@
 					label="Вид таблатура:"
 				/>
 
-				<FormInput
+				<FormAutocompleteInput
 					v-model="band"
 					:error="errors.band"
 					@keyup.enter="submit"
@@ -21,10 +21,12 @@
 					name="band"
 					floating-label
 					placeholder="Група"
-				></FormInput>
+					field="band"
+				/>
 
-				<FormInput
+				<FormAutocompleteInput
 					v-model="song"
+					:band="band"
 					:error="errors.song"
 					@keyup.enter="submit"
 					@focus="clearError"
@@ -32,7 +34,8 @@
 					name="song"
 					floating-label
 					placeholder="Песен"
-				></FormInput>
+					field="song"
+				/>
 
 				<FormDropdown
 					v-model="tunning"
