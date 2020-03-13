@@ -3,7 +3,7 @@
 
 		<FormInput
 			v-model="band"
-			@keyup.enter="search()"
+			@keyup.enter="submit"
 			type="text"
 			name="band"
 			placeholder="Група"
@@ -11,7 +11,7 @@
 
 		<FormInput
 			v-model="song"
-			@keyup.enter="search()"
+			@keyup.enter="submit"
 			type="text"
 			name="song"
 			placeholder="Песен"
@@ -23,7 +23,7 @@
 			name="type"
 		/>
 
-		<FormButton @click="search()">
+		<FormButton @click="submit">
 			Търси
 		</FormButton>
 
@@ -34,7 +34,6 @@
 	import { mapState } from 'vuex';
 
 	export default {
-		//TODO: add autocomplete for the band and song fields
 		data() {
 			return {
 				band: '',
@@ -58,9 +57,34 @@
 				return options;
 			}
 		},
+		created() {
+			this.parseUrlParams();
+		},
 		methods: {
-			search() {
+			/**
+			 * Submits the search params
+			 */
+			submit() {
+				if (!this.band && !this.song) {
+					return;
+				}
 
+				this.$router.push({
+					name: 'search',
+					params: {
+						type: this.type,
+						band: this.band || '*',
+						song: this.song || '*'
+					}
+				}).catch(() => {});
+			},
+			/**
+			 * Parses the URL for the search params
+			 */
+			parseUrlParams() {
+				this.type = this.$route.params.type;
+				this.band = this.$route.params.band !== '*' ? this.$route.params.band : '';
+				this.song = this.$route.params.song !== '*' ? this.$route.params.song : '';
 			}
 		}
 	};

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home';
+import Search from '@/views/Search';
 import Articles from '@/views/Articles';
 import NotFound from '@/views/NotFound';
 import Forbidden from '@/views/Forbidden';
@@ -22,6 +23,11 @@ const routes = [
 		path: '/home',
 		name: 'explicit-home',
 		component: Home
+	},
+	{
+		path: '/search/:type/:band/:song',
+		name: 'search',
+		component: Search
 	},
 	{
 		path: '/articles',
