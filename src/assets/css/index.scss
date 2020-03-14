@@ -2,8 +2,9 @@
 @import '~bootstrap/scss/bootstrap';
 @import '_links.scss';
 
-body{
+body {
 	background: $background;
+	background-size: cover;
 	color: $text-color;
 	font-family: $font-family;
 	font-size: $font-size;
