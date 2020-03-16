@@ -13,6 +13,10 @@
 			}
 		}
 
+		td {
+			vertical-align: middle;
+		}
+
 		a.red {
 			text-decoration: none;
 

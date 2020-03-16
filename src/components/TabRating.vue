@@ -19,11 +19,9 @@
 
 <style scoped lang="scss">
 	.tab-rating {
-		display: inline-block;
+		display: flex;
 
 		.star {
-			display: inline-block;
-			vertical-align: middle;
 			margin-bottom: 2px;
 			margin-right: 1px;
 			height: 15px;
