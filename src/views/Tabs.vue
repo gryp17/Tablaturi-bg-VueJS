@@ -2,151 +2,37 @@
 	<div class="tabs-page">
 		<LoadingIndicator v-if="!done" />
 		<div v-else class="tables-wrapper">
+			<TopTabsTable
+				:tabs="popular"
+				type="popular"
+			/>
 
-			<!-- popular -->
-			<div class="top-table">
-				<div class="header">
-					<img src="/img/top-icons/zoom.png" />
-					Най-търсени
-				</div>
-				<hr/>
-				<ResultsTable>
-					<thead>
-						<tr>
-							<td>Песен</td>
-							<td>Посещения</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="tab in popular" :key="tab.ID">
-							<td>
-								<router-link
-									:to="{name: 'tab', params: {id: tab.ID}}"
-									:title="`${tab.band} - ${tab.song}`"
-									class="red"
-								>
-									{{tab.band}} - {{ tab.song }}
-								</router-link>
-							</td>
-							<td>
-								{{ tab.downloads }}
-							</td>
-						</tr>
-					</tbody>
-				</ResultsTable>
-			</div>
+			<TopTabsTable
+				:tabs="liked"
+				type="liked"
+			/>
 
-			<!-- liked -->
-			<div class="top-table">
-				<div class="header">
-					<img src="/img/top-icons/thumbs-up.png" />
-					Най-харесвани
-				</div>
-				<hr/>
-				<ResultsTable>
-					<thead>
-						<tr>
-							<td>Песен</td>
-							<td>Рейтинг</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="tab in liked" :key="tab.ID">
-							<td>
-								<router-link
-									:to="{name: 'tab', params: {id: tab.ID}}"
-									:title="`${tab.band} - ${tab.song}`"
-									class="red"
-								>
-									{{tab.band}} - {{ tab.song }}
-								</router-link>
-							</td>
-							<td>
-								<TabRating :rating="tab.rating" />
-							</td>
-						</tr>
-					</tbody>
-				</ResultsTable>
-			</div>
+			<TopTabsTable
+				:tabs="latest"
+				type="latest"
+			/>
 
-			<!-- latest -->
-			<div class="top-table">
-				<div class="header">
-					<img src="/img/top-icons/calendar.png" />
-					Най-нови
-				</div>
-				<hr/>
-				<ResultsTable>
-					<thead>
-						<tr>
-							<td>Песен</td>
-							<td>Дата</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="tab in latest" :key="tab.ID">
-							<td>
-								<router-link
-									:to="{name: 'tab', params: {id: tab.ID}}"
-									:title="`${tab.band} - ${tab.song}`"
-									class="red"
-								>
-									{{tab.band}} - {{ tab.song }}
-								</router-link>
-							</td>
-							<td>
-								{{ tab.upload_date | date }}
-							</td>
-						</tr>
-					</tbody>
-				</ResultsTable>
-			</div>
+			<TopTabsTable
+				:tabs="commented"
+				type="commented"
+			/>
 
-			<!-- commented -->
-			<div class="top-table">
-				<div class="header">
-					<img src="/img/top-icons/comment.png" />
-					Най-коментирани
-				</div>
-				<hr/>
-				<ResultsTable>
-					<thead>
-						<tr>
-							<td>Песен</td>
-							<td>Коментари</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="tab in commented" :key="tab.ID">
-							<td>
-								<router-link
-									:to="{name: 'tab', params: {id: tab.ID}}"
-									:title="`${tab.band} - ${tab.song}`"
-									class="red"
-								>
-									{{tab.band}} - {{ tab.song }}
-								</router-link>
-							</td>
-							<td>
-								{{ tab.comments }}
-							</td>
-						</tr>
-					</tbody>
-				</ResultsTable>
-			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 	import { mapState, mapActions } from 'vuex';
-	import ResultsTable from '@/components/ResultsTable';
-	import TabRating from '@/components/TabRating';
+	import TopTabsTable from '@/components/TopTabsTable';
 
 	export default {
 		components: {
-			ResultsTable,
-			TabRating
+			TopTabsTable
 		},
 		data() {
 			return {
@@ -186,55 +72,9 @@
 			flex-wrap: wrap;
 			justify-content: space-between;
 
-			.top-table {
+			.top-tabs-table {
 				margin: 10px;
 				width: 47%;
-				border: 1px solid $gray;
-
-				.header {
-					position: relative;
-					min-height: 70px;
-					line-height: 70px;
-					font-size: 18px;
-					text-align: center;
-
-					img {
-						position: absolute;
-						left: 0;
-						width: 70px;
-					}
-				}
-
-				hr {
-					width: 90%;
-					margin: auto;
-					margin-top: 5px;
-				}
-
-				table {
-					margin-bottom: 0px;
-
-					thead {
-						td {
-							font-weight: 600;
-						}
-					}
-
-					td {
-						color: $text-color;
-						padding-top: 0;
-						padding-bottom: 0;
-						height: 65px;
-
-						&:first-child {
-							width: 100%;
-						}
-
-						&:last-child {
-							text-align: center;
-						}
-					}
-				}
 			}
 		}
 	}
