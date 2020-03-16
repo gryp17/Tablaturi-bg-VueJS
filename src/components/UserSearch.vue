@@ -152,7 +152,7 @@
 	};
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	.user-search {
 		.form-wrapper {
 			display: flex;

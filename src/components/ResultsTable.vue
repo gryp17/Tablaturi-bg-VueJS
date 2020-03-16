@@ -12,5 +12,13 @@
 				font-weight: 600;
 			}
 		}
+
+		a.red {
+			text-decoration: none;
+
+			&:hover, &:focus, &:active:focus {
+				text-decoration: underline;
+			}
+		}
 	}
 </style>

@@ -158,7 +158,7 @@
 	};
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	.search-page {
 		.has-results {
 			margin-top: 15px;
