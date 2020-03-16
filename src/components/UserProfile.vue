@@ -125,7 +125,6 @@
 </template>
 
 <script>
-	import moment from 'moment';
 	import { mapState, mapActions } from 'vuex';
 
 	import GenderIcon from '@/components/GenderIcon';
@@ -158,13 +157,13 @@
 				return this.user.gender === 'M' ? 'Регистриран на:' : 'Регистриранa на:';
 			},
 			registeredDate() {
-				return moment(this.user.register_date).format('YYYY-MM-DD в HH:mm');
+				return this.$options.filters.date(this.user.register_date, 'YYYY-MM-DD в HH:mm');
 			},
 			lastActiveText() {
 				return this.user.gender === 'M' ? 'Последно активен на:' : 'Последно активна на:';
 			},
 			lastActiveDate() {
-				return moment(this.user.last_active_date).format('YYYY-MM-DD в HH:mm');
+				return this.$options.filters.date(this.user.last_active_date, 'YYYY-MM-DD в HH:mm');
 			},
 			isAdmin() {
 				return this.user.type === 'admin';

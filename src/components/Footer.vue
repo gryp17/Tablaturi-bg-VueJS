@@ -11,12 +11,10 @@
 </template>
 
 <script>
-	import moment from 'moment';
-
 	export default {
 		computed: {
 			currentYear() {
-				return moment().format('YYYY');
+				return this.$options.filters.date(new Date(), 'YYYY');
 			}
 		}
 	};

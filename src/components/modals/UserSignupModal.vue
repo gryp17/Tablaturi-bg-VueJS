@@ -97,7 +97,6 @@
 </template>
 
 <script>
-	import moment from 'moment';
 	import { mapState, mapActions } from 'vuex';
 	import BaseModal from '@/components/modals/BaseModal';
 
@@ -168,7 +167,7 @@
 					email: this.email,
 					password: this.password,
 					repeatPassword: this.repeatPassword,
-					birthday: moment(this.birthday).format('YYYY-MM-DD'),
+					birthday: this.$options.filters.date(this.birthday, 'YYYY-MM-DD'),
 					gender: this.gender,
 					captcha: this.captcha
 				};

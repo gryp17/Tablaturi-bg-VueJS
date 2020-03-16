@@ -56,7 +56,6 @@
 </template>
 
 <script>
-	import moment from 'moment';
 	import { mapState, mapGetters, mapActions } from 'vuex';
 
 	import ShareWidget from '@/components/ShareWidget';
@@ -84,7 +83,7 @@
 				'CDN_URL'
 			]),
 			date() {
-				return moment(this.article.date).format('YYYY-MM-DD в HH:mm:ss');
+				return this.$options.filters.date(this.article.date, 'YYYY-MM-DD в HH:mm:ss');
 			},
 			authorLink() {
 				return {

@@ -57,7 +57,6 @@
 </template>
 
 <script>
-	import moment from 'moment';
 	import { mapState, mapActions } from 'vuex';
 	import UploadImagePreview from '@/components/UploadImagePreview';
 
@@ -139,7 +138,7 @@
 						let value = this[field];
 
 						if (field === 'date') {
-							value = moment(value).format('YYYY-MM-DD HH:mm:ss');
+							value = this.$options.filters.date(value, 'YYYY-MM-DD HH:mm:ss');
 						}
 
 						formData.append(field, value);

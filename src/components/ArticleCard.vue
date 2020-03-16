@@ -25,7 +25,6 @@
 </template>
 
 <script>
-	import moment from 'moment';
 	import { mapState } from 'vuex';
 
 	export default {
@@ -53,7 +52,7 @@
 				};
 			},
 			date() {
-				return moment(this.data.date).format('YYYY-MM-DD HH:mm');
+				return this.$options.filters.date(this.data.date, 'YYYY-MM-DD HH:mm');
 			},
 			content() {
 				const sanitizedContent = this.data.content.replace(/<[^>]+>/gm, '');
