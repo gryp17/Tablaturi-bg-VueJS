@@ -9,6 +9,12 @@ export default {
 			text: 0,
 			gp: 0
 		},
+		most: {
+			popular: [],
+			liked: [],
+			latest: [],
+			commented: []
+		},
 		tab: null,
 		userTabs: {
 			tabs: [],
@@ -62,6 +68,9 @@ export default {
 		},
 		setSearchPage(state, page) {
 			state.search.page = page;
+		},
+		setMost(state, { type, tabs }) {
+			state.most[type] = tabs;
 		}
 	},
 	actions: {
@@ -171,5 +180,20 @@ export default {
 				});
 			});
 		},
+		getMost(context, type) {
+			const limit = 5;
+
+			return TabHttpService.getMost(type, limit).then((res) => {
+				context.commit('setMost', {
+					type,
+					tabs: res.data
+				});
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `get most tabs failed - ${error}`
+				});
+			});
+		}
 	}
 };

@@ -63,5 +63,13 @@ export default {
 	 */
 	search(type, band, song, limit, offset) {
 		return API.get(`/Tab/search?type=${type}&band=${band}&song=${song}&limit=${limit}&offset=${offset}`);
+	},
+	/**
+	 * Returns the most popular/liked/latest/commented tabs
+	 * @param {String} type
+	 * @param {Number} limit
+	 */
+	getMost(type, limit) {
+		return API.get(`/Tab/getMost?type=${type}&limit=${limit}`);
 	}
 };
