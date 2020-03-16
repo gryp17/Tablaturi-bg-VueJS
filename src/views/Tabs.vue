@@ -51,7 +51,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="tab in popular" :key="tab.ID">
+						<tr v-for="tab in liked" :key="tab.ID">
 							<td>
 								<router-link
 									:to="{name: 'tab', params: {id: tab.ID}}"
@@ -69,6 +69,7 @@
 				</ResultsTable>
 			</div>
 
+			<!-- latest -->
 			<div class="top-table">
 				<div class="header">
 					<img src="/img/top-icons/calendar.png" />
@@ -76,10 +77,32 @@
 				</div>
 				<hr/>
 				<ResultsTable>
-
+					<thead>
+						<tr>
+							<td>Песен</td>
+							<td>Дата</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="tab in latest" :key="tab.ID">
+							<td>
+								<router-link
+									:to="{name: 'tab', params: {id: tab.ID}}"
+									:title="`${tab.band} - ${tab.song}`"
+									class="red"
+								>
+									{{tab.band}} - {{ tab.song }}
+								</router-link>
+							</td>
+							<td>
+								{{ tab.upload_date | date }}
+							</td>
+						</tr>
+					</tbody>
 				</ResultsTable>
 			</div>
 
+			<!-- commented -->
 			<div class="top-table">
 				<div class="header">
 					<img src="/img/top-icons/comment.png" />
@@ -87,7 +110,28 @@
 				</div>
 				<hr/>
 				<ResultsTable>
-
+					<thead>
+						<tr>
+							<td>Песен</td>
+							<td>Коментари</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="tab in commented" :key="tab.ID">
+							<td>
+								<router-link
+									:to="{name: 'tab', params: {id: tab.ID}}"
+									:title="`${tab.band} - ${tab.song}`"
+									class="red"
+								>
+									{{tab.band}} - {{ tab.song }}
+								</router-link>
+							</td>
+							<td>
+								{{ tab.comments }}
+							</td>
+						</tr>
+					</tbody>
 				</ResultsTable>
 			</div>
 		</div>
@@ -178,6 +222,9 @@
 
 					td {
 						color: $text-color;
+						padding-top: 0;
+						padding-bottom: 0;
+						height: 65px;
 
 						&:first-child {
 							width: 100%;
