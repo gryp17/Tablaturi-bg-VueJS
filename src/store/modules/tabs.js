@@ -5,6 +5,7 @@ import UserFavouriteHttpService from '@/services/user-favourite';
 export default {
 	namespaced: true,
 	state: {
+		tab: null,
 		totalTabs: {
 			text: 0,
 			gp: 0
@@ -15,7 +16,6 @@ export default {
 			latest: [],
 			commented: []
 		},
-		tab: null,
 		userTabs: {
 			tabs: [],
 			total: 0,
