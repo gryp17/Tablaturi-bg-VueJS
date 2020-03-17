@@ -50,7 +50,10 @@
 
 				</div>
 				<div class="right-wrapper">
-					right
+					<div class="views">
+						{{ tab.downloads }}
+						преглеждания
+					</div>
 				</div>
 			</div>
 
@@ -229,6 +232,8 @@
 
 			.right-wrapper {
 				flex: 1;
+				display: flex;
+				flex-direction: row-reverse;
 			}
 
 			.title {
