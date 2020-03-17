@@ -66,9 +66,26 @@
 					<div v-if="showTabActions">
 						<!-- add to favourites button -->
 						<FavouriteTabButton
+							v-if="isLoggedIn"
 							@change="toggleFavouriteTab"
 							:favourite="tabIsFavourite"
 						/>
+
+						<PopoverButton
+							v-else
+							trigger="focus"
+							placement="top"
+						>
+							<template v-slot:button>
+								<FavouriteTabButton disabled />
+							</template>
+							<template v-slot:content>
+								<a @click.prevent="showSignupModal()" href="#" class="red">Регистрирай се</a>
+								или
+								<a @click.prevent="showLoginModal()" href="#" class="red">влез</a>, за да добавиш таблатурата в любими.
+							</template>
+						</PopoverButton>
+
 						<!--
 						<button ng-if="favouriteTabs.indexOf(tab.ID) === -1" id="add-to-favourites-button" class="btn btn-red outline" ng-click="addToFavourites(tab.ID)">
 							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Добави в любими
@@ -154,6 +171,7 @@
 	import { mapState, mapGetters, mapActions } from 'vuex';
 
 	import FavouriteTabButton from '@/components/FavouriteTabButton';
+	import PopoverButton from '@/components/PopoverButton';
 	import RedLine from '@/components/RedLine';
 	import ShareWidget from '@/components/ShareWidget';
 	import CommentsWidget from '@/components/comments/CommentsWidget';
@@ -161,6 +179,7 @@
 	export default {
 		components: {
 			FavouriteTabButton,
+			PopoverButton,
 			RedLine,
 			ShareWidget,
 			CommentsWidget
@@ -237,6 +256,10 @@
 			this.getTabData();
 		},
 		methods: {
+			...mapActions('modals', [
+				'showLoginModal',
+				'showSignupModal'
+			]),
 			...mapActions('tabs', [
 				'getTab',
 				'isFavouriteTab',

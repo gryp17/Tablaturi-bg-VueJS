@@ -15,7 +15,8 @@
 
 	export default {
 		props: {
-			favourite: Boolean
+			favourite: Boolean,
+			disabled: Boolean
 		},
 		computed: {
 			text() {
@@ -27,6 +28,10 @@
 			 * Emits the change event with the toggled favourite status
 			 */
 			toggleFavouriteStatus() {
+				if (this.disabled) {
+					return;
+				}
+
 				//manually remove focus from the button
 				$(this.$refs.button.$el).blur();
 				this.$emit('change', !this.favourite);
