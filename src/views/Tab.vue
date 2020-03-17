@@ -103,6 +103,11 @@
 			</div>
 
 			<ShareWidget />
+
+			<CommentsWidget
+				:object-id="tab.ID"
+				type="tab"
+			/>
 		</template>
 	</div>
 </template>
@@ -110,13 +115,16 @@
 <script>
 	//import $ from 'jquery';
 	import { mapState, mapActions } from 'vuex';
+
 	import RedLine from '@/components/RedLine';
 	import ShareWidget from '@/components/ShareWidget';
+	import CommentsWidget from '@/components/comments/CommentsWidget';
 
 	export default {
 		components: {
 			RedLine,
-			ShareWidget
+			ShareWidget,
+			CommentsWidget
 		},
 		data() {
 			return {

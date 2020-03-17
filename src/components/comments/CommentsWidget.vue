@@ -43,6 +43,10 @@
 					article: {
 						add: this.addArticleComment,
 						get: this.getArticleComments
+					},
+					tab: {
+						add: this.addTabComment,
+						get: this.getTabComments
 					}
 				};
 			},
@@ -52,7 +56,9 @@
 				'addUserComment',
 				'getUserComments',
 				'addArticleComment',
-				'getArticleComments'
+				'getArticleComments',
+				'addTabComment',
+				'getTabComments',
 			]),
 			/**
 			 * Fetches the comments for the passed page
