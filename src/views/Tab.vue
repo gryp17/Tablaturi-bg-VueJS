@@ -54,6 +54,41 @@
 						{{ tab.downloads }}
 						преглеждания
 					</div>
+
+					<!-- edit tab button -->
+					<router-link v-if="userSession.ID === tab.uploader_ID" :to="editTabLink" class="red edit-btn">
+						<FormButton>
+							<i class="fas fa-pencil-alt"></i>
+							Редактирай
+						</FormButton>
+					</router-link>
+
+					<div v-else>
+						<!-- add to favourites button -->
+						<FavouriteTabButton
+							@change="toggleFavouriteTab"
+							:favourite="tabIsFavourite"
+						/>
+						<!--
+						<button ng-if="favouriteTabs.indexOf(tab.ID) === -1" id="add-to-favourites-button" class="btn btn-red outline" ng-click="addToFavourites(tab.ID)">
+							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Добави в любими
+						</button>
+						-->
+
+						<!-- remove from favourites button -->
+						<!--
+						<button ng-if="favouriteTabs.indexOf(tab.ID) !== -1" class="btn btn-red" ng-click="removeFromFavourites(tab.ID)">
+							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Премахни от любими
+						</button>
+						-->
+
+						<!-- report tab button -->
+						<!--
+						<button class="btn btn-red outline" id="report-tab-button" ng-click="openReportTabModal()">
+							<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Докладвай
+						</button>
+						-->
+					</div>
 				</div>
 			</div>
 
@@ -116,15 +151,16 @@
 </template>
 
 <script>
-	//import $ from 'jquery';
 	import { mapState, mapActions } from 'vuex';
 
+	import FavouriteTabButton from '@/components/FavouriteTabButton';
 	import RedLine from '@/components/RedLine';
 	import ShareWidget from '@/components/ShareWidget';
 	import CommentsWidget from '@/components/comments/CommentsWidget';
 
 	export default {
 		components: {
+			FavouriteTabButton,
 			RedLine,
 			ShareWidget,
 			CommentsWidget
@@ -132,6 +168,7 @@
 		data() {
 			return {
 				loading: true,
+				tabIsFavourite: false,
 				fontSize: 13
 			};
 		},
@@ -139,6 +176,9 @@
 			...mapState([
 				'API_URL',
 				'CDN_URL'
+			]),
+			...mapState('auth', [
+				'userSession'
 			]),
 			...mapState('tabs', [
 				'tab'
@@ -166,6 +206,14 @@
 					}
 				};
 			},
+			editTabLink() {
+				return {
+					name: 'edit-tab',
+					params: {
+						id: this.tab.ID
+					}
+				};
+			},
 			modifiedDate() {
 				return this.$options.filters.date(this.tab.modified_date, 'YYYY-MM-DD в HH:mm');
 			},
@@ -181,16 +229,25 @@
 		},
 		methods: {
 			...mapActions('tabs', [
-				'getTab'
+				'getTab',
+				'isFavouriteTab',
+				'addFavouriteTab',
+				'deleteFavouriteTab'
 			]),
 			/**
 			 * Fetches the tab data
 			 */
 			getTabData() {
-				return this.getTab(this.$route.params.id).then((res) => {
-					const data = res.data;
+				const tabId = this.$route.params.id;
+
+				Promise.all([
+					this.getTab(tabId),
+					this.isFavouriteTab(tabId)
+				]).then((results) => {
+					const data = results[0].data;
 
 					if (data && data.ID) {
+						this.tabIsFavourite = results[1].data;
 						this.loading = false;
 					} else {
 						this.$router.push({ name: 'not-found' });
@@ -215,6 +272,19 @@
 			 */
 			downloadTxtFile() {
 				window.open(this.txtFileLink, '_blank');
+			},
+			/**
+			 * Toggles the tab favourite status
+			 * @param {Boolean} favourite
+			 */
+			toggleFavouriteTab(favourite) {
+				const action = favourite ? this.addFavouriteTab : this.deleteFavouriteTab;
+
+				action(this.tab.ID).then((res) => {
+					if (res.data && res.data.success) {
+						this.tabIsFavourite = favourite;
+					}
+				});
 			}
 		}
 	};
@@ -233,7 +303,8 @@
 			.right-wrapper {
 				flex: 1;
 				display: flex;
-				flex-direction: row-reverse;
+				flex-direction: column;
+				align-items: flex-end;
 			}
 
 			.title {
@@ -256,6 +327,10 @@
 					margin-right: 5px;
 					color: $red;
 				}
+			}
+
+			.edit-btn {
+				margin-top: 10px;
 			}
 		}
 

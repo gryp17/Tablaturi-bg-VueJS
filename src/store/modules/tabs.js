@@ -156,6 +156,24 @@ export default {
 				});
 			});
 		},
+		addFavouriteTab(context, tabId) {
+			return UserFavouriteHttpService.addFavouriteTab(tabId).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `add user favourite failed - ${error}`
+				});
+			});
+		},
+		isFavouriteTab(context, tabId) {
+			return UserFavouriteHttpService.isFavouriteTab(tabId).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `is favourite tab failed - ${error}`
+				});
+			});
+		},
 		autocomplete(context, { type, term, band }) {
 			return TabHttpService.autocomplete(type, term, band).then((res) => {
 				return res;
