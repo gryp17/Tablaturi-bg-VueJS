@@ -56,6 +56,36 @@
 
 			<RedLine />
 
+			<div class="tab-content">
+				<!-- guitar pro tab -->
+				<div v-if="tab.type === 'gp'">
+
+					<!-- TODO: implement this button!!! -->
+					<FormButton class="gp-file-btn">
+						<i class="fas fa-file-download"></i>
+						Свали Guitar Pro таблатурата
+					</FormButton>
+					<!--
+					<a class="btn btn-red download-button" href="API/Tab/getGpTabFile?tab_id={{tab.ID}}" target="_blank">
+						<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+						Свали Guitar Pro таблатурата
+					</a>
+					-->
+
+					<div class="hint">
+						Таблатурата е тип Guitar Pro. За повече информация за програмата кликнете
+						<router-link
+							:to="{
+								name: 'guitar-pro'
+							}"
+							class="red"
+						>
+							тук
+						</router-link>.
+					</div>
+				</div>
+			</div>
+
 			{{ tab }}
 		</template>
 	</div>
@@ -159,6 +189,25 @@
 					margin-right: 5px;
 					color: $red;
 				}
+			}
+		}
+
+		.tab-content {
+
+			.gp-file-btn {
+				display: block;
+				margin: 20px auto 0px auto;
+
+				.svg-inline--fa {
+					margin-right: 3px;
+					margin-bottom: 3px;
+				}
+			}
+
+			.hint {
+				margin-top: 20px;
+				font-style: italic;
+				text-align: center;
 			}
 		}
 	}

@@ -119,6 +119,10 @@
 				font-size: 18px;
 				padding: 0px 12px;
 			}
+
+			> svg {
+				margin: 0px;
+			}
 		}
 	}
 </style>
