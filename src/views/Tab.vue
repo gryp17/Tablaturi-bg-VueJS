@@ -77,33 +77,66 @@
 						</router-link>.
 					</div>
 				</div>
+				<!-- text tab -->
+				<template v-else>
+					<div class="tools">
+						<FormButton @click="zoom(1)" title="Уголеми шрифта">
+							<img src="/img/icons/zoom-in.png" />
+						</FormButton>
+						<FormButton @click="zoom(-1)" title="Намали шрифта">
+							<img src="/img/icons/zoom-out.png" />
+						</FormButton>
+					</div>
+
+					<pre :style="preStyle" ref="pre">{{ tab.content }}</pre>
+
+					<FormButton @click="downloadTxtFile" class="txt-file-btn">
+						<i class="fas fa-file-download"></i>
+						Свали като .txt
+					</FormButton>
+
+					<div class="hint">
+						Ако имате проблем с четенето на таблатурата, кликнете
+						<a class="red" :href="`${CDN_URL}/downloads/tabs.pdf`">тук</a> за да разгледате уроците за начинаещи.
+					</div>
+				</template>
 			</div>
 
-			{{ tab }}
+			<ShareWidget />
 		</template>
 	</div>
 </template>
 
 <script>
+	//import $ from 'jquery';
 	import { mapState, mapActions } from 'vuex';
 	import RedLine from '@/components/RedLine';
+	import ShareWidget from '@/components/ShareWidget';
 
 	export default {
 		components: {
-			RedLine
+			RedLine,
+			ShareWidget
 		},
 		data() {
 			return {
-				loading: true
+				loading: true,
+				fontSize: 13
 			};
 		},
 		computed: {
 			...mapState([
-				'API_URL'
+				'API_URL',
+				'CDN_URL'
 			]),
 			...mapState('tabs', [
 				'tab'
 			]),
+			preStyle() {
+				return {
+					'font-size': `${this.fontSize}px`
+				};
+			},
 			tabLink() {
 				return {
 					name: 'search',
@@ -127,6 +160,9 @@
 			},
 			gpFileLink() {
 				return `${this.API_URL}/Tab/getGpTabFile?tab_id=${this.tab.ID}`;
+			},
+			txtFileLink() {
+				return `${this.API_URL}/Tab/getTextTabFile?tab_id=${this.tab.ID}`;
 			}
 		},
 		created() {
@@ -151,10 +187,23 @@
 				});
 			},
 			/**
+			 * Increases/decreases the pre font size
+			 * @param {Number} amount
+			 */
+			zoom(amount) {
+				this.fontSize = this.fontSize + amount;
+			},
+			/**
 			 * Downloads the guitar pro file in a new tab
 			 */
 			downloadGpFile() {
 				window.open(this.gpFileLink, '_blank');
+			},
+			/**
+			 * Downloads the text tab in a txt file in a new tab
+			 */
+			downloadTxtFile() {
+				window.open(this.txtFileLink, '_blank');
 			}
 		}
 	};
@@ -199,14 +248,36 @@
 
 		.tab-content {
 
-			.gp-file-btn {
+			.gp-file-btn, .txt-file-btn {
 				display: block;
 				margin: 20px auto 0px auto;
+			}
 
-				.svg-inline--fa {
-					margin-right: 3px;
-					margin-bottom: 3px;
+			.tools {
+				margin-top: 10px;
+
+				.form-button {
+					padding: 1px;
+					margin-right: 5px;
+
+					img {
+						width: 35px;
+					}
 				}
+			}
+
+			pre {
+				display: block;
+				margin-top: 15px;
+				padding: 10px;
+				border-radius: 0px;
+				white-space: pre-wrap;
+				word-wrap: break-word;
+				word-break: break-all;
+				background-color: $gray-light;
+				color: darken($text-color, 15%);
+				border: 1px solid $gray;
+				font-size: 13px;
 			}
 
 			.hint {
