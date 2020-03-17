@@ -3,6 +3,7 @@
 		@click="toggleFavouriteStatus"
 		:outline="!favourite"
 		class="favourite-tab-button"
+		ref="button"
 	>
 		<i class="fas fa-heart"></i>
 		{{ text }}
@@ -10,6 +11,8 @@
 </template>
 
 <script>
+	import $ from 'jquery';
+
 	export default {
 		props: {
 			favourite: Boolean
@@ -24,6 +27,8 @@
 			 * Emits the change event with the toggled favourite status
 			 */
 			toggleFavouriteStatus() {
+				//manually remove focus from the button
+				$(this.$refs.button.$el).blur();
 				this.$emit('change', !this.favourite);
 			}
 		}
