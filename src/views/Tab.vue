@@ -56,14 +56,14 @@
 					</div>
 
 					<!-- edit tab button -->
-					<router-link v-if="userSession.ID === tab.uploader_ID" :to="editTabLink" class="red edit-btn">
+					<router-link v-if="canEdit" :to="editTabLink" class="red edit-btn">
 						<FormButton>
 							<i class="fas fa-pencil-alt"></i>
 							Редактирай
 						</FormButton>
 					</router-link>
 
-					<div v-else>
+					<div v-if="showTabActions">
 						<!-- add to favourites button -->
 						<FavouriteTabButton
 							@change="toggleFavouriteTab"
@@ -151,7 +151,7 @@
 </template>
 
 <script>
-	import { mapState, mapActions } from 'vuex';
+	import { mapState, mapGetters, mapActions } from 'vuex';
 
 	import FavouriteTabButton from '@/components/FavouriteTabButton';
 	import RedLine from '@/components/RedLine';
@@ -177,12 +177,21 @@
 				'API_URL',
 				'CDN_URL'
 			]),
+			...mapGetters('auth', [
+				'isLoggedIn'
+			]),
 			...mapState('auth', [
 				'userSession'
 			]),
 			...mapState('tabs', [
 				'tab'
 			]),
+			canEdit() {
+				return this.isLoggedIn && this.userSession.ID === this.tab.uploader_ID;
+			},
+			showTabActions() {
+				return !this.isLoggedIn || (this.userSession.ID !== this.tab.uploader_ID);
+			},
 			preStyle() {
 				return {
 					'font-size': `${this.fontSize}px`
@@ -240,15 +249,18 @@
 			getTabData() {
 				const tabId = this.$route.params.id;
 
-				Promise.all([
-					this.getTab(tabId),
-					this.isFavouriteTab(tabId)
-				]).then((results) => {
-					const data = results[0].data;
+				this.getTab(tabId).then((res) => {
+					const data = res.data;
 
 					if (data && data.ID) {
-						this.tabIsFavourite = results[1].data;
-						this.loading = false;
+						if (this.isLoggedIn) {
+							this.isFavouriteTab(tabId).then((favouriteRes) => {
+								this.tabIsFavourite = favouriteRes ? favouriteRes.data : false;
+								this.loading = false;
+							});
+						} else {
+							this.loading = false;
+						}
 					} else {
 						this.$router.push({ name: 'not-found' });
 					}
