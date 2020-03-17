@@ -60,17 +60,10 @@
 				<!-- guitar pro tab -->
 				<div v-if="tab.type === 'gp'">
 
-					<!-- TODO: implement this button!!! -->
-					<FormButton class="gp-file-btn">
+					<FormButton @click="downloadGpFile" class="gp-file-btn">
 						<i class="fas fa-file-download"></i>
 						Свали Guitar Pro таблатурата
 					</FormButton>
-					<!--
-					<a class="btn btn-red download-button" href="API/Tab/getGpTabFile?tab_id={{tab.ID}}" target="_blank">
-						<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-						Свали Guitar Pro таблатурата
-					</a>
-					-->
 
 					<div class="hint">
 						Таблатурата е тип Guitar Pro. За повече информация за програмата кликнете
@@ -105,6 +98,9 @@
 			};
 		},
 		computed: {
+			...mapState([
+				'API_URL'
+			]),
 			...mapState('tabs', [
 				'tab'
 			]),
@@ -128,6 +124,9 @@
 			},
 			modifiedDate() {
 				return this.$options.filters.date(this.tab.modified_date, 'YYYY-MM-DD в HH:mm');
+			},
+			gpFileLink() {
+				return `${this.API_URL}/Tab/getGpTabFile?tab_id=${this.tab.ID}`;
 			}
 		},
 		created() {
@@ -150,6 +149,12 @@
 						this.$router.push({ name: 'not-found' });
 					}
 				});
+			},
+			/**
+			 * Downloads the guitar pro file in a new tab
+			 */
+			downloadGpFile() {
+				window.open(this.gpFileLink, '_blank');
 			}
 		}
 	};
