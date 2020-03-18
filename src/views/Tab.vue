@@ -94,6 +94,14 @@
 								<a @click.prevent="showLoginModal()" href="#" class="red">влез</a>, за да докладваш таблатурата.
 							</template>
 						</PopoverWrapper>
+
+						<!-- rate tab -->
+						<TabRating
+							:rating="tab.rating"
+							editable
+							label="Оцени"
+							@rate="onRateTab"
+						/>
 					</div>
 				</div>
 			</div>
@@ -168,6 +176,7 @@
 	import ShareWidget from '@/components/ShareWidget';
 	import CommentsWidget from '@/components/comments/CommentsWidget';
 	import ReportTabModal from '@/components/modals/ReportTabModal';
+	import TabRating from '@/components/TabRating';
 
 	export default {
 		components: {
@@ -177,7 +186,8 @@
 			RedLine,
 			ShareWidget,
 			CommentsWidget,
-			ReportTabModal
+			ReportTabModal,
+			TabRating
 		},
 		data() {
 			return {
@@ -316,6 +326,13 @@
 						this.tabIsFavourite = favourite;
 					}
 				});
+			},
+			/**
+			 * Rates the tab
+			 * @param {Number} rating
+			 */
+			onRateTab(rating) {
+				console.log(rating);
 			}
 		}
 	};
