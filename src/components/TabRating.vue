@@ -1,5 +1,5 @@
 <template>
-	<div class="tab-rating" :title="ratingLabel">
+	<div :class="['tab-rating', {editable}]" :title="ratingLabel">
 		<label v-if="label">
 			{{ label }}
 		</label>
@@ -25,6 +25,7 @@
 		props: {
 			rating: Number,
 			editable: Boolean,
+			disabled: Boolean,
 			label: String
 		},
 		data() {
@@ -82,7 +83,7 @@
 			 * @param {Number} index
 			 */
 			selectStar(index) {
-				if (!this.editable) {
+				if (!this.editable || this.disabled) {
 					return;
 				}
 
@@ -102,7 +103,8 @@
 
 		.stars-wrapper {
 			display: flex;
-			justify-content: center;;
+			justify-content: center;
+			padding: 0px 5px;
 
 			.star {
 				margin-bottom: 2px;
@@ -120,6 +122,12 @@
 
 		.rating-label {
 			text-align: center;
+		}
+
+		&.editable {
+			.star {
+				cursor: pointer;
+			}
 		}
 	}
 </style>

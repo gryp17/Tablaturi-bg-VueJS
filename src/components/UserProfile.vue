@@ -228,6 +228,10 @@
 						padding: 10px;
 					}
 				}
+
+				.popover-button {
+					display: inline-block;
+				}
 			}
 		}
 

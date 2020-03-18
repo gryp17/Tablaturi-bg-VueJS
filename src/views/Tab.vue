@@ -96,12 +96,27 @@
 						</PopoverWrapper>
 
 						<!-- rate tab -->
-						<TabRating
-							:rating="tab.rating"
-							editable
-							label="Оцени"
-							@rate="onRateTab"
-						/>
+						<PopoverWrapper :disabled="!isLoggedIn || rated">
+							<template v-slot:button>
+								<TabRating
+									:rating="tab.rating"
+									:disabled="!isLoggedIn"
+									:editable="ratingEditable"
+									label="Оцени"
+									@rate="onRateTab"
+								/>
+							</template>
+							<template v-slot:content>
+								<template v-if="!rated">
+									<a @click.prevent="showSignupModal()" href="#" class="red">Регистрирай се</a>
+									или
+									<a @click.prevent="showLoginModal()" href="#" class="red">влез</a>, за да оцениш таблатурата.
+								</template>
+								<template v-else>
+									Вече си оценил таблатурата.
+								</template>
+							</template>
+						</PopoverWrapper>
 					</div>
 				</div>
 			</div>
@@ -193,7 +208,9 @@
 			return {
 				loading: true,
 				tabIsFavourite: false,
-				fontSize: 13
+				fontSize: 13,
+				rated: false,
+				ratingEditable: true
 			};
 		},
 		computed: {
@@ -260,6 +277,11 @@
 		created() {
 			this.getTabData();
 		},
+		watch: {
+			userSession() {
+				this.getSecondaryData();
+			}
+		},
 		methods: {
 			...mapActions('modals', [
 				'showLoginModal',
@@ -270,7 +292,9 @@
 				'getTab',
 				'isFavouriteTab',
 				'addFavouriteTab',
-				'deleteFavouriteTab'
+				'deleteFavouriteTab',
+				'tabIsRated',
+				'rateTab'
 			]),
 			/**
 			 * Fetches the tab data
@@ -281,18 +305,32 @@
 				this.getTab(tabId).then((res) => {
 					const data = res.data;
 
-					if (data && data.ID) {
-						if (this.isLoggedIn) {
-							this.isFavouriteTab(tabId).then((favouriteRes) => {
-								this.tabIsFavourite = favouriteRes ? favouriteRes.data : false;
-								this.loading = false;
-							});
-						} else {
-							this.loading = false;
-						}
-					} else {
-						this.$router.push({ name: 'not-found' });
+					if (!data || !data.ID) {
+						return this.$router.push({ name: 'not-found' });
 					}
+
+					if (this.isLoggedIn) {
+						this.getSecondaryData().then(() => {
+							this.loading = false;
+						});
+					} else {
+						this.loading = false;
+					}
+				});
+			},
+			/**
+			 * Fetches the secondary data such as favourite and rated status
+			 * @returns {Promise}
+			 */
+			getSecondaryData() {
+				const tabId = this.$route.params.id;
+
+				return Promise.all([
+					this.isFavouriteTab(tabId),
+					this.tabIsRated(tabId)
+				]).then((results) => {
+					this.tabIsFavourite = results[0] ? results[0].data : false;
+					this.rated = results[1] ? results[1].data : false;
 				});
 			},
 			/**
@@ -332,7 +370,19 @@
 			 * @param {Number} rating
 			 */
 			onRateTab(rating) {
-				console.log(rating);
+				const params = {
+					tabId: this.tab.ID,
+					rating
+				};
+
+				this.rateTab(params).then((res) => {
+					const data = res.data;
+
+					if (data.success) {
+						this.rated = true;
+						this.ratingEditable = false;
+					}
+				});
 			}
 		}
 	};

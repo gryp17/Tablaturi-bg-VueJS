@@ -221,6 +221,24 @@ export default {
 					message: `report tab failed - ${error}`
 				});
 			});
+		},
+		rateTab(context, { tabId, rating }) {
+			return TabHttpService.rateTab(tabId, rating).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `rate tab failed - ${error}`
+				});
+			});
+		},
+		tabIsRated(context, tabId) {
+			return TabHttpService.tabIsRated(tabId).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `tab is rated failed - ${error}`
+				});
+			});
 		}
 	}
 };

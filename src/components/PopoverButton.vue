@@ -47,10 +47,9 @@
 
 <style scoped lang="scss">
 	.popover-button {
-		display: inline-block;
-
 		.popover-trigger {
 			display: block;
+			color: $text-color;
 		}
 
 		.popover-content {

@@ -83,5 +83,27 @@ export default {
 			tab_id: tabId,
 			report
 		});
+	},
+	/**
+	 * Submits a tab rating
+	 * @param {Number} tabId
+	 * @param {Number} rating
+	 * @returns {Promise}
+	 */
+	rateTab(tabId, rating) {
+		return API.post('/Tab/rateTab', {
+			tab_id: tabId,
+			rating
+		});
+	},
+	/**
+	 * Checks if the tab has already been rated by the user
+	 * @param {Number} tabId
+	 * @returns {Promise}
+	 */
+	tabIsRated(tabId) {
+		return API.post('/Tab/tabIsRated', {
+			tab_id: tabId
+		});
 	}
 };
