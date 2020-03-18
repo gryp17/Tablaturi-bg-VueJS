@@ -99,7 +99,7 @@
 						<PopoverWrapper :disabled="!isLoggedIn || rated">
 							<template v-slot:button>
 								<TabRating
-									:rating="tab.rating"
+									:rating="ratedAs || tab.rating"
 									:disabled="!isLoggedIn"
 									:editable="ratingEditable"
 									label="Оцени"
@@ -210,6 +210,7 @@
 				tabIsFavourite: false,
 				fontSize: 13,
 				rated: false,
+				ratedAs: null,
 				ratingEditable: true
 			};
 		},
@@ -380,6 +381,7 @@
 
 					if (data.success) {
 						this.rated = true;
+						this.ratedAs = rating;
 						this.ratingEditable = false;
 					}
 				});
