@@ -34,7 +34,7 @@
 
 				//manually remove focus from the button
 				$(this.$refs.button.$el).blur();
-				this.$emit('change', !this.favourite);
+				this.$emit('click', !this.favourite);
 			}
 		}
 	};

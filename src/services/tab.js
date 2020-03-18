@@ -71,5 +71,17 @@ export default {
 	 */
 	getMost(type, limit) {
 		return API.get(`/Tab/getMost?type=${type}&limit=${limit}`);
+	},
+	/**
+	 * Submits a tab report
+	 * @param {Number} tabId
+	 * @param {String} report
+	 * @returns {Promise}
+	 */
+	reportTab(tabId, report) {
+		return API.post('/TabReport/reportTab', {
+			tab_id: tabId,
+			report
+		});
 	}
 };

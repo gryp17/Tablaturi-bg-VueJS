@@ -212,6 +212,15 @@ export default {
 					message: `get most tabs failed - ${error}`
 				});
 			});
+		},
+		reportTab(context, { tabId, report }) {
+			return TabHttpService.reportTab(tabId, report).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `report tab failed - ${error}`
+				});
+			});
 		}
 	}
 };

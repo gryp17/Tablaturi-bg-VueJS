@@ -68,8 +68,8 @@
 						<PopoverWrapper :disabled="!isLoggedIn">
 							<template v-slot:button>
 								<FavouriteTabButton
+									@click="toggleFavouriteTab"
 									:disabled="!isLoggedIn"
-									@change="toggleFavouriteTab"
 									:favourite="tabIsFavourite"
 								/>
 							</template>
@@ -80,25 +80,20 @@
 							</template>
 						</PopoverWrapper>
 
-						<!--
-						<button ng-if="favouriteTabs.indexOf(tab.ID) === -1" id="add-to-favourites-button" class="btn btn-red outline" ng-click="addToFavourites(tab.ID)">
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Добави в любими
-						</button>
-						-->
-
-						<!-- remove from favourites button -->
-						<!--
-						<button ng-if="favouriteTabs.indexOf(tab.ID) !== -1" class="btn btn-red" ng-click="removeFromFavourites(tab.ID)">
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Премахни от любими
-						</button>
-						-->
-
 						<!-- report tab button -->
-						<!--
-						<button class="btn btn-red outline" id="report-tab-button" ng-click="openReportTabModal()">
-							<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Докладвай
-						</button>
-						-->
+						<PopoverWrapper :disabled="!isLoggedIn">
+							<template v-slot:button>
+								<ReportTabButton
+									@click="showReportTabModal"
+									:disabled="!isLoggedIn"
+								/>
+							</template>
+							<template v-slot:content>
+								<a @click.prevent="showSignupModal()" href="#" class="red">Регистрирай се</a>
+								или
+								<a @click.prevent="showLoginModal()" href="#" class="red">влез</a>, за да докладваш таблатурата.
+							</template>
+						</PopoverWrapper>
 					</div>
 				</div>
 			</div>
@@ -157,6 +152,8 @@
 				:object-id="tab.ID"
 				type="tab"
 			/>
+
+			<ReportTabModal :tab="tab" />
 		</template>
 	</div>
 </template>
@@ -165,18 +162,22 @@
 	import { mapState, mapGetters, mapActions } from 'vuex';
 
 	import FavouriteTabButton from '@/components/tab/FavouriteTabButton';
+	import ReportTabButton from '@/components/tab/ReportTabButton';
 	import PopoverWrapper from '@/components/tab/PopoverWrapper';
 	import RedLine from '@/components/RedLine';
 	import ShareWidget from '@/components/ShareWidget';
 	import CommentsWidget from '@/components/comments/CommentsWidget';
+	import ReportTabModal from '@/components/modals/ReportTabModal';
 
 	export default {
 		components: {
 			FavouriteTabButton,
+			ReportTabButton,
 			PopoverWrapper,
 			RedLine,
 			ShareWidget,
-			CommentsWidget
+			CommentsWidget,
+			ReportTabModal
 		},
 		data() {
 			return {
@@ -252,7 +253,8 @@
 		methods: {
 			...mapActions('modals', [
 				'showLoginModal',
-				'showSignupModal'
+				'showSignupModal',
+				'showReportTabModal'
 			]),
 			...mapActions('tabs', [
 				'getTab',

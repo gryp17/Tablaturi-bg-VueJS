@@ -14,6 +14,7 @@ export default {
 			userSearch: {},
 			article: {},
 			reportUser: {},
+			reportTab: {},
 			tab: {}
 		}
 	},
