@@ -25,6 +25,12 @@ export default {
 		}
 	},
 	actions: {
+		/**
+		 * Adds a new article
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		addArticle(context, data) {
 			return ArticleHttpService.addArticle(data).then((res) => {
 				return res;
@@ -34,6 +40,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Updates an existing article
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		updateArticle(context, data) {
 			return ArticleHttpService.updateArticle(data).then((res) => {
 				return res;
@@ -43,6 +55,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Returns a list of articles matching the requested page
+		 * @param {Object} context
+		 * @param {Number} page
+		 * @returns {Promise}
+		 */
 		getArticles(context, page) {
 			const limit = context.state.perPage;
 			const offset = page * limit;
@@ -68,6 +86,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Returns the article that corresponds to the requested id
+		 * @param {Object} context
+		 * @param {Number} id
+		 * @returns {Promise}
+		 */
 		getArticle(context, id) {
 			context.commit('setArticle', null);
 

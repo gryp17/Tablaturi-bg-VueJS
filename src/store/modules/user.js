@@ -26,6 +26,12 @@ export default {
 		}
 	},
 	actions: {
+		/**
+		 * Fetches the user data for the requested user
+		 * @param {Object} context
+		 * @param {Number} userId
+		 * @returns {Promise}
+		 */
 		getUser(context, userId) {
 			return UserHttpService.getUser(userId).then((res) => {
 				context.commit('setUser', res.data);
@@ -36,6 +42,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Updates an existing user
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		updateUser(context, data) {
 			return UserHttpService.updateUser(data).then((res) => {
 				return res;
@@ -45,6 +57,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Returns all users that match the search criterias
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		search(context, { keyword, page }) {
 			const limit = context.state.perPage;
 			const offset = page * limit;
@@ -62,6 +80,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Sends a user report
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		reportUser(context, { userId, report }) {
 			return UserHttpService.reportUser(userId, report).then((res) => {
 				return res;

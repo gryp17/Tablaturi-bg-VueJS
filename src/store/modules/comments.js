@@ -23,6 +23,12 @@ export default {
 		}
 	},
 	actions: {
+		/**
+		 * Adds a new user comment
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		addUserComment(context, { id, content }) {
 			return UserCommentHttpService.addUserComment(id, content).then((res) => {
 				return res;
@@ -32,6 +38,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Fetches the user comments by page
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		getUserComments(context, { id, page }) {
 			const limit = context.state.perPage;
 			const offset = page * limit;
@@ -47,6 +59,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Adds a new article comment
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		addArticleComment(context, { id, content }) {
 			return ArticleCommentHttpService.addArticleComment(id, content).then((res) => {
 				return res;
@@ -56,6 +74,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Fetches the article comments by page
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		getArticleComments(context, { id, page }) {
 			const limit = context.state.perPage;
 			const offset = page * limit;
@@ -71,6 +95,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Adds a new tab comment
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		addTabComment(context, { id, content }) {
 			return TabCommentHttpService.addTabComment(id, content).then((res) => {
 				return res;
@@ -80,6 +110,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Fetches the tab comments by page
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		getTabComments(context, { id, page }) {
 			const limit = context.state.perPage;
 			const offset = page * limit;

@@ -33,6 +33,10 @@ export default new Vuex.Store({
 		}
 	},
 	actions: {
+		/**
+		 * Sets the app as ready (usually called when all initial data has been loaded)
+		 * @param {Object} context
+		 */
 		setAppAsReady(context) {
 			context.commit('setAppIsReady', true);
 		}

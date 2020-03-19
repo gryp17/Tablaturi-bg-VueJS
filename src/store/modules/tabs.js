@@ -74,6 +74,11 @@ export default {
 		}
 	},
 	actions: {
+		/**
+		 * Fetches the total text and gp tabs count
+		 * @param {Object} context
+		 * @returns {Promise}
+		 */
 		getTabsCount(context) {
 			return TabHttpService.getTabsCount().then((res) => {
 				context.commit('setTotalTabs', res.data);
@@ -84,6 +89,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Fetches a single tab record
+		 * @param {Object} context
+		 * @param {Number} id
+		 * @returns {Promise}
+		 */
 		getTab(context, id) {
 			context.commit('setTab', null);
 
@@ -99,6 +110,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Adds a new tab record
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		addTab(context, data) {
 			return TabHttpService.addTab(data).then((res) => {
 				return res;
@@ -108,6 +125,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Updates an existing tab
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		updateTab(context, data) {
 			return TabHttpService.updateTab(data).then((res) => {
 				return res;
@@ -117,6 +140,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Fetches the tabs uploaded by the requested user
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		getUserTabs(context, { id, page }) {
 			const limit = context.state.userTabs.perPage;
 			const offset = page * limit;
@@ -132,6 +161,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Fetches the favourite tabs list for the requested user
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		getUserFavouriteTabs(context, { id, page }) {
 			const limit = context.state.userFavourites.perPage;
 			const offset = page * limit;
@@ -147,6 +182,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Removes the tab from the user's favourite list
+		 * @param {Object} context
+		 * @param {Number} tabId
+		 * @returns {Promise}
+		 */
 		deleteFavouriteTab(context, tabId) {
 			return UserFavouriteHttpService.deleteFavouriteTab(tabId).then((res) => {
 				return res;
@@ -156,6 +197,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Adds the tab to the user's favourite list
+		 * @param {Object} context
+		 * @param {Number} tabId
+		 * @returns {Promise}
+		 */
 		addFavouriteTab(context, tabId) {
 			return UserFavouriteHttpService.addFavouriteTab(tabId).then((res) => {
 				return res;
@@ -165,6 +212,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Checks if the tab is in the user's favourite tabs list
+		 * @param {Object} context
+		 * @param {Number} tabId
+		 * @returns {Promise}
+		 */
 		isFavouriteTab(context, tabId) {
 			return UserFavouriteHttpService.isFavouriteTab(tabId).then((res) => {
 				return res;
@@ -174,6 +227,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Returns all tabs/songs that match the passed term
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		autocomplete(context, { type, term, band }) {
 			return TabHttpService.autocomplete(type, term, band).then((res) => {
 				return res;
@@ -183,6 +242,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Returns all tabs that match the search params
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		search(context, { type, band, song, page }) {
 			const limit = context.state.search.perPage;
 			const offset = page * limit;
@@ -198,6 +263,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Returns the top tabs for each category/type
+		 * @param {Object} context
+		 * @param {String} type
+		 * @returns {Promise}
+		 */
 		getMost(context, type) {
 			const limit = 5;
 
@@ -213,6 +284,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Sends a tab report
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		reportTab(context, { tabId, report }) {
 			return TabHttpService.reportTab(tabId, report).then((res) => {
 				return res;
@@ -222,6 +299,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Rates the tab
+		 * @param {Object} context
+		 * @param {Object} data
+		 * @returns {Promise}
+		 */
 		rateTab(context, { tabId, rating }) {
 			return TabHttpService.rateTab(tabId, rating).then((res) => {
 				return res;
@@ -231,6 +314,12 @@ export default {
 				});
 			});
 		},
+		/**
+		 * Checks if the tab has been rated already
+		 * @param {Object} context
+		 * @param {Number} tabId
+		 * @returns {Promise}
+		 */
 		tabIsRated(context, tabId) {
 			return TabHttpService.tabIsRated(tabId).then((res) => {
 				return res;
