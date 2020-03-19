@@ -33,7 +33,7 @@
 <style scoped lang="scss">
 	.form-button {
 		padding: 6px 20px;
-		border: none;
+		border: solid 1px transparent;
 		background-color: $red;
 		color: $white;
 		transition: all 0.4s ease-in-out;

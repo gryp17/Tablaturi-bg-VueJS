@@ -63,7 +63,7 @@
 						</FormButton>
 					</router-link>
 
-					<div v-if="showTabActions">
+					<div v-if="showTabActions" class="tab-actions">
 						<!-- add to favourites button -->
 						<PopoverWrapper :disabled="!isLoggedIn">
 							<template v-slot:button>
@@ -402,9 +402,6 @@
 
 			.right-wrapper {
 				flex: 1;
-				display: flex;
-				flex-direction: column;
-				align-items: flex-end;
 			}
 
 			.title {
@@ -429,8 +426,23 @@
 				}
 			}
 
+			.views {
+				text-align: right;
+			}
+
 			.edit-btn {
+				float: right;
 				margin-top: 10px;
+			}
+
+			.tab-actions {
+				text-align: right;
+
+				.popover-wrapper {
+					float: right;
+					margin-top: 10px;
+					clear: both;
+				}
 			}
 		}
 

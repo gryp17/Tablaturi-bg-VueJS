@@ -34,3 +34,9 @@
 		}
 	};
 </script>
+
+<style scoped lang="scss">
+	.popover-wrapper {
+		display: inline-block;
+	}
+</style>

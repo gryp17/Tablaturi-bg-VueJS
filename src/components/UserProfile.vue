@@ -79,7 +79,15 @@
 						<tr>
 							<td>
 								<span class="info-label">Web:</span>
-								<a v-if="user.web" :href="user.web" class="red" target="_blank">{{ user.web }}</a>
+								<a
+									v-if="user.web"
+									:href="user.web"
+									:title="user.web"
+									class="red"
+									target="_blank"
+								>
+									{{ user.web }}
+								</a>
 								<template v-else>
 									Няма информация
 								</template>
