@@ -121,7 +121,7 @@
 			}
 
 			> svg {
-				margin: 0px;
+				margin: -2px 0px 0px 0px;
 			}
 		}
 	}
