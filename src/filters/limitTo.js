@@ -2,7 +2,7 @@
  * Limits the text string to X characters
  * @param {String} text
  * @param {Number} limit
- * @param {Boolean} dots
+ * @param {Boolean} addDots
  * @returns {String}
  */
 export default (text, limit = 100, addDots = true) => {

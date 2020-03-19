@@ -1,3 +1,8 @@
+/**
+ * Maps the error code to it's string value
+ * @param {String} errorCode
+ * @returns {String}
+ */
 export default (errorCode) => {
 	const errors = {
 		invalid_login: 'Грешно име или парола',
