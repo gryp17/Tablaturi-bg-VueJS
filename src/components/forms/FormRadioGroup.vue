@@ -61,7 +61,9 @@
 		}
 
 		.radio-label {
+			margin-left: 5px;
 			margin-bottom: 0;
+			cursor: pointer;
 		}
 
 		&.horizontal {
