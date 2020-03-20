@@ -3,6 +3,7 @@ import Toasted from 'vue-toasted';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
+import '@/assets/css/index.scss';
 
 import App from './App';
 import router from './router';

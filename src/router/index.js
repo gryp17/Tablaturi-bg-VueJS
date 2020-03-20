@@ -8,6 +8,18 @@ import Forbidden from '@/views/Forbidden';
 import Unauthorized from '@/views/Unauthorized';
 import ChangePassword from '@/views/ChangePassword';
 import UserActivation from '@/views/UserActivation';
+import Article from '@/views/Article';
+import EditArticle from '@/views/EditArticle';
+import Tabs from '@/views/Tabs';
+import Tab from '@/views/Tab';
+import AddTab from '@/views/AddTab';
+import EditTab from '@/views/EditTab';
+import GuitarPro from '@/views/GuitarPro';
+import Usefull from '@/views/Usefull';
+import ContactUs from '@/views/ContactUs';
+import AboutUs from '@/views/AboutUs';
+import Copyright from '@/views/Copyright';
+import Profile from '@/views/Profile';
 
 import store from '@/store';
 
@@ -37,12 +49,12 @@ const routes = [
 	{
 		path: '/article/:id',
 		name: 'article',
-		component: () => import(/* webpackChunkName: "article" */ '@/views/Article')
+		component: Article
 	},
 	{
 		path: '/edit-article/:id',
 		name: 'edit-article',
-		component: () => import(/* webpackChunkName: "article-form" */ '@/views/EditArticle'),
+		component: EditArticle,
 		meta: {
 			adminRequired: true
 		}
@@ -50,20 +62,17 @@ const routes = [
 	{
 		path: '/tabs',
 		name: 'tabs',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "tabs" */ '@/views/Tabs')
+		component: Tabs
 	},
 	{
 		path: '/tab/:id',
 		name: 'tab',
-		component: () => import(/* webpackChunkName: "tab" */ '@/views/Tab')
+		component: Tab
 	},
 	{
 		path: '/add-tab',
 		name: 'add-tab',
-		component: () => import(/* webpackChunkName: "tab-form" */ '@/views/AddTab'),
+		component: AddTab,
 		meta: {
 			authRequired: true
 		}
@@ -71,7 +80,7 @@ const routes = [
 	{
 		path: '/edit-tab/:id',
 		name: 'edit-tab',
-		component: () => import(/* webpackChunkName: "tab-form" */ '@/views/EditTab'),
+		component: EditTab,
 		meta: {
 			authRequired: true
 		}
@@ -79,32 +88,32 @@ const routes = [
 	{
 		path: '/guitar-pro',
 		name: 'guitar-pro',
-		component: () => import(/* webpackChunkName: "guitar-pro" */ '@/views/GuitarPro')
+		component: GuitarPro
 	},
 	{
 		path: '/usefull',
 		name: 'usefull',
-		component: () => import(/* webpackChunkName: "usefull" */ '@/views/Usefull')
+		component: Usefull
 	},
 	{
 		path: '/contact-us',
 		name: 'contact-us',
-		component: () => import(/* webpackChunkName: "contact-us" */ '@/views/ContactUs')
+		component: ContactUs
 	},
 	{
 		path: '/about-us',
 		name: 'about-us',
-		component: () => import(/* webpackChunkName: "about-us" */ '@/views/AboutUs')
+		component: AboutUs
 	},
 	{
 		path: '/copyright',
 		name: 'copyright',
-		component: () => import(/* webpackChunkName: "copyright" */ '@/views/Copyright')
+		component: Copyright
 	},
 	{
 		path: '/profile/:id',
 		name: 'profile',
-		component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile'),
+		component: Profile,
 		meta: {
 			authRequired: true
 		}

@@ -137,6 +137,9 @@
 </script>
 
 <style lang="scss">
+	//this import is only needed because we are using @extend .red in this component
+	@import '@/assets/css/_links.scss';
+
 	.article-page {
 
 		.article-wrapper {
