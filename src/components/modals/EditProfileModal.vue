@@ -90,7 +90,6 @@
 				<FormInput
 					v-model="aboutMe"
 					:error="errors.about_me"
-					@keyup.enter="submit"
 					@focus="clearError"
 					tag="textarea"
 					name="about_me"
@@ -101,7 +100,6 @@
 				<FormInput
 					v-model="instrument"
 					:error="errors.instrument"
-					@keyup.enter="submit"
 					@focus="clearError"
 					tag="textarea"
 					name="instrument"
@@ -112,7 +110,6 @@
 				<FormInput
 					v-model="favouriteBands"
 					:error="errors.favourite_bands"
-					@keyup.enter="submit"
 					@focus="clearError"
 					tag="textarea"
 					name="favourite_bands"

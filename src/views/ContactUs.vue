@@ -41,7 +41,6 @@
 					v-model="message"
 					:error="errors.message"
 					:rows="8"
-					@keyup.enter="submit"
 					@focus="clearError"
 					tag="textarea"
 					name="message"
