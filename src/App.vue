@@ -8,10 +8,9 @@
 			<SearchBar />
 
 			<div class="inner-wrapper">
-				<aside ref="aside">
+				<aside>
 					<a href="mailto:reklama@tablaturi-bg.com">
 						<img src="/img/ad-placeholder.png" />
-						<img v-if="showAdditionalAds" src="/img/ad-placeholder.png" />
 					</a>
 				</aside>
 				<div class="content-wrapper">
@@ -28,7 +27,6 @@
 				<aside>
 					<a href="mailto:reklama@tablaturi-bg.com">
 						<img src="/img/ad-placeholder.png" />
-						<img v-if="showAdditionalAds" src="/img/ad-placeholder.png" />
 					</a>
 				</aside>
 			</div>
@@ -41,7 +39,6 @@
 </template>
 
 <script>
-	import $ from 'jquery';
 	import Vue from 'vue';
 	import { mapState, mapActions } from 'vuex';
 
@@ -95,21 +92,13 @@
 			SearchBar,
 			Footer
 		},
-		data() {
-			return {
-				asideHeight: 0
-			};
-		},
 		computed: {
 			...mapState([
 				'appIsReady'
 			]),
 			...mapState('auth', [
 				'userSession'
-			]),
-			showAdditionalAds() {
-				return this.asideHeight > 1300;
-			}
+			])
 		},
 		created() {
 			Promise.all([
@@ -122,13 +111,6 @@
 					message: 'Failed to initialize the application'
 				});
 			});
-		},
-		updated() {
-			//update the asideHeight with this beautifull hack in order to know how many ads to show
-			this.asideHeight = $(this.$refs.aside).height();
-			setTimeout(() => {
-				this.asideHeight = $(this.$refs.aside).height();
-			}, 1000);
 		},
 		methods: {
 			...mapActions([
