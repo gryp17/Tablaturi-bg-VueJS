@@ -117,7 +117,7 @@
 					placeholder="Любими групи/музиканти"
 				></FormInput>
 
-				<FormButton @click="submit" class="submit-btn">
+				<FormButton @click="submit" :disabled="submitting" class="submit-btn">
 					Запази промените
 				</FormButton>
 
@@ -152,7 +152,8 @@
 				instrument: '',
 				favouriteBands: '',
 				avatar: null,
-				avatarPreview: null
+				avatarPreview: null,
+				submitting: false
 			};
 		},
 		computed: {
@@ -212,6 +213,8 @@
 					}
 				});
 
+				this.submitting = true;
+
 				this.updateUser(formData).then((res) => {
 					const data = res.data;
 
@@ -226,6 +229,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

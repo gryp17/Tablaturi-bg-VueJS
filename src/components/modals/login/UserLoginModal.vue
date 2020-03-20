@@ -17,7 +17,7 @@
 					<FormInput
 						v-model="username"
 						:error="errors.username"
-						@keyup.enter="loginUser()"
+						@keyup.enter="submit"
 						@focus="clearError"
 						type="text"
 						name="username"
@@ -28,7 +28,7 @@
 					<FormInput
 						v-model="password"
 						:error="errors.password"
-						@keyup.enter="loginUser()"
+						@keyup.enter="submit"
 						@focus="clearError"
 						type="password"
 						name="password"
@@ -50,7 +50,7 @@
 						</div>
 					</div>
 
-					<FormButton @click="loginUser()" class="login-btn">
+					<FormButton @click="submit" :disabled="submitting" class="login-btn">
 						Влез
 					</FormButton>
 				</template>
@@ -77,7 +77,8 @@
 				username: '',
 				password: '',
 				rememberMe: false,
-				forgottenPasswordFormVisible: false
+				forgottenPasswordFormVisible: false,
+				submitting: false
 			};
 		},
 		computed: {
@@ -125,7 +126,9 @@
 			/**
 			 * Tries to authenticate the user with the provided credentials
 			 */
-			loginUser() {
+			submit() {
+				this.submitting = true;
+
 				this.login({
 					username: this.username,
 					password: this.password,
@@ -146,6 +149,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

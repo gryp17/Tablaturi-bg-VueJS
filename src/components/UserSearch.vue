@@ -14,7 +14,7 @@
 				placeholder="Ключова дума"
 			></FormInput>
 
-			<FormButton @click="submit">
+			<FormButton @click="submit" :disabled="submitting">
 				Търси
 			</FormButton>
 		</div>
@@ -82,7 +82,8 @@
 		data() {
 			return {
 				keyword: '',
-				searchDone: false
+				searchDone: false,
+				submitting: false
 			};
 		},
 		computed: {
@@ -112,6 +113,8 @@
 			 * Submits the user search form
 			 */
 			submit() {
+				this.submitting = true;
+
 				this.getUsers(0).then((res) => {
 					const data = res.data;
 
@@ -123,6 +126,8 @@
 					} else {
 						this.searchDone = true;
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

@@ -30,7 +30,7 @@
 						placeholder="Друга причина"
 					></FormInput>
 
-					<FormButton @click="submit" class="submit-btn">
+					<FormButton @click="submit" :disabled="submitting" class="submit-btn">
 						Докладвай
 					</FormButton>
 				</template>
@@ -68,7 +68,8 @@
 				},
 				reason: 'rude_language',
 				other: '',
-				done: false
+				done: false,
+				submitting: false
 			};
 		},
 		computed: {
@@ -111,6 +112,8 @@
 					report: this.reportReason
 				};
 
+				this.submitting = true;
+
 				this.reportUser(params).then((res) => {
 					const data = res.data;
 
@@ -122,6 +125,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

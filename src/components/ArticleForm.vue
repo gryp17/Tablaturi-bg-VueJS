@@ -50,7 +50,7 @@
 			placeholder="Съдържание"
 		></FormInput>
 
-		<FormButton @click="submit">
+		<FormButton @click="submit" :disabled="submitting">
 			{{ buttonText }}
 		</FormButton>
 	</div>
@@ -76,7 +76,8 @@
 				date: null,
 				content: '',
 				image: null,
-				imagePreview: '/img/no-image.jpg'
+				imagePreview: '/img/no-image.jpg',
+				submitting: false
 			};
 		},
 		computed: {
@@ -145,6 +146,8 @@
 					}
 				});
 
+				this.submitting = true;
+
 				action(formData).then((res) => {
 					const data = res.data;
 
@@ -161,6 +164,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

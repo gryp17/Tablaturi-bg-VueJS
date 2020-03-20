@@ -102,7 +102,7 @@
 			placeholder="Текстова таблатура"
 		></FormInput>
 
-		<FormButton @click="submit" class="submit-btn">
+		<FormButton @click="submit" :disabled="submitting" class="submit-btn">
 			{{ buttonText }}
 		</FormButton>
 	</div>
@@ -139,7 +139,8 @@
 					'Drop D': 'Drop D',
 					'Drop C': 'Drop C',
 					other: 'Друг'
-				}
+				},
+				submitting: false
 			};
 		},
 		computed: {
@@ -243,6 +244,8 @@
 				const tunning = this.showCustomTunning ? this.customTunning : this.tunning;
 				formData.append('tunning', tunning);
 
+				this.submitting = true;
+
 				action(formData).then((res) => {
 					const data = res.data;
 
@@ -259,6 +262,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

@@ -55,7 +55,7 @@
 					@focus="clearError"
 				/>
 
-				<FormButton @click="submit" class="submit-btn">
+				<FormButton @click="submit" :disabled="submitting" class="submit-btn">
 					Изпрати
 				</FormButton>
 			</div>
@@ -75,7 +75,8 @@
 				email: '',
 				message: '',
 				captcha: '',
-				done: false
+				done: false,
+				submitting: false
 			};
 		},
 		computed: {
@@ -103,6 +104,8 @@
 					captcha: this.captcha
 				};
 
+				this.submitting = true;
+
 				this.sendContactUsForm(params).then((res) => {
 					const data = res.data;
 
@@ -114,6 +117,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

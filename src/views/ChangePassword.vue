@@ -14,7 +14,7 @@
 					<FormInput
 						v-model="password"
 						:error="errors.password"
-						@keyup.enter="changePassword()"
+						@keyup.enter="submit"
 						@focus="clearError"
 						type="password"
 						name="password"
@@ -25,7 +25,7 @@
 					<FormInput
 						v-model="repeatPassword"
 						:error="errors.repeat_password"
-						@keyup.enter="changePassword()"
+						@keyup.enter="submit"
 						@focus="clearError"
 						type="password"
 						name="repeat_password"
@@ -33,7 +33,7 @@
 						placeholder="Повтори паролата"
 					></FormInput>
 
-					<FormButton @click="changePassword()">
+					<FormButton @click="submit" :disabled="submitting">
 						Смени паролата
 					</FormButton>
 				</div>
@@ -63,7 +63,8 @@
 				repeatPassword: '',
 				tokenChecked: false,
 				validToken: false,
-				done: false
+				done: false,
+				submitting: false
 			};
 		},
 		computed: {
@@ -96,7 +97,7 @@
 			/**
 			 * Submits the new user password together with the hash and user id
 			 */
-			changePassword() {
+			submit() {
 				const { userId, hash } = this.$route.params;
 
 				const params = {
@@ -105,6 +106,8 @@
 					password: this.password,
 					repeatPassword: this.repeatPassword
 				};
+
+				this.submitting = true;
 
 				this.updatePassword(params).then((res) => {
 					const data = res.data;
@@ -119,6 +122,8 @@
 						this.setRedirectAfterLogin({ name: 'home' });
 						this.done = true;
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

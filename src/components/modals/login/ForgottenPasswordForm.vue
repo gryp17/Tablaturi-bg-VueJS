@@ -12,7 +12,7 @@
 				placeholder="Email"
 			></FormInput>
 
-			<FormButton @click="submit()">
+			<FormButton @click="submit()" :disabled="submitting">
 				Изпрати
 			</FormButton>
 		</template>
@@ -34,7 +34,8 @@
 		data() {
 			return {
 				email: '',
-				done: false
+				done: false,
+				submitting: false
 			};
 		},
 		computed: {
@@ -55,6 +56,7 @@
 			 * Sends the password reset request
 			 */
 			submit() {
+				this.submitting = true;
 				this.sendPasswordResetRequest(this.email).then((res) => {
 					const data = res.data;
 
@@ -66,6 +68,8 @@
 					} else {
 						this.done = true;
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

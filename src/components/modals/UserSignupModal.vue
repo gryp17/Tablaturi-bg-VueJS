@@ -81,7 +81,7 @@
 						ref="captcha"
 					/>
 
-					<FormButton @click="submit" class="signup-btn">
+					<FormButton @click="submit" :disabled="submitting" class="signup-btn">
 						Регистрирай се
 					</FormButton>
 				</template>
@@ -119,7 +119,8 @@
 				birthday: null,
 				gender: 'M',
 				captcha: '',
-				done: false
+				done: false,
+				submitting: false
 			};
 		},
 		computed: {
@@ -172,6 +173,8 @@
 					captcha: this.captcha
 				};
 
+				this.submitting = true;
+
 				this.signup(params).then((res) => {
 					const data = res.data;
 
@@ -183,6 +186,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**

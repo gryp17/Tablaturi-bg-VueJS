@@ -21,7 +21,7 @@
 						@emoticon-selected="onEmoticonSelected"
 					/>
 
-					<FormButton @click="onSubmit">
+					<FormButton @click="onSubmit" :disabled="submitting">
 						Коментирай
 					</FormButton>
 				</div>
@@ -51,7 +51,8 @@
 		},
 		data() {
 			return {
-				content: ''
+				content: '',
+				submitting: false
 			};
 		},
 		computed: {
@@ -87,6 +88,7 @@
 			 * Submits the comment data
 			 */
 			onSubmit() {
+				this.submitting = true;
 				this.addComment(this.content).then((res) => {
 					const data = res.data;
 
@@ -98,6 +100,8 @@
 							form: formName
 						});
 					}
+
+					this.submitting = false;
 				});
 			},
 			/**
