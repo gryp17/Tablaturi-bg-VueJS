@@ -113,6 +113,10 @@
 			 * Submits the user search form
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				this.submitting = true;
 
 				this.getUsers(0).then((res) => {

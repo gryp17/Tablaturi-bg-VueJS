@@ -94,6 +94,10 @@
 			 * Submits the contact us form
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const params = {
 					username: this.username,
 					email: this.email,

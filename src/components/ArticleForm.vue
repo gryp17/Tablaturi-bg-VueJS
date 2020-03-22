@@ -130,6 +130,10 @@
 			 * Submits the article form
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const action = this.isEditing ? this.updateArticle : this.addArticle;
 				const formData = new FormData();
 

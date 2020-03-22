@@ -107,6 +107,10 @@
 			 * Submits the report tab form
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const params = {
 					tabId: this.tab.ID,
 					report: this.reportReason

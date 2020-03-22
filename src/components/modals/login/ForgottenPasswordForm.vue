@@ -58,6 +58,10 @@
 			 * Sends the password reset request
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				this.submitting = true;
 				this.sendPasswordResetRequest(this.email).then((res) => {
 					const data = res.data;

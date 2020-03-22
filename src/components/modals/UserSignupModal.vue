@@ -158,6 +158,10 @@
 			 * Submits the user signup data
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const params = {
 					username: this.username,
 					email: this.email,

@@ -107,6 +107,10 @@
 			 * Submits the report user form
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const params = {
 					userId: this.user.ID,
 					report: this.reportReason

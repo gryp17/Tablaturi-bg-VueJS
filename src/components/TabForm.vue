@@ -226,6 +226,10 @@
 			 * Submits the tab form
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const action = this.isEditing ? this.updateTab : this.addTab;
 				const formData = new FormData();
 

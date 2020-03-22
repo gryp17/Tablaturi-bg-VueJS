@@ -102,6 +102,10 @@
 			 * Submits the new user password together with the hash and user id
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const { userId, hash } = this.$route.params;
 
 				const params = {

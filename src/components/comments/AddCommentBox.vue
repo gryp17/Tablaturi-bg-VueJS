@@ -87,6 +87,10 @@
 			 * Submits the comment data
 			 */
 			onSubmit() {
+				if (this.submitting) {
+					return;
+				}
+
 				this.submitting = true;
 				this.addComment(this.content).then((res) => {
 					const data = res.data;

@@ -199,6 +199,10 @@
 			 * Submits the updated user data
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				const formData = new FormData();
 
 				['password', 'repeatPassword', 'location', 'occupation', 'web', 'aboutMe', 'instrument', 'favouriteBands', 'avatar'].forEach((field) => {
