@@ -14,7 +14,7 @@
 						<td>Група</td>
 						<td>Песен</td>
 						<td>Тип</td>
-						<td>Рейтинг</td>
+						<td class="text-center">Рейтинг</td>
 						<td v-if="canEdit" class="text-center">
 							Редактирай
 						</td>
