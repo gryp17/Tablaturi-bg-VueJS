@@ -80,14 +80,12 @@
 							<td>
 								<span class="info-label">Web:</span>
 								<a
-									v-if="user.web"
-									:href="user.web"
-									:title="user.web"
+									v-if="web"
+									:href="web"
+									:title="web"
 									class="red"
 									target="_blank"
-								>
-									{{ user.web }}
-								</a>
+								>{{ web }}</a>
 								<template v-else>
 									Няма информация
 								</template>
@@ -172,6 +170,13 @@
 			},
 			lastActiveDate() {
 				return this.$options.filters.date(this.user.last_active_date, 'YYYY-MM-DD в HH:mm');
+			},
+			web() {
+				if (this.user.web && this.user.web.indexOf('http') !== 0) {
+					return `http://${this.user.web}`;
+				}
+
+				return this.user.web;
 			},
 			isAdmin() {
 				return this.user.type === 'admin';
