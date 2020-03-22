@@ -236,7 +236,13 @@
 				['tabId', 'type', 'tabType', 'band', 'song', 'difficulty', 'content', 'gpFile'].forEach((field) => {
 					if (this[field]) {
 						const snakeCaseField = this.$options.filters.camelToSnake(field);
-						const value = this[field];
+						let value = this[field];
+
+						//chrome specific hack in order to always submit the content data with \r\n line endings
+						if (field === 'content') {
+							value = value.replace(/\n/g, '\r\n');
+						}
+
 						formData.append(snakeCaseField, value);
 					}
 				});
