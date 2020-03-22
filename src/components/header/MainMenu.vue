@@ -9,11 +9,11 @@
 		<router-link :to="{name: 'tabs'}">
 			Таблатури
 		</router-link>
-		<router-link :to="{name: 'guitar-pro'}">
-			Guitar Pro
-		</router-link>
 		<router-link :to="{name: 'add-tab'}">
 			Качи таблатура
+		</router-link>
+		<router-link :to="{name: 'guitar-pro'}">
+			Guitar Pro
 		</router-link>
 		<router-link :to="{name: 'usefull'}">
 			Полезно
