@@ -151,6 +151,7 @@
 				}
 
 				&:last-child {
+					min-width: 100px;
 					text-align: center;
 				}
 			}
