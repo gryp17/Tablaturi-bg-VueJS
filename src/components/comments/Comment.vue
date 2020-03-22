@@ -88,6 +88,7 @@
 
 				.content {
 					margin-top: 30px;
+					white-space: break-spaces;
 
 					.emoticon {
 						width: 25px;

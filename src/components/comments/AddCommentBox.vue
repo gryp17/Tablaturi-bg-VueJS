@@ -8,7 +8,6 @@
 				<FormInput
 					v-model="content"
 					:error="errors.content"
-					@keyup.enter="onSubmit"
 					@focus="clearError"
 					tag="textarea"
 					name="content"

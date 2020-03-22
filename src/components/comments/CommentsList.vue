@@ -24,7 +24,7 @@
 
 <script>
 	import { mapState } from 'vuex';
-	import Comment from '@/components/Comment';
+	import Comment from '@/components/comments/Comment';
 	import Pagination from '@/components/Pagination';
 
 	export default {
