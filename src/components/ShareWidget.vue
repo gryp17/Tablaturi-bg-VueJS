@@ -24,6 +24,7 @@
 <style scoped lang="scss">
 	.share-widget {
 		margin-top: 20px;
+		clear: both;
 
 		.red-line {
 			margin: 10px 0px;
