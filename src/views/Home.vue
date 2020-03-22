@@ -3,7 +3,7 @@
 		<LoadingIndicator v-if="loading" />
 		<template v-else>
 			<PageTitle>
-				Новини
+				Последни новини
 			</PageTitle>
 
 			<ArticlesList>
