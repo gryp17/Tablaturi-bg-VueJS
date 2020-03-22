@@ -6,6 +6,8 @@
 				:error="errors.email"
 				@keyup.enter="submit()"
 				@focus="clearError"
+				@blur="clearError"
+				@keyup="clearError"
 				type="text"
 				name="email"
 				floating-label

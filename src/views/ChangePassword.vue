@@ -16,6 +16,8 @@
 						:error="errors.password"
 						@keyup.enter="submit"
 						@focus="clearError"
+						@blur="clearError"
+						@keyup="clearError"
 						type="password"
 						name="password"
 						floating-label
@@ -27,6 +29,8 @@
 						:error="errors.repeat_password"
 						@keyup.enter="submit"
 						@focus="clearError"
+						@blur="clearError"
+						@keyup="clearError"
 						type="password"
 						name="repeat_password"
 						floating-label

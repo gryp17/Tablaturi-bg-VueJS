@@ -19,6 +19,8 @@
 						:error="errors.username"
 						@keyup.enter="submit"
 						@focus="clearError"
+						@blur="clearError"
+						@keyup="clearError"
 						type="text"
 						name="username"
 						floating-label
@@ -30,6 +32,8 @@
 						:error="errors.password"
 						@keyup.enter="submit"
 						@focus="clearError"
+						@blur="clearError"
+						@keyup="clearError"
 						type="password"
 						name="password"
 						floating-label
@@ -127,6 +131,10 @@
 			 * Tries to authenticate the user with the provided credentials
 			 */
 			submit() {
+				if (this.submitting) {
+					return;
+				}
+
 				this.submitting = true;
 
 				this.login({
