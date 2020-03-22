@@ -15,7 +15,6 @@
 				<FormAutocompleteInput
 					v-model="band"
 					:error="errors.band"
-					@keyup.enter="submit"
 					@focus="clearError"
 					type="text"
 					name="band"
@@ -28,7 +27,6 @@
 					v-model="song"
 					:band="band"
 					:error="errors.song"
-					@keyup.enter="submit"
 					@focus="clearError"
 					type="text"
 					name="song"
@@ -47,7 +45,6 @@
 					v-show="showCustomTunning"
 					v-model="customTunning"
 					:error="errors.tunning"
-					@keyup.enter="submit"
 					@focus="clearError"
 					type="text"
 					name="tunning"

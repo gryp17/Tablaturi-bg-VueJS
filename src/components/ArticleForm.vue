@@ -22,7 +22,6 @@
 		<FormInput
 			v-model="title"
 			:error="errors.title"
-			@keyup.enter="submit"
 			@focus="clearError"
 			type="text"
 			name="title"

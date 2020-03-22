@@ -33,7 +33,6 @@
 						<FormInput
 							v-model="password"
 							:error="errors.password"
-							@keyup.enter="submit"
 							@focus="clearError"
 							type="password"
 							name="password"
@@ -44,7 +43,6 @@
 						<FormInput
 							v-model="repeatPassword"
 							:error="errors.repeat_password"
-							@keyup.enter="submit"
 							@focus="clearError"
 							type="password"
 							name="repeat_password"
@@ -55,7 +53,6 @@
 						<FormInput
 							v-model="location"
 							:error="errors.location"
-							@keyup.enter="submit"
 							@focus="clearError"
 							type="text"
 							name="location"
@@ -66,7 +63,6 @@
 						<FormInput
 							v-model="occupation"
 							:error="errors.occupation"
-							@keyup.enter="submit"
 							@focus="clearError"
 							type="text"
 							name="occupation"
@@ -77,7 +73,6 @@
 						<FormInput
 							v-model="web"
 							:error="errors.web"
-							@keyup.enter="submit"
 							@focus="clearError"
 							type="text"
 							name="web"

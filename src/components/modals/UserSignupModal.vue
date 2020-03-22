@@ -16,7 +16,6 @@
 					<FormInput
 						v-model="username"
 						:error="errors.username"
-						@keyup.enter="submit"
 						@focus="clearError"
 						type="text"
 						name="username"
@@ -27,7 +26,6 @@
 					<FormInput
 						v-model="email"
 						:error="errors.email"
-						@keyup.enter="submit"
 						@focus="clearError"
 						type="text"
 						name="email"
@@ -38,7 +36,6 @@
 					<FormInput
 						v-model="password"
 						:error="errors.password"
-						@keyup.enter="submit"
 						@focus="clearError"
 						type="password"
 						name="password"
@@ -49,7 +46,6 @@
 					<FormInput
 						v-model="repeatPassword"
 						:error="errors.repeat_password"
-						@keyup.enter="submit"
 						@focus="clearError"
 						type="password"
 						name="repeat_password"
@@ -76,7 +72,6 @@
 					<FormCaptcha
 						v-model="captcha"
 						:error="errors.captcha"
-						@keyup.enter="submit"
 						@focus="clearError"
 						ref="captcha"
 					/>

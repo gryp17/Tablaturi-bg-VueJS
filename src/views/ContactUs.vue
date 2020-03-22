@@ -18,7 +18,6 @@
 				<FormInput
 					v-model="username"
 					:error="errors.username"
-					@keyup.enter="submit"
 					@focus="clearError"
 					type="text"
 					name="username"
@@ -29,7 +28,6 @@
 				<FormInput
 					v-model="email"
 					:error="errors.email"
-					@keyup.enter="submit"
 					@focus="clearError"
 					type="text"
 					name="email"
@@ -51,7 +49,6 @@
 				<FormCaptcha
 					v-model="captcha"
 					:error="errors.captcha"
-					@keyup.enter="submit"
 					@focus="clearError"
 				/>
 
