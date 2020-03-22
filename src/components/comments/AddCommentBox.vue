@@ -144,7 +144,8 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
-				max-width: 160px;
+				min-width: 160px;
+				width: 160px;
 
 				.form-button {
 					float: right;
