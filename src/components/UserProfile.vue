@@ -255,6 +255,7 @@
 			.info {
 				padding: 10px 20px;
 				min-height: 100px;
+				white-space: break-spaces;
 			}
 		}
 	}
