@@ -76,7 +76,6 @@
 
 		> svg {
 			margin-right: 3px;
-			margin-bottom: 3px;
 		}
 	}
 </style>
