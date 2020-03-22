@@ -16,7 +16,7 @@
 			RedLine
 		},
 		mounted() {
-			if (window.stButtons) {
+			if (window.stButtons && window.stButtons.makeButtons) {
 				window.stButtons.makeButtons();
 			}
 		}
