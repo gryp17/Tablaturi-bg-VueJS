@@ -216,7 +216,7 @@
 		$max-width: 600px;
 
 		.modal-dialog {
-			margin-top: 20vh;
+			margin-top: 10vh;
 			max-width: $max-width;
 			text-align: left;
 
