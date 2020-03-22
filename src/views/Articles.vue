@@ -13,14 +13,6 @@
 					:data="article"
 				/>
 			</ArticlesList>
-
-			<FormButton
-				v-show="hasMoreArticles"
-				@click="loadMoreArticles"
-				class="load-more-btn"
-			>
-				Покажи още новини
-			</FormButton>
 		</template>
 	</div>
 </template>
@@ -92,12 +84,3 @@
 		}
 	};
 </script>
-
-<style scoped lang="scss">
-	.articles-page {
-		.load-more-btn {
-			display: block;
-			margin: 15px auto 5px auto;
-		}
-	}
-</style>
