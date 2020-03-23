@@ -1,5 +1,5 @@
 # Tablaturi-bg-VueJs
-VueJS application for [Tablaturi-BG](https://tablaturi-bg.com) - the biggest website for guitar tabs in Bulgaria.
+VueJS application for [Tablaturi-BG](https://tablaturi-bg.com) - the biggest website for guitar tabs in Bulgaria. 
 The application uses a custom [PHP API](https://github.com/gryp17/Tablaturi-bg-API) with MySQL database, VueJS as front end and [SASS](http://sass-lang.com) as css preprocessor. The dependencies are managed using [npm](https://www.npmjs.com) and the build process is done with [webpack](https://webpack.js.org/).
 
 ## Project setup
