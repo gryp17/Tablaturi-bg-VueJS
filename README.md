@@ -17,13 +17,16 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
 ### Lints and fixes files
 ```
 npm run lint
 ```
+
+## Configuration
+
+The frontend configuration file is located in
+
+> [/src/config.js](https://github.com/gryp17/Tablaturi-bg-VueJS/blob/master/src/config.js)
+
+It contains the server/API URL and other application constants.
 
