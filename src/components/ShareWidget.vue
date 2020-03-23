@@ -23,7 +23,7 @@
 			 */
 			share() {
 				const url = window.location.href;
-				window.open(`http://facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'location=yes,height=500,width=520,scrollbars=yes,status=yes');
+				window.open(`https://facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'location=yes,height=500,width=520,scrollbars=yes,status=yes');
 			}
 		}
 	};

@@ -110,8 +110,8 @@
 					</h5>
 
 					<div class="videos-wrapper">
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=guitarjamzdotcom" width="340" height="390"></iframe>
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=martyzsongs" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=guitarjamzdotcom" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=martyzsongs" width="340" height="390"></iframe>
 					</div>
 
 					<hr/>
@@ -121,14 +121,14 @@
 					</h5>
 
 					<div class="videos-wrapper">
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=JustinSandercoeSongs" width="340" height="390"></iframe>
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=guitarlessonscom" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=JustinSandercoeSongs" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=guitarlessonscom" width="340" height="390"></iframe>
 
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=tripfuse04" width="340" height="390"></iframe>
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=educationalmaterials" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=tripfuse04" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=educationalmaterials" width="340" height="390"></iframe>
 
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=KristoferDahl" width="340" height="390"></iframe>
-						<iframe src="http://www.youtube.com/embed/?listType=user_uploads&list=SteveTerreberry" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=KristoferDahl" width="340" height="390"></iframe>
+						<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=SteveTerreberry" width="340" height="390"></iframe>
 					</div>
 
 				</div>

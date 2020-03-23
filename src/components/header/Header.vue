@@ -5,7 +5,7 @@
 		<div class="inner-wrapper">
 			<div class="aside left">
 				<div class="social-links">
-					<a href="http://www.facebook.com/tablaturiBG" target="_blank">
+					<a href="https://www.facebook.com/tablaturiBG" target="_blank">
 						<img src="/img/social/fb-icon.jpg" title="Последвайте ни във Facebook"/>
 					</a>
 				</div>
