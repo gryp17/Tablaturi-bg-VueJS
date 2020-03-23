@@ -27,8 +27,6 @@
 		methods: {
 			share() {
 				const url = window.location.href;
-				//TODO: remove this
-				console.log(url);
 				window.open(`http://facebook.com/sharer/sharer.php?u=${url}`, '_blank');
 			}
 		}
