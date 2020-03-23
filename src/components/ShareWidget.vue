@@ -5,6 +5,10 @@
 		<span class="st_fblike_hcount" displayText="Facebook Like"></span>
 		<span class="st_facebook_hcount" displayText="Facebook"></span>
 		<span class="st_twitter_hcount" displayText="Tweet"></span>
+
+		<button @click="share">
+			Share
+		</button>
 	</div>
 </template>
 
@@ -18,6 +22,14 @@
 		mounted() {
 			if (window.stButtons && window.stButtons.makeButtons) {
 				window.stButtons.makeButtons();
+			}
+		},
+		methods: {
+			share() {
+				const url = window.location.href;
+				//TODO: remove this
+				console.log(url);
+				window.open(`http://facebook.com/sharer/sharer.php?u=${url}`, '_blank');
 			}
 		}
 	};
