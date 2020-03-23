@@ -4,9 +4,11 @@
 
 		<div class="inner-wrapper">
 			<div class="aside left">
-				<a href="http://www.facebook.com/tablaturiBG" target="_blank">
-					<img src="/img/social/fb-icon.jpg" title="Последвайте ни във Facebook"/>
-				</a>
+				<div class="social-links">
+					<a href="http://www.facebook.com/tablaturiBG" target="_blank">
+						<img src="/img/social/fb-icon.jpg" title="Последвайте ни във Facebook"/>
+					</a>
+				</div>
 			</div>
 
 			<router-link :to="{name: 'home'}">
