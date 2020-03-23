@@ -2,13 +2,11 @@
 	<div class="share-widget">
 		Сподели в:
 		<RedLine />
-		<span class="st_fblike_hcount" displayText="Facebook Like"></span>
-		<span class="st_facebook_hcount" displayText="Facebook"></span>
-		<span class="st_twitter_hcount" displayText="Tweet"></span>
 
-		<button @click="share">
-			Share
-		</button>
+		<FormButton @click="share" title="Сподели" class="fb-share-btn">
+			<i class="fab fa-facebook-square"></i>
+			Facebook
+		</FormButton>
 	</div>
 </template>
 
@@ -19,15 +17,13 @@
 		components: {
 			RedLine
 		},
-		mounted() {
-			if (window.stButtons && window.stButtons.makeButtons) {
-				window.stButtons.makeButtons();
-			}
-		},
 		methods: {
+			/**
+			 * Opens the facebook share dialog
+			 */
 			share() {
 				const url = window.location.href;
-				window.open(`http://facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+				window.open(`http://facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'location=yes,height=500,width=520,scrollbars=yes,status=yes');
 			}
 		}
 	};
@@ -40,6 +36,12 @@
 
 		.red-line {
 			margin: 10px 0px;
+		}
+
+		.fb-share-btn {
+			padding: 2px 10px;
+			font-size: 13px;
+			background-color: #3b5997;
 		}
 	}
 </style>
