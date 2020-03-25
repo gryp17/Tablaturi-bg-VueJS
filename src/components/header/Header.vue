@@ -17,7 +17,7 @@
 
 			<div class="aside right">
 				<TabsStats />
-				<UserPanel />
+				<UserPanel v-show="appIsReady" />
 			</div>
 		</div>
 
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex';
+
 	import MainMenu from '@/components/header/MainMenu';
 	import UserPanel from '@/components/header/UserPanel';
 	import TabsStats from '@/components/header/TabsStats';
@@ -34,6 +36,11 @@
 			MainMenu,
 			UserPanel,
 			TabsStats
+		},
+		computed: {
+			...mapState([
+				'appIsReady'
+			])
 		}
 	};
 </script>
@@ -41,6 +48,7 @@
 
 <style scoped lang="scss">
 	.header {
+		min-height: 230px;
 		background-color: $gray;
 
 		.inner-wrapper {

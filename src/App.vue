@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 
-		<div v-show="appIsReady" class="main-wrapper">
+		<div class="main-wrapper">
 
 			<Header />
 
@@ -101,10 +101,9 @@
 			])
 		},
 		created() {
-			Promise.all([
-				this.getUserSession(),
-				this.getTabsCount()
-			]).then(() => {
+			this.getTabsCount();
+
+			this.getUserSession().then(() => {
 				this.setAppAsReady();
 			}).catch(() => {
 				this.$toasted.global.apiError({
