@@ -78,7 +78,6 @@
 						});
 					} else if (data.success) {
 						this.done = true;
-						console.log('success');
 					}
 
 					this.submitting = false;
