@@ -15,7 +15,8 @@ export default {
 			article: {},
 			reportUser: {},
 			reportTab: {},
-			tab: {}
+			tab: {},
+			resendActivation: {}
 		}
 	},
 	mutations: {

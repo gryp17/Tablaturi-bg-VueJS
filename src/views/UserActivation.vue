@@ -12,7 +12,9 @@
 				<p>
 					Линкът за активация е невалиден или е изтекъл.
 					<br/>
-					При проблем с активацията се
+					Поискайте
+					<router-link :to="{name: 'resend-activation'}" class="red">нов линк за активация</router-link>
+					или се
 					<router-link :to="{name: 'contact-us'}" class="red">свържете с нас</router-link>.
 				</p>
 			</StatusMessage>

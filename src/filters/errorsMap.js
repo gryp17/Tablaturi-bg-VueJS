@@ -16,6 +16,7 @@ export default (errorCode) => {
 		invalid_characters: 'Полето съдържа непозволени символи',
 		email_in_use: 'Имейлът е зает',
 		email_not_found: 'Несъществуващ имейл',
+		email_already_activated: 'Имейлът вече е активиран',
 		not_in_list: 'Невалидно поле',
 		invalid_captcha: 'Captcha-та не съвпада',
 		invalid_file_extension: 'Невалиден формат',
@@ -36,5 +37,5 @@ export default (errorCode) => {
 		}
 	}
 
-	return errors[errorCode];
+	return errors[errorCode] || errorCode;
 };

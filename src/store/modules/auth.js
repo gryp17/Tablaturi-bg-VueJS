@@ -156,6 +156,21 @@ export default {
 					message: `user activation failed - ${error}`
 				});
 			});
+		},
+		/**
+		 * Resends the user activation email
+		 * @param {Object} context
+		 * @param {String} email
+		 * @returns {Promise}
+		 */
+		resendActivation(context, email) {
+			return UserHttpService.resendActivation(email).then((res) => {
+				return res;
+			}).catch((error) => {
+				Vue.toasted.global.apiError({
+					message: `resend activation failed - ${error}`
+				});
+			});
 		}
 	}
 };

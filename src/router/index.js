@@ -8,6 +8,7 @@ import Forbidden from '@/views/Forbidden';
 import Unauthorized from '@/views/Unauthorized';
 import ChangePassword from '@/views/ChangePassword';
 import UserActivation from '@/views/UserActivation';
+import ResendActivation from '@/views/ResendActivation';
 import Article from '@/views/Article';
 import EditArticle from '@/views/EditArticle';
 import Tabs from '@/views/Tabs';
@@ -127,6 +128,11 @@ const routes = [
 		path: '/activate/:userId/:hash',
 		name: 'user-activation',
 		component: UserActivation
+	},
+	{
+		path: '/resend-activation/',
+		name: 'resend-activation',
+		component: ResendActivation
 	},
 	{
 		path: '/forbidden',

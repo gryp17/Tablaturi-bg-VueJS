@@ -103,6 +103,16 @@ export default {
 		});
 	},
 	/**
+	 * Sends an user activation email
+	 * @param {String} email
+	 * @returns {Promise}
+	 */
+	resendActivation(email) {
+		return API.post('/User/resendUserActivation', {
+			email
+		});
+	},
+	/**
 	 * Returns the user data for the specified id
 	 * @param {Number} userId
 	 * @returns {Promise}
