@@ -4,7 +4,6 @@ import errorsMap from '@/filters/errorsMap';
 
 const API = axios.create({
 	baseURL: config.API_URL,
-	timeout: 8000,
 	withCredentials: true
 });
 
