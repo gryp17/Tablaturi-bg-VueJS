@@ -1,6 +1,7 @@
 <template>
 	<div class="search-page">
-		<template v-if="done">
+		<LoadingIndicator v-if="loading" />
+		<template v-else>
 			<StatusMessage :class="{'has-results': hasResults}">
 				<img v-if="!hasResults" src="/img/icons/sad.png" />
 				<p>
@@ -96,7 +97,7 @@
 				type: this.$route.params.type,
 				band: this.$route.params.band,
 				song: this.$route.params.song,
-				done: false
+				loading: true
 			};
 		},
 		computed: {
@@ -118,20 +119,26 @@
 		},
 		watch: {
 			$route() {
-				this.getSearchParams();
-				this.getTabs(0);
+				this.loadInitialData();
 			}
 		},
 		created() {
-			this.getSearchParams();
-			this.getTabs(0).then(() => {
-				this.done = true;
-			});
+			this.loadInitialData();
 		},
 		methods: {
 			...mapActions('tabs', [
 				'search'
 			]),
+			/**
+			 * Loads the initial page data
+			 */
+			loadInitialData() {
+				this.loading = true;
+				this.getSearchParams();
+				this.getTabs(0).then(() => {
+					this.loading = false;
+				});
+			},
 			/**
 			 * Parses the route params and stores them in the "data"
 			 */
