@@ -133,11 +133,8 @@
 			 * Loads the initial page data
 			 */
 			loadInitialData() {
-				this.loading = true;
 				this.getSearchParams();
-				this.getTabs(0).then(() => {
-					this.loading = false;
-				});
+				this.getTabs(0);
 			},
 			/**
 			 * Parses the route params and stores them in the "data"
@@ -159,7 +156,11 @@
 					page
 				};
 
-				return this.search(params);
+				this.loading = true;
+
+				return this.search(params).then(() => {
+					this.loading = false;
+				});
 			}
 		}
 	};
